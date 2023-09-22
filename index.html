@@ -4,11 +4,37 @@
 <head>
 <title>Running Key Cipher</title>
 </head>
+<meta charset="UTF-8">
 <body>
-    <!-- # Each character of the running key is used as a rotation
- to permute the associated char of the <plaintext class=""></plaintext> -->
+<!--##########################################################################
+==-------------------------------------------===================------------==
+------------------------------------------------------------------------------
+--------------------------------    -
+                                  ----
+                                ---------
+                            ---------------
+                            PLAINTEXT CLASS 
+                            ---------------
+                                -------
+                                  ---
+--------------------------------   -
+------------------------------------------------------------------------------
+ ------+++++++++-    <plaintext class=""></plaintext>    -----++++++++========
+ -----------------------------------------------------------------------------
+ ==-------------------------------------------===================-----------==
+ ###########################################################################-->
 <h1>Running Key Cipher</h1>
-<plaintext class=""></plaintext>  
+    <form id="cipherForm">
+        <label for="plaintext">Plaintext:</label>
+        <input type="text" id="plaintext" name="plaintext" required>
+        <br>
+        <label for="key">Running Key:</label>
+        <input type="text" id="key" name="key" required>
+        <br>
+        <input type="submit" value="Generate Hash">
+    </form>
+    <div id="hashOutput"></div>
+    <script src="script.js"></script>
 </body>
 </html>
 
