@@ -1,70 +1,185 @@
-<!-- # Each character of the running key is used as a rotation
- to permute the associated char of the <plaintext class=""></plaintext> -->
+<!DOCTYPE html>
 <html>
 <head>
-<title>Running Key Cipher</title>
- <style>
+    <title>SourceCode</title>
+    <style>
+        /* Updated Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+            background-color: #f6f8fa;
+            color: #24292e;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
         }
-        ul {
-            list-style-type: none;
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
         }
-        li {
+        header {
+        position: relative;
+        background: url('./thevault.png') no-repeat center center;
+        background-size: cover;
+        color: #fff;
+        padding-top: 30px;
+        min-height: 70px;
+        border-bottom: #f9826c 3px solid;
+        overflow: hidden;
+    }
+
+    header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.89); /* Dark overlay with 50% opacity */
+        z-index: 1;
+    }
+
+    .container, #user-profile, #user-bio, header h1 {
+        position: relative;
+        z-index: 2;
+    }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+        #user-profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+        #user-bio {
+            margin-top: 10px;
+            font-size: 21px;
+            color:  #fff;
+        }
+        #repo-list-container {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        #repo-list-container li {
+            background: #fff;
             margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            text-align: left;
         }
-        a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.3s ease;
+        #repo-list-container li:hover {
+            border-color: #0366d6;
         }
-        a:hover {
-            color: #0056b3;
+        .repo-title {
+            font-size: 16px;
+            color: #0366d6;
+        }
+        .repo-description {
+            font-size: 14px;
+            color: #586069;
+            margin-top: 8px;
         }
     </style>
+    <meta charset="UTF-8">
 </head>
-<meta charset="UTF-8">
 <body>
-<!--##########################################################################
-==-------------------------------------------===================------------==
-------------------------------------------------------------------------------
---------------------------------    -
-                                  ----
-                                ---------
-                            ---------------
-                            PLAINTEXT CLASS 
-                            ---------------
-                                -------
-                                  ---
---------------------------------   -
-------------------------------------------------------------------------------
- ------+++++++++-    <plaintext class=""></plaintext>    -----++++++++========
- -----------------------------------------------------------------------------
- ==-------------------------------------------===================-----------==
- ###########################################################################-->
-<h1>Running Key Cipher</h1>
-    <form id="cipherForm">
-        <label for="plaintext">Plaintext:</label>
-        <input type="text" id="plaintext" name="plaintext" required>
-        <br>
-        <label for="key">Running Key:</label>
-        <input type="text" id="key" name="key" required>
-        <br>
-        <input type="submit" value="Generate Hash">
-    </form>
-        <title>@apps</title>
-      <ul>
-        <li><a href="https://example.com/@apps" target="_blank">@apps</a></li>
-        <li><a href="https://cleaker.me" target="_blank">Cleaker.me</a></li>
-                <li><a href="https://cleaker.me" target="_blank">Orgboat.me</a></li>
-        <!-- Add more links as needed -->
-    </ul>
 
-        <ul>         
-        <li><a href="https://example.com/full-trailer" target="_blank">full trailer</a></li>
-        <!-- Add more links as needed -->
-    </ul>
-    <div id="hashOutput"></div>
-    <script src="script.js"></script>
+    <header>
+        <div class="container">
+            <div id="user-profile">
+                <!-- User profile picture will be displayed here -->
+            </div>
+            <h2>SuiGn</h2>
+            <div id="user-bio">
+                <!-- User bio will be displayed here -->
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="user-profile">
+            <!-- User profile picture will be displayed here -->
+        </div>
+        <div id="user-bio">
+            <!-- User bio will be displayed here -->
+        </div>
+        <h2>DOCS:</h2>
+        <div id="filter-buttons">
+            <button onclick="filterRepos('all')">All Repos</button>
+            <button onclick="filterRepos('package')">Packages</button>
+            <button onclick="filterRepos('app')">Apps</button>
+            <button onclick="filterRepos('endpoint')">Endpoints</button>
+        </div>
+        <ul id="repo-list-container">
+            <!-- Repository links and descriptions will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = 'suiGn';
+            const userApiUrl = `https://api.github.com/users/${username}`;
+            const reposApiUrl = `https://api.github.com/users/${username}/repos`;
+            let allRepos = []; // Array to store all repositories
+    
+            const userProfileContainer = document.getElementById('user-profile');
+            const userBioContainer = document.getElementById('user-bio');
+            const repoListContainer = document.getElementById('repo-list-container');
+    
+            // Function to display repositories
+            function displayRepos(repos) {
+                repoListContainer.innerHTML = ''; // Clear existing list
+                repos.forEach(repo => {
+                    // ...rest of the code to create list items...
+                    // Add the repository to the list
+                    repoListContainer.appendChild(createRepoListItem(repo));
+                });
+            }
+    
+            // Function to create a list item for a repository
+            function createRepoListItem(repo) {
+                const listItem = document.createElement('li');
+                // ...code to add repository details to listItem...
+                return listItem;
+            }
+    
+            // Function to filter repositories
+            function filterRepos(type) {
+                let filteredRepos = allRepos;
+                if (type !== 'all') {
+                    filteredRepos = allRepos.filter(repo => repo.type === type);
+                }
+                displayRepos(filteredRepos);
+            }
+            window.filterRepos = filterRepos; // Make the function globally accessible
+    
+            // Fetch user profile data
+            fetch(userApiUrl)
+                .then(response => response.json())
+                .then(user => {
+                    // ...code to display user profile...
+                })
+                .catch(error => console.error('Error:', error));
+    
+            // Fetch repositories
+            fetch(reposApiUrl)
+                .then(response => response.json())
+                .then(repos => {
+                    allRepos = repos.map(repo => {
+                        // Here, include logic to determine the repo type
+                        // For example, repo.type = 'app'; based on your custom logic
+                        return repo;
+                    });
+                    displayRepos(allRepos); // Initially display all repositories
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+    
 </body>
 </html>
