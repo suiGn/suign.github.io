@@ -110,26 +110,48 @@
         </div>
         <h2>DOCS:</h2>
         <div id="filter-buttons">
-            <button onclick="filterRepos('all')">All Repos</button>
-            <button onclick="filterRepos('NPM Package')">Packages</button>
-            <button onclick="filterRepos('App')">Apps</button>
-            <button onclick="filterRepos('EndPoint')">EndPoints</button>
+    <button onclick="filterAndCountRepos('all')">All Repos<span id="all-repos-count"></span></button>
+    <button onclick="filterAndCountRepos('NPM Package')">Packages<span id="packages-count"></span></button>
+    <button onclick="filterAndCountRepos('App')">Apps<span id="apps-count"></span></button>
+    <button onclick="filterAndCountRepos('EndPoint')">EndPoints<span id="endpoints-count"></span></button>
         </div>
         <ul id="repo-list-container">
             <!-- Repository links and descriptions will be added here -->
         </ul>
     </div>
 
-    <script>
+    <script>        
         document.addEventListener('DOMContentLoaded', function() {
             const username = 'suiGn';
             const userApiUrl = `https://api.github.com/users/${username}`;
             const reposApiUrl = `https://api.github.com/users/${username}/repos`;
-            let allRepos = []; // Array to store all repositories
-    
             const userProfileContainer = document.getElementById('user-profile');
             const userBioContainer = document.getElementById('user-bio');
             const repoListContainer = document.getElementById('repo-list-container');
+            let allRepos = []; // Array to store all repositories
+    
+            // Function to fetch all pages of repositories
+            function fetchAllRepos(url, repos = []) {
+                return fetch(url)
+                    .then(response => {
+                        const link = response.headers.get('link');
+                        let nextPageUrl = null;
+                        if (link) {
+                            const matches = link.match(/<([^>]+)>; rel="next"/);
+                            nextPageUrl = matches && matches[1];
+                        }
+    
+                        return response.json().then(data => {
+                            repos = repos.concat(data);
+    
+                            if (nextPageUrl) {
+                                return fetchAllRepos(nextPageUrl, repos);
+                            }
+    
+                            return repos; // Return all repositories when done
+                        });
+                    });
+            }
     
             // Function to display repositories
             function displayRepos(repos) {
@@ -140,38 +162,80 @@
                 });
             }
     
-            // Function to create a list item for a repository
             function createRepoListItem(repo) {
-                const listItem = document.createElement('li');
-                
-                const link = document.createElement('a');
-                link.href = repo.html_url; // GitHub repository URL
-                link.textContent = repo.name;
-                link.className = 'repo-title';
-                link.target = "_blank";
+    const listItem = document.createElement('li');
+    listItem.className = 'repo-list-item';
     
-                const description = document.createElement('p');
-                description.textContent = repo.description;
-                description.className = 'repo-description';
-    
-                listItem.appendChild(link);
-                listItem.appendChild(description);
-    
-                return listItem;
-            }
-    
-            // Function to filter repositories
-            function filterRepos(type) {
-                let filteredRepos = allRepos;
+    // Repository Title
+    const titleLink = document.createElement('a');
+    titleLink.href = repo.html_url; // GitHub repository URL
+    titleLink.textContent = repo.name;
+    titleLink.className = 'repo-title';
+    titleLink.target = "_blank";
+
+    // Repository Description
+    const description = document.createElement('p');
+    description.textContent = repo.description;
+    description.className = 'repo-description';
+
+    // Icons container
+    const iconsContainer = document.createElement('div');
+    iconsContainer.className = 'icons-container';
+
+    // HomePage Link
+    if (repo.homepage) {
+        const homePageLink = document.createElement('a');
+        homePageLink.href = repo.homepage;
+        homePageLink.className = 'icon-homepage';
+        // Here you can add an icon or text
+        homePageLink.textContent = 'HomePage';
+        homePageLink.target = "_blank";
+        iconsContainer.appendChild(homePageLink);
+    }
+
+    // Docs Link
+    if (repo.docs) {
+        const docsLink = document.createElement('a');
+        docsLink.href = repo.docs;
+        docsLink.className = 'icon-docs';
+        // Here you can add an icon or text
+        docsLink.textContent = 'Docs';
+        docsLink.target = "_blank";
+        iconsContainer.appendChild(docsLink);
+    }
+
+    // GitHub Link
+    const gitHubLink = document.createElement('a');
+    gitHubLink.href = repo.repository.url.replace('git+', '').replace('.git', ''); // Clean the GitHub repo URL
+    gitHubLink.className = 'icon-github';
+    // Here you can add an icon or text
+    gitHubLink.textContent = 'GitHub';
+    gitHubLink.target = "_blank";
+    iconsContainer.appendChild(gitHubLink);
+
+    listItem.appendChild(titleLink);
+    listItem.appendChild(description);
+    listItem.appendChild(iconsContainer); // Add icons container to the list item
+
+    return listItem;
+}
+            // Function to filter and count repositories
+            function filterAndCountRepos(type) {
+                 let filteredRepos = allRepos;
                 if (type !== 'all') {
-                    filteredRepos = allRepos.filter(repo => repo.type === type);
+                  filteredRepos = allRepos.filter(repo => repo.type === type);
                 }
-                displayRepos(filteredRepos);
-            }
-            window.filterRepos = filterRepos; // Make the function globally accessible
-    
-            // Fetch user profile data
-            fetch(userApiUrl)
+                 displayRepos(filteredRepos);
+                // Update the counts for all categories
+                document.getElementById('all-repos-count').textContent = `(${allRepos.length})`;
+                document.getElementById('packages-count').textContent = `(${allRepos.filter(repo => repo.type === 'NPM Package').length})`;
+                document.getElementById('apps-count').textContent = `(${allRepos.filter(repo => repo.type === 'App').length})`;
+                document.getElementById('endpoints-count').textContent = `(${allRepos.filter(repo => repo.type === 'EndPoint').length})`;
+                        }
+            window.filterAndCountRepos = filterAndCountRepos;
+
+              // Fetch user profile data
+              fetch(userApiUrl)
                 .then(response => response.json())
                 .then(user => {
                     const img = document.createElement('img');
@@ -184,38 +248,41 @@
                     userBioContainer.appendChild(bio);
                 })
                 .catch(error => console.error('Error:', error));
+                
+            // Fetch all repositories with pagination handling
+            fetchAllRepos(reposApiUrl)
+                .then(repos => {
+                    // Process each repository
+                    const repoPromises = repos.map(repo => {
+                        const packageJsonUrl = `https://raw.githubusercontent.com/${username}/${repo.name}/main/package.json`;
+                        return fetch(packageJsonUrl)
+                            .then(response => response.json())
+                            .then(packageJson => {
+                                repo.type = packageJson.repoType || 'unknown';
+                                return repo;
+                            })
+                            .catch(error => {
+                                console.error(`Error fetching package.json for ${repo.name}:`, error);
+                                repo.type = 'unknown';
+                                return repo;
+                            });
+                    });
     
-     // Fetch repositories
-     fetch(reposApiUrl)
-    .then(response => response.json())
-    .then(repos => {
-        // Process each repository
-        const repoPromises = repos.map(repo => {
-            // Fetch package.json for each repository
-            const packageJsonUrl = `https://raw.githubusercontent.com/${username}/${repo.name}/main/package.json`;
-            return fetch(packageJsonUrl)
-                .then(response => response.json())
-                .then(packageJson => {
-                    // Use the 'repoType' from package.json
-                    repo.type = packageJson.repoType || 'unknown'; // Default to 'unknown' if not specified
-                    return repo;
+                    // Wait for all package.json files to be processed
+                    Promise.all(repoPromises).then(processedRepos => {
+                        allRepos = processedRepos;
+                        console.log('Total Repos:', allRepos.length);
+    
+                        const allReposCountElement = document.getElementById('all-repos-count');
+                        allReposCountElement.textContent = `(${allRepos.length})`;
+    
+                        filterAndCountRepos('all');
+                    });
                 })
-                .catch(() => {
-                    // Handle error or absence of package.json
-                    repo.type = 'unknown';
-                    return repo;
-                });
-        });
-
-        // Wait for all package.json files to be processed
-        Promise.all(repoPromises).then(processedRepos => {
-            allRepos = processedRepos;
-            displayRepos(allRepos); // Display all repositories initially
-        });
-    })
-    .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error fetching repositories:', error));
         });
     </script>
+    
     
 </body>
 </html>
