@@ -18,7 +18,8 @@
     background-size: cover;
     color: #fff;
     padding-top: 30px;
-    min-height: 70px;
+    height: 377px;
+    min-height: 89px;
     border-bottom: #f9826c 3px solid;
     overflow: hidden;
 }
@@ -44,10 +45,10 @@ header::after {
         font-size: 26px;
     }
     #user-profile img {
-        width: 100px;
-        height: 100px;
+        width: 177px;
+        height: 177px;
         border-radius: 50%;
-        margin-top: 20px;
+        margin-top: 55px;
     }
     #user-bio {
         margin-top: 10px;
@@ -71,22 +72,29 @@ header::after {
         border-color: #0366d6;
     }
     .repo-title {
-        font-size: 16px;
+        font-size: 21px;
         color: #0366d6;
     }
     .repo-description {
-        font-size: 14px;
-        color: #586069;
+        font-size: 16px;
+        color: #404040; /* A darker shade for better readability */
         margin-top: 8px;
     }
     .icons-container {
-float: right; /* Align the icons to the right */
-}
+        /* Align icons horizontally */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    
 .icon {
 display: block;
 width: 20px;
 height: 20px;
-margin: 0 auto; 
+margin: 0 auto;
+margin-bottom: 4px;
+opacity: 0.89; /* Set the opacity for all icons */
 background-size: contain;
 background-repeat: no-repeat;
 }
@@ -113,12 +121,13 @@ background-image: url('../imgs/docs.png');
 background-image: url('../imgs/github.png');
 }
 .icon-link {
-display: inline-block;
-margin-left: 10px; /* Spacing between icons */
-padding: 5px; /* Optional: If you want padding */
-border: 1px solid #f0f0f0; /* Optional: If you want borders around icons */
-text-decoration: none; /* Remove underline from links */
-opacity: 0.89; /* 50% opacity */
+    /* Style each icon link */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Clear floats */
@@ -127,3 +136,115 @@ content: "";
 display: table;
 clear: both;
 }
+.repo-list-item {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    padding: 15px;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #fff;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.repo-content {
+    /* This contains the title, description, and keywords */
+    flex-grow: 1;
+}
+
+.keywords-container {
+    color: #0074D9; /* Blue color for keywords */
+    font-size: 0.85em; /* Smaller font size */
+    font-style: italic; /* Italicize keywords to differentiate from normal text */
+    margin-top: 4px; /* Space above the keywords */
+    display: block; /* Display as block to ensure it takes its own line */
+    opacity: 0.89; /* Optional: if you want to make keywords slightly transparent */
+    padding: 2px 0; /* Optional: if you want to add some padding */
+    background-color: #f0f0f0; /* Optional: if you want a different background */
+    border-radius: 4px; /* Optional: if you want rounded corners */
+    display: inline-block; /* Optional: if you want the background to wrap the text only */
+    margin-right: 10px; /* Optional: if you want some space on the right if inline-block */
+}
+
+/* Style for the filter buttons */
+#filter-buttons button {
+    border: 2px solid #ccc; /* Button border */
+    background-color: #f0f0f0; /* Default background color */
+    color: #333; /* Default text color */
+    padding: 5px 10px; /* Padding inside the button */
+    border-radius: 5px; /* Rounded corners */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+    margin-right: 3px; /* Space between buttons */
+    min-width: 89px;
+}
+
+/* Style for the filter button counts */
+#filter-buttons span {
+    background: #e1e4e800;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin-left: 5px;
+    font-size: 11px;
+}
+
+/* Hover and active styles */
+#filter-buttons button:hover, #filter-buttons button.clicked {
+    background-color: #333; /* Dark background for clicked or hovered button */
+    color: #fff; /* White text for clicked or hovered button */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+      width: 95%; /* Make container wider on small screens */
+    }
+    
+    header {
+      height: auto; /* Allow header height to adjust to content */
+      padding-top: 15px; /* Reduce padding on small screens */
+    }
+  
+    #user-profile img {
+      width: 144px; /* Smaller image on small screens */
+      height: 144px;
+    }
+  
+    .repo-list-item {
+      flex-direction: column; /* Stack items vertically on small screens */
+      align-items: center; /* Center items when stacked */
+    }
+  
+    .repo-content,
+    .icons-container {
+      width: 100%; /* Full width on small screens */
+    }
+  
+    .icons-container {
+      justify-content: center; /* Center icons container on small screens */
+      margin-top: 21px; /* Add space between content and icons */
+    }
+  
+    .keywords-container {
+      /* Ensure keywords fit on small screens */
+      font-size: 0.75em;
+    }
+  
+    #filter-buttons button {
+      width: 100%; /* Full width buttons on small screens */
+      margin-bottom: 5px; /* Add space between stacked buttons */
+    }
+  }
+  
+  /* Use vw/vh units for font sizes that need to scale with the viewport */
+  h1 {
+    font-size: 4.5vw; /* Example for responsive font size */
+  }
+  
+  /* Ensure images are responsive */
+  img {
+    max-width: 100%; /* Ensure images are not larger than their container */
+    height: auto; /* Maintain aspect ratio */
+  }
