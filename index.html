@@ -5,42 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code and Creativity</title>
     <style>
-        body {
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: #111;
-        }
-        .card {
-    width: 300px;
-    height: 200px;
-    margin: 20px;
-    display: inline-block;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; /* This ensures that the image covers the whole area */
-    color: #fff;
-    font-weight: bold;
+body {
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    height: 100vh;
 }
 
-        .card:hover {
-            transform: scale(1.1);
-        }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100vw;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
-        .sourcecode {
-            background-image: url('./assets/imgs/cleaker_monads-removebg-preview.png');
-        }
+.card {
+    width: 100%;
+    height: 100%; /* Make cards fill their containers */
+    background-size: cover; /* Change from 'contain' to 'cover' to fill the card */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align text to the bottom */
+    position: relative; /* For absolute positioning of the text */
+    overflow: hidden; /* Ensure content doesn't spill out */
+    border-radius: 8px; /* Optional: rounded corners */
+}
+
+.card .text {
+    width: 100%;
+    padding: 10px 20px; /* Add padding for the text */
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for text */
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease-in-out;
+    margin: 0;
+    position: absolute; /* Absolute position text at the bottom */
+    bottom: 0;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Subtle grow effect on hover */
+}
+
+/* Add custom styles for each card */
+.sourcecode {
+    background-image: url('./assets/imgs/cleaker_monads-removebg-preview.png');
+    /* Additional styles for .sourcecode */
+}
+
 
         .portfolio {
             background-image: url('./assets/imgs/Cleaker-removebg-preview.png');
@@ -60,10 +81,24 @@
     </style>
 </head>
 <body>
-    <div class="card sourcecode" onclick="location.href='./pages/sourcecode.html';">SourceCode</div>
-    <div class="card portfolio" onclick="location.href='./portfolio';">Portfolio</div>
-    <div class="card music" onclick="location.href='/pages/endpoints.html';">@endpoints</div>
-    <div class="card monads" onclick="location.href='/pages/apps.html';">@apps</div>
-    <div class="card packages" onclick="location.href='/pages/packages.html';">@packages</div>
+    <div class="grid-container">
+
+    <div class="card sourcecode" onclick="location.href='./pages/sourcecode.html';">
+        <div class="text">SourceCode</div>
+    </div>
+    <div class="card portfolio" onclick="location.href='./portfolio';">
+        <div class="text">Portfolio</div>
+    </div>
+    <div class="card music" onclick="location.href='./pages/endpoints.html';">
+        <div class="text">@endpoints</div>
+    </div>
+    <div class="card monads" onclick="location.href='./pages/apps.html';">
+        <div class="text">@apps</div>
+    </div>
+    <div class="card packages" onclick="location.href='./pages/packages.html';">
+        <div class="text">@packages</div>
+    </div>
+</div>
+
 </body>
 </html>
