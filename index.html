@@ -1,54 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SourceCode</title>
-    <link rel="stylesheet" href="./assets/styles/style.css">
     <meta charset="UTF-8">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TQPLSH796Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code and Creativity</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #111;
+        }
+        .card {
+    width: 300px;
+    height: 200px;
+    margin: 20px;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* This ensures that the image covers the whole area */
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
 
-  gtag('config', 'G-TQPLSH796Z');
-</script>
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .sourcecode {
+            background-image: url('./assets/imgs/cleaker_monads-removebg-preview.png');
+        }
+
+        .portfolio {
+            background-image: url('./assets/imgs/Cleaker-removebg-preview.png');
+        }
+
+        .music {
+            background-image: url('./assets/imgs/theVault-removebg-preview.png');
+        }
+        .packages {
+            background-image: url('./assets/imgs/addingFace_cleaker-removebg-preview.png');
+        }
+        .monads {
+            background-image: url('./assets/imgs/monads-removebg-preview.png');
+        }
+
+
+    </style>
 </head>
 <body>
-
-    <header>
-        <div class="container">
-            <div id="user-profile">
-                <!-- User profile picture will be displayed here -->
-            </div>
-            <h2>SuiGn</h2>
-            <div id="user-bio">
-                <!-- User bio will be displayed here -->
-            </div>
-          
-        </div>
-    
-    </header>
-
-    <div class="container">
-        <div id="user-profile">
-            <!-- User profile picture will be displayed here -->
-        </div>
-        <div id="user-bio">
-            <!-- User bio will be displayed here -->
-        </div>
-        <div id="filter-buttons">
-            <button onclick="filterAndCountRepos('all')">All Repos<span id="all-repos-count"></span></button>
-            <button onclick="filterAndCountRepos('NPM Package')">Packages<span id="packages-count"></span></button>
-            <button onclick="filterAndCountRepos('App')">Apps<span id="apps-count"></span></button>
-            <button onclick="filterAndCountRepos('EndPoint')">EndPoints<span id="endpoints-count"></span></button>
-                </div>
-        <ul id="repo-list-container">
-            <!-- Repository links and descriptions will be added here -->
-        </ul>
-    </div>
-    <script src="./assets/scripts/main.js"></script>
-    
-    
+    <div class="card sourcecode" onclick="location.href='https://github.com/yourusername';">SourceCode</div>
+    <div class="card portfolio" onclick="location.href='./portfolio';">Portfolio</div>
+    <div class="card music" onclick="location.href='/pages/endpoints.html';">@endpoints</div>
+    <div class="card monads" onclick="location.href='/pages/apps.html';">@apps</div>
+    <div class="card packages" onclick="location.href='/pages/packages.html';">@packages</div>
 </body>
 </html>

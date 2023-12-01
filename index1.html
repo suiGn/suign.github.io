@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SourceCode</title>
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TQPLSH796Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TQPLSH796Z');
+</script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div id="user-profile">
+                <!-- User profile picture will be displayed here -->
+            </div>
+            <h2>SuiGn</h2>
+            <div id="user-bio">
+                <!-- User bio will be displayed here -->
+            </div>
+          
+        </div>
+    
+    </header>
+
+    <div class="container">
+        <div id="user-profile">
+            <!-- User profile picture will be displayed here -->
+        </div>
+        <div id="user-bio">
+            <!-- User bio will be displayed here -->
+        </div>
+        <div id="filter-buttons">
+            <button onclick="filterAndCountRepos('all')">All Repos<span id="all-repos-count"></span></button>
+            <button onclick="filterAndCountRepos('NPM Package')">Packages<span id="packages-count"></span></button>
+            <button onclick="filterAndCountRepos('App')">Apps<span id="apps-count"></span></button>
+            <button onclick="filterAndCountRepos('EndPoint')">EndPoints<span id="endpoints-count"></span></button>
+                </div>
+        <ul id="repo-list-container">
+            <!-- Repository links and descriptions will be added here -->
+        </ul>
+    </div>
+    <script src="./assets/scripts/main.js"></script>
+    
+    
+</body>
+</html>
