@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code and Creativity</title>
     <style>
+
+.top-nav {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #333; /* A dark background for the nav */
+    color: #fff; /* Light text for contrast */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff; /* Adjust the color to match your brand */
+    text-decoration: none; /* Removes the underline from the logo */
+}
+
+.nav-links a {
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px; /* Spacing between nav items */
+}
+
+.nav-links a:hover {
+    text-decoration: underline; /* Adds an underline on hover for visual feedback */
+}
+
+
 body {
     font-family: 'Courier New', monospace;
     margin: 0;
@@ -15,6 +54,38 @@ body {
     justify-content: center;
     height: 100vh;
 }
+
+.submenu {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #444; /* Slightly lighter than the top-nav for contrast */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional */
+    position: fixed; /* Fixed like the top-nav */
+    top: 60px; /* Adjust this value based on the height of your top-nav */
+    z-index: 999; /* Slightly lower than the top-nav */
+}
+
+.nav-sublinks {
+    display: flex;
+    justify-content: center; /* Center the submenu links */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-sublinks a {
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px; /* Spacing between submenu items */
+    padding: 5px 10px; /* Padding for clickable area */
+}
+
+.nav-sublinks a:hover {
+    text-decoration: underline; /* Underline on hover for visual feedback */
+    background-color: rgba(255, 255, 255, 0.1); /* Highlight the background on hover */
+}
+
 
 .main-container {
     width: calc(100vw - 40px); /* Subtracting the padding from the viewport width */
@@ -86,26 +157,48 @@ body {
         }
 
 
+
     </style>
 </head>
 <body>
+    <header class="top-nav">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">Sui.Gn</a> <!-- Replace with your logo if available -->
+            <nav class="nav-links">
+                <a href="#updates">Portfolio</a>
+                <a href="#updates">SourceCode</a>
+                <!-- Add other navigation links as necessary -->
+            </nav>
+        </div>
+        <div class="submenu">
+            <div class="nav-content">
+                <nav class="nav-sublinks">
+                    <a href="#apps">Apps</a>
+                    <a href="#endpoints">Endpoints</a>
+                    <a href="#packages">Packages</a>
+                    <!-- Add other subnavigation links as necessary -->
+                </nav>
+            </div>
+        </div>
+        
+    </header>
     <div class="main-container">
     <div class="grid-container">
 
     <div class="card sourcecode" onclick="location.href='./pages/sourcecode.html';">
-        <div class="text">SourceCode</div>
+        <div class="text">at0m.me</div>
     </div>
     <div class="card portfolio" onclick="location.href='./portfolio';">
-        <div class="text">Portfolio</div>
+        <div class="text">this.me</div>
     </div>
     <div class="card music" onclick="location.href='./pages/endpoints.html';">
-        <div class="text">@endpoints</div>
+        <div class="text">netGet</div>
     </div>
     <div class="card monads" onclick="location.href='./pages/apps.html';">
-        <div class="text">@apps</div>
+        <div class="text">Cleaker</div>
     </div>
     <div class="card packages" onclick="location.href='./pages/packages.html';">
-        <div class="text">@packages</div>
+        <div class="text">monads</div>
     </div>
 </div>
     </div>
