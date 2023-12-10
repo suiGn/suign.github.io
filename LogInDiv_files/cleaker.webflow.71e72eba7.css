@@ -4037,6 +4037,7 @@ a {
 }
 
 .div-block-16.jhj {
+  max-width: 777px;
   background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("https://assets-global.website-files.com/5ce9d28d5d0f4701ba9bbbe0/656abb845867d91d353dacd9_array_of_glowing_memory_pixels_l-removebg-.png");
   background-position: 0 0, 0 0;
   background-size: auto, auto;
@@ -4053,7 +4054,7 @@ a {
 }
 
 .nav-link {
-  color: #0fa294;
+  color: rgba(15, 162, 148, .89);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Oxygen, Fira Sans, Droid Sans, sans-serif;
   font-size: 21px;
 }
@@ -4077,8 +4078,9 @@ a {
 }
 
 .section-2 {
-  margin-bottom: 55px;
+  margin-bottom: 34px;
   padding-top: 34px;
+  padding-bottom: 21px;
 }
 
 .text-block-23 {
@@ -4086,6 +4088,9 @@ a {
   text-align: center;
   margin-bottom: 21px;
   padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  font-family: Montserrat, sans-serif;
   font-size: 26px;
   text-decoration: none;
 }
@@ -4108,6 +4113,10 @@ a {
   margin-right: auto;
 }
 
+.container-3 {
+  max-width: 777px;
+}
+
 .div-block-18 {
   float: right;
   text-align: left;
@@ -4118,8 +4127,9 @@ a {
 }
 
 .container-4 {
-  margin-bottom: 28px;
-  padding-top: 21px;
+  margin-bottom: 21px;
+  padding-top: 0;
+  padding-bottom: 21px;
 }
 
 .section-3 {
@@ -4129,6 +4139,7 @@ a {
 .image-14 {
   margin-top: 21px;
   padding-top: 0;
+  padding-bottom: 5px;
 }
 
 .link-block {
@@ -4136,8 +4147,14 @@ a {
   text-decoration: none;
 }
 
-.link-block-2, .link-block-3 {
+.link-block-2 {
   color: rgba(0, 0, 238, 0);
+}
+
+.link-block-3 {
+  color: rgba(0, 0, 238, 0);
+  margin-right: 0;
+  padding-right: 0;
 }
 
 .container-5 {
@@ -4157,6 +4174,18 @@ a {
   margin-bottom: 32px;
   margin-left: 50px;
   padding-left: 15px;
+}
+
+.heading-7, .heading-8 {
+  font-size: 55px;
+}
+
+.container-6, .container-7 {
+  max-width: 777px;
+}
+
+.section-4 {
+  margin-bottom: 19px;
 }
 
 @media screen and (max-width: 991px) {
@@ -5235,5 +5264,9 @@ a {
     padding-top: 5px;
     padding-bottom: 0;
     box-shadow: 0 11px 14px 8px rgba(0, 0, 0, .2);
+  }
+
+  .heading-8 {
+    font-size: 34px;
   }
 }
