@@ -35,11 +35,17 @@
                 </div>
                 <?js } ?>
             <div class="navigation">
+             <a
+                    href="https://docs.neurons.me"
+                    class="link"
+                >
+                    <?js= betterDocs.navDocumentationLabel || 'Docs' ?>
+                </a>
                 <a
                     href="<?js= betterDocs.landing ? 'docs.html' : 'index.html' ?>"
                     class="link"
                 >
-                    <?js= betterDocs.navDocumentationLabel || 'Documentation' ?>
+                    <?js= betterDocs.navDocumentationLabel || 'Index' ?>
                 </a>
                 <?js if (this.tutorials.length) { ?>
                 <div class="dropdown is-hoverable is-right">
