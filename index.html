@@ -1,181 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Explore the our sourcecode and its Mechanics.">
-<meta name="keywords" content="System Mechanics, SuiGN, neurons.me, Open Source, Technology, EndPoints, Apps, Packages">
-<title>Source-Code</title>
-<link rel="icon" href="https://suign.github.io/neurons.me/neurons_logo.png" type="image/png">
-<style>
-        body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background-color: #fafafa;
-          margin: 0;
-          padding: 20px;
-          color: #333;
-        }
-        .container {
-          max-width: 1200px;
-          margin: 20px auto;
-          background-color: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-          text-align: center;
-          color: #0077cc;
-        }
-        .section {
-          margin-bottom: 40px;
-        }
-        .section-header {
-          color: #0077cc;
-          padding-bottom: 10px;
-          border-bottom: 2px solid #eee;
-          margin-bottom: 20px;
-        }
-        ul {
-          list-style-type: none;
-          padding: 0;
-        }
-        li {
-          background-color: #f9f9f9;
-          margin-bottom: 10px;
-          padding: 10px;
-          border-radius: 4px;
-          transition: all 0.3s;
-        }
-        li:hover {
-          background-color: #e9e9e9;
-        }
-        .navbar {
-          background-color: #333;
-          overflow: hidden;
-          font-size: 16px;
-        }
-        .navbar a {
-          float: left;
-          display: block;
-          color: white;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-          transition: background-color 0.3s;
-        }
-        .navbar a:hover {
-          background-color: #555;
-        }
-        .navbar a.active {
-          background-color: #0077cc;
-        }
-        .navbar .icon {
-          display: none;
-        }
-        @media screen and (max-width: 600px) {
-          .navbar a:not(:first-child) {display: none;}
-          .navbar a.icon {
-            float: right;
-            display: block;
-          }
-        }
-        @media screen and (max-width: 600px) {
-          .navbar.responsive {position: relative;}
-          .navbar.responsive .icon {
-            position: absolute;
-            right: 0;
-            top: 0;
-          }
-          .navbar.responsive a {
-            float: none;
-            display: block;
-            text-align: left;
-          }
-        }
-   
-  .learn-more-btn {
-    background-color: #2196F3;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  .learn-more-btn:hover {
-    background-color: #0D47A1;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO Meta Tags -->
+<meta name="description" content="Explore SuiGn's code and open-source projects.">
+<meta name="keywords" content="SuiGn, GitHub, Open Source, Projects, Developers, Technology">
+<meta name="author" content="SuiGn">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="SuiGn - Open Source Projects">
+<meta property="og:description" content="Discover SuiGn's open-source projects on GitHub. Join the community of developers and tech enthusiasts!">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+<meta property="og:url" content="https://github.com/suiGn">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SuiGn GitHub - Open Source Projects">
+<meta name="twitter:description" content="Discover innovative open-source projects by SuiGn on GitHub.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<!-- Favicon -->
+<link rel="icon" href="https://avatars.githubusercontent.com/u/9565222?v=4" type="image/png">
+
+
+  <title>SuiGn</title>
+  <style>
+    /* Reset styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Background video container */
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.85); /* Stronger black overlay */
+      z-index: 0;
+    }
+
+    /* Centered modal */
+    .modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(50, 50, 50, 0.8); /* Greyish modal with lower opacity */
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      z-index: 1;
+      width: 300px;
+    }
+
+    .modal img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal h1 {
+      margin: 0 0 20px;
+      font-size: 28px;
+      color: #fff; /* White text */
+    }
+
+    .modal .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .modal button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal button.github {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .modal button.github:hover {
+      background-color: #555;
+    }
+
+    .modal button.other {
+      background-color: #0a6ebd;
+      color: #fff;
+    }
+
+    .modal button.other:hover {
+      background-color: #0c87e7;
+    }
+  </style>
 </head>
 <body>
-
-    <div class="navbar" id="myNavbar">
-        <a href="#" class="active">Source.Code</a>
-        <a href="https://neurons.me">neurons.me</a>
-        <a href="/pages/@packages.html">@Packages</a>
-        <a href="javascript:void(0);" class="icon" onclick="navbarToggle()">
-          &#9776;
-        </a>
-      </div>
-
-<div class="container">
-<img src="https://suign.github.io/neurons.me/neurons_logo.png" alt="neurons.me" width="89" height="89">
-  <!-- Core Components -->
-  <div class="section">
-    <h2 class="section-header">Core Components</h2>
-    <div class="component">
-        <h3 class="component-title">Packages</h3>
-        <p class="component-description">Modular code packages for system functionality and features.</p>
-        <a href="pages/@packages.html" class="learn-more-btn">Learn More</a>
-      </div>
-      <div class="component">
-        <h3 class="component-title">Apps</h3>
-        <p class="component-description">Collection of applications built on top of the system architecture.</p>
-        <a href="pages/@apps.html" class="learn-more-btn">Learn More</a>
-      </div>
-    <div class="component">
-      <h3 class="component-title">EndPoints</h3>
-      <p class="component-description">Interfaces for system communication and data exchange.</p>
-      <a href="pages/@endpoints.html" class="learn-more-btn">Learn More</a>
-    </div>
+  <!-- Background Video -->
+  <div class="video-container">
+    <video autoplay muted loop>
+      <source src="./assets/suiGn.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
-  <!-- System Essentials -->
-  <div class="section">
-    <h2 class="section-header">System Essentials</h2>
-    <div class="component">
-      <h3 class="component-title">Environments</h3>
-      <p class="component-description">Configurable settings that define system operation contexts.</p>
-      <a href="#" class="learn-more-btn">Learn More</a>
-    </div>
-    <div class="component">
-      <h3 class="component-title">Contexts</h3>
-      <p class="component-description">Contextual elements that influence system behavior and user interaction.</p>
-      <a href="#" class="learn-more-btn">Learn More</a>
-    </div>
-    <div class="component">
-      <h3 class="component-title">Identities</h3>
-      <p class="component-description">System entities with unique identifiers for security and personalization.</p>
-      <a href="#" class="learn-more-btn">Learn More</a>
-    </div>
-    <div class="component">
-      <h3 class="component-title">Agreements</h3>
-      <p class="component-description">Protocols and conventions that govern system usage and interaction.</p>
-      <a href="#" class="learn-more-btn">Learn More</a>
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Centered Modal -->
+  <div class="modal">
+    <!-- Avatar -->
+    <img src="https://avatars.githubusercontent.com/u/9565222?v=4" alt="SuiGn Avatar">
+    <h1>SuiGn</h1>
+    <div class="button-group">
+      <button class="github" onclick="window.location.href='https://github.com/suiGn';">GitHub</button>
+      <button class="github" onclick="window.location.href='https://www.abellae.me/';">Web</button>
     </div>
   </div>
-
-</div>
-
-<script>
-    function navbarToggle() {
-      var x = document.getElementById("myNavbar");
-      if (x.className === "navbar") {
-        x.className += " responsive";
-      } else {
-        x.className = "navbar";
-      }
-    }
-    </script>
-
 </body>
 </html>
