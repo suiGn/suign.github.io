@@ -3,28 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- SEO Meta Tags -->
-<meta name="description" content="Explore SuiGn's code and open-source projects.">
-<meta name="keywords" content="SuiGn, GitHub, Open Source, Projects, Developers, Technology">
-<meta name="author" content="SuiGn">
-
-<!-- Open Graph Meta Tags -->
-<meta property="og:title" content="SuiGn - Open Source Projects">
-<meta property="og:description" content="Discover SuiGn's open-source projects on GitHub. Join the community of developers and tech enthusiasts!">
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
-<meta property="og:url" content="https://github.com/suiGn">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SuiGn GitHub - Open Source Projects">
-<meta name="twitter:description" content="Discover innovative open-source projects by SuiGn on GitHub.">
-<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
-
-<!-- Favicon -->
-<link rel="icon" href="https://avatars.githubusercontent.com/u/9565222?v=4" type="image/png">
-
-
   <title>SuiGn</title>
   <style>
     /* Reset styles */
@@ -64,7 +42,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(5, 5, 5, 0.85); /* Stronger black overlay */
+      background: rgba(5, 5, 5, 0.85);
       z-index: 0;
     }
 
@@ -74,7 +52,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(50, 50, 50, 0.8); /* Greyish modal with lower opacity */
+      background: rgba(50, 50, 50, 0.8);
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
@@ -94,7 +72,7 @@
     .modal h1 {
       margin: 0 0 20px;
       font-size: 28px;
-      color: #fff; /* White text */
+      color: #fff;
     }
 
     .modal .button-group {
@@ -129,6 +107,65 @@
     .modal button.other:hover {
       background-color: #0c87e7;
     }
+
+    /* README Icon */
+    .readme-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333;
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+
+    .readme-icon:hover {
+      background-color: #555;
+    }
+
+    /* README Modal */
+    .readme-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(50, 50, 50, 0.9);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      text-align: left;
+      color: white;
+      z-index: 20;
+      max-width: 600px;
+      display: none;
+    }
+
+    .readme-modal h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .readme-modal p {
+      margin: 0 0 10px;
+    }
+
+    .close-readme {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -145,7 +182,6 @@
 
   <!-- Centered Modal -->
   <div class="modal">
-    <!-- Avatar -->
     <img src="https://avatars.githubusercontent.com/u/9565222?v=4" alt="SuiGn Avatar">
     <h1>SuiGn</h1>
     <div class="button-group">
@@ -153,5 +189,35 @@
       <button class="github" onclick="window.location.href='https://www.abellae.me/';">Web</button>
     </div>
   </div>
+
+  <!-- README Icon -->
+  <div class="readme-icon" onclick="openReadme()">⌘</div>
+
+  <!-- README Modal -->
+  <div class="readme-modal" id="readmeModal">
+    <span class="close-readme" onclick="closeReadme()">×</span>
+    <h1>⌘ - The Code is the Ultimate Truth</h1>
+    <p><i>Existence is logic in essence - La existencia es lógica en esencia.</i></p>
+    <p>Code embodies pure logic — it is honest, unambiguous, and cannot lie.</p>
+    <p>Always guided by the principles of <strong>Inherent Logic</strong>:</p>
+    <ul>
+      <li><strong>Reality as Interconnected Systems</strong>: Every entity exists within a network of relationships.</li>
+      <li><strong>Consciousness as a Dynamic Process</strong>: Consciousness collapses possibilities into reality.</li>
+      <li><strong>Space and Time as Interfaces</strong>: Emergent properties facilitating transitions and interactions.</li>
+      <li><strong>Programming as a Mirror of the Universe</strong>: Logic and modularity reflect universal patterns.</li>
+      <li><strong>The Self as a Monad</strong>: Identity is fluid, encapsulating context and decisions.</li>
+    </ul>
+    <p>Explore these concepts through my repositories and projects. Feel free to contribute or reach out.</p>
+  </div>
+
+  <script>
+    function openReadme() {
+      document.getElementById('readmeModal').style.display = 'block';
+    }
+
+    function closeReadme() {
+      document.getElementById('readmeModal').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
