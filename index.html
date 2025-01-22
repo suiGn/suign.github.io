@@ -24,7 +24,6 @@
       z-index: -1;
       overflow: hidden;
     }
-
     .video-container video {
       position: absolute;
       top: 50%;
@@ -60,7 +59,6 @@
       z-index: 1;
       width: 300px;
     }
-
     .modal img {
       width: 100px;
       height: 100px;
@@ -68,19 +66,16 @@
       margin-bottom: 15px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
-
     .modal h1 {
       margin: 0 0 20px;
       font-size: 28px;
       color: #fff;
     }
-
     .modal .button-group {
       display: flex;
       justify-content: center;
       gap: 10px;
     }
-
     .modal button {
       padding: 10px 20px;
       border: none;
@@ -89,30 +84,33 @@
       font-size: 16px;
       transition: background-color 0.3s ease;
     }
-
     .modal button.github {
       background-color: #333;
       color: #fff;
     }
-
     .modal button.github:hover {
       background-color: #555;
     }
-
     .modal button.other {
       background-color: #0a6ebd;
       color: #fff;
     }
-
     .modal button.other:hover {
       background-color: #0c87e7;
     }
 
-    /* README Icon */
-    .readme-icon {
+    /* Container for bottom-right icons */
+    .icon-container {
       position: fixed;
       bottom: 20px;
       right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    /* First circle: readme icon (⌘) */
+    .readme-icon {
       background-color: #333;
       color: #fff;
       width: 50px;
@@ -124,12 +122,35 @@
       font-size: 18px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       cursor: pointer;
-      z-index: 10;
       transition: background-color 0.3s ease;
     }
-
     .readme-icon:hover {
       background-color: #555;
+    }
+
+    /* Second circle: link to neurons.me */
+    .neurons-link {
+      background-color: #333;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+    .neurons-link:hover {
+      background-color: #555;
+    }
+
+    .neurons-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
     /* README Modal */
@@ -148,16 +169,13 @@
       max-width: 600px;
       display: none;
     }
-
     .readme-modal h1 {
       font-size: 22px;
       margin-bottom: 10px;
     }
-
     .readme-modal p {
       margin: 0 0 10px;
     }
-
     .close-readme {
       position: absolute;
       top: 10px;
@@ -190,8 +208,19 @@
     </div>
   </div>
 
-  <!-- README Icon -->
-  <div class="readme-icon" onclick="openReadme()">⌘</div>
+  <!-- Bottom-right icons -->
+  <div class="icon-container">
+    <!-- Icon that opens README modal -->
+    <div class="readme-icon" onclick="openReadme()">⌘</div>
+    <!-- Icon (link) to neurons.me -->
+    <a href="https://neurons.me" target="_blank" class="neurons-link">
+      <img 
+        class="neurons-icon" 
+        src="./assets/imgs/neurons-grey.png" 
+        alt="Neurons Grey Icon"
+      >
+    </a>
+  </div>
 
   <!-- README Modal -->
   <div class="readme-modal" id="readmeModal">
