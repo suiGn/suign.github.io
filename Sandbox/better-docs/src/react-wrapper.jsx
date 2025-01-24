@@ -13,7 +13,7 @@ window.component = null
 class Wrapper extends React.Component {
   constructor(props) {
     super(props)
-    window.component = window.component || {};
+    window.component = window.component || {}class="footer"
     this.iframeRef= React.createRef()
     this.handleChange = this.handleChange.bind(this)
     this.toggleEditor = this.toggleEditor.bind(this)
