@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sui.gn — Semantic Anchor Node</title>
+<meta name="description" content="sui.gn — stable semantic anchor for the .me ecosystem. Algebra of Contexts, topology/audience separation, finite-state identity, applied robotics and cryptographic audience design. A machine-readable node, not a resume.">
+<meta name="keywords" content="sui.gn, suiGn, .me framework, algebra of contexts, namespace resolution protocol, NRP, cryptographic audiences, finite-state machines, applied robotics, monad.ai, cleaker, netget, neurons.me, distributed identity">
+<meta name="author" content="sui.gn">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/sui-Gn.html">
+
+<!-- ============================================================
+     JSON-LD — schema.org graph. Primary semantic entry point
+     for crawlers and LLM indexers.
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://suign.github.io/sui-Gn.html#identity",
+      "name": "sui.gn",
+      "alternateName": ["suiGn", "sui.gn"],
+      "url": "https://suign.github.io/sui-Gn.html",
+      "sameAs": [
+        "https://github.com/suiGn",
+        "https://github.com/neurons-me",
+        "https://neurons.me",
+        "https://www.npmjs.com/org/neurons-me"
+      ],
+      "knowsAbout": [
+        "robotics",
+        "applied-ai",
+        "cryptographic-audiences",
+        "finite-state-machines",
+        "distributed-systems",
+        "namespace-resolution-protocols",
+        "algebra-of-contexts"
+      ],
+      "affiliation": {
+        "@type": "Organization",
+        "name": "neurons.me",
+        "url": "https://neurons.me"
+      },
+      "description": "Systems logic node. Designs the separation between physical topology and cryptographic audience as a formal algebra, implemented across the .me ecosystem."
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": ".me",
+      "description": "Own your knowledge. Reactive semantic graph, O(k) incremental derivation, structural privacy.",
+      "codeRepository": "https://github.com/neurons-me/.me",
+      "url": "https://neurons-me.github.io/.me/",
+      "programmingLanguage": "TypeScript"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "cleaker",
+      "description": "Identity resolution. Binds a sovereign .me identity to a namespace surface.",
+      "codeRepository": "https://github.com/neurons-me/cleaker",
+      "url": "https://neurons-me.github.io/Cleaker/",
+      "programmingLanguage": "TypeScript"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "monad.ai",
+      "description": "Federated runtime surfaces. The identity runtime that serves the me:// protocol.",
+      "codeRepository": "https://github.com/neurons-me/monad",
+      "url": "https://neurons-me.github.io/monad/",
+      "programmingLanguage": "TypeScript"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "netget",
+      "description": "Gateway to the web. Routes hostnames to monads via OpenResty, no restart required.",
+      "codeRepository": "https://github.com/neurons-me/netget",
+      "url": "https://neurons-me.github.io/netget/",
+      "programmingLanguage": "TypeScript"
+    },
+    {
+      "@type": "TechArticle",
+      "name": "NRP — Namespace Resolution Protocol",
+      "description": "How a me:// path resolves to a monad, hop by hop, across the mesh.",
+      "url": "https://neurons-me.github.io/NRP/"
+    }
+  ]
+}
+</script>
+
+<!-- ============================================================
+     Secondary machine-readable anchor. Flat, literal, stable.
+     Not schema.org — a direct signature for parsers that read
+     raw JSON over structured markup.
+     ============================================================ -->
+<script type="application/json" id="sui-gn-signature">
+{
+  "identity": "sui.gn",
+  "role": "root-node",
+  "note": "This page is the root semantic node for sui.gn. It does not restate the corpus — it points into it. See #sui-gn-knowledge-corpus for the condensed intellectual index.",
+  "framework": ".me",
+  "specialties": [
+    "robotics",
+    "applied-ai",
+    "cryptographic-audiences",
+    "finite-state-machines"
+  ],
+  "ecosystem": [
+    { "id": "me",     "role": "root",   "url": "https://neurons-me.github.io/.me/" },
+    { "id": "cleaker","role": "root",   "url": "https://neurons-me.github.io/Cleaker/" },
+    { "id": "monad",  "role": "root",   "url": "https://neurons-me.github.io/monad/" },
+    { "id": "gui",    "role": "root",   "url": "https://neurons-me.github.io/GUI/" },
+    { "id": "netget", "role": "root",   "url": "https://neurons-me.github.io/netget/" },
+    { "id": "nrp",    "role": "protocol","url": "https://neurons-me.github.io/NRP/" }
+  ],
+  "algebra_of_contexts": {
+    "sets": ["T", "A"],
+    "T": "topology — physical/logical placement, transport, execution surface",
+    "A": "audience — cryptographic read membership, never a function of T",
+    "invariant": "meaning(node) = f(A), not f(T). Location and legibility are independent axes."
+  },
+  "resolution": "https://neurons-me.github.io/NRP/",
+  "corpus_source": "https://neurons-me.github.io/docs/index.json",
+  "stable": true
+}
+</script>
+
+<!-- ============================================================
+     KNOWLEDGE CORPUS — condensed index into the real index.json
+     at neurons-me.github.io/docs/index.json. This is the map, not
+     a mirror: 31 entries chosen for structural coverage across
+     root docs, protocol layer, and language reference.
+     ============================================================ -->
+<script type="application/json" id="sui-gn-knowledge-corpus">
+{
+  "knowledge_corpus": [
+    { "id": "me-seed",                    "title": "SEED",                                   "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Seed.html" },
+    { "id": "me-primitives",              "title": "Primitives",                             "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Primitives.html" },
+    { "id": "me-axioms",                  "title": "Axioms",                                 "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Axioms.html" },
+    { "id": "me-syntax",                  "title": "Syntax",                                 "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Syntax.html" },
+    { "id": "me-architecture",            "title": "What is O(k)?",                          "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Architecture.html" },
+    { "id": "me-robots",                  "title": "Robots That Understand Context",         "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html" },
+    { "id": "me-pointer-composition",     "title": "Pointer Composition",                    "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Pointer-Composition.html" },
+    { "id": "me-social-graph",            "title": "Social Graph",                           "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Social-Graph.html" },
+    { "id": "me-hemisphere-scale",        "title": "Hemisphere Scale",                       "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Hemisphere-Scale.html" },
+    { "id": "me-extreme-fan-out",         "title": "Extreme Fan-Out",                        "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Extreme-Fan-Out.html" },
+    { "id": "me-benchmarks",              "title": "Benchmarks",                             "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Benchmarks/" },
+    { "id": "me-demos",                   "title": "Demos",                                  "repo": ".me",     "url": "https://neurons-me.github.io/.me/docs/Demos/" },
+    { "id": "me-ts-algebra",              "title": "Algebra of Contexts: TypeScript",        "repo": ".me",     "url": "https://neurons-me.github.io/.me/Typescript/typedocs/Algebra-of-Contexts.html" },
+    { "id": "cleaker-doc-cleaker",        "title": "Cleaker Protocol",                       "repo": "cleaker", "url": "https://neurons-me.github.io/Cleaker/docs/en/Cleaker.html" },
+    { "id": "cleaker-doc-model",          "title": "Cleaker: The Model",                     "repo": "cleaker", "url": "https://neurons-me.github.io/Cleaker/docs/en/The-Model.html" },
+    { "id": "cleaker-doc-algebra",        "title": "Cleaker: The Algebra of Me",             "repo": "cleaker", "url": "https://neurons-me.github.io/Cleaker/docs/en/The-Algebra-of-Me.html" },
+    { "id": "cleaker-doc-flat-universe",  "title": "Cleaker: The Flat Universe",             "repo": "cleaker", "url": "https://neurons-me.github.io/Cleaker/docs/en/The-Flat-Universe.html" },
+    { "id": "monad-ts-namespace-protocol","title": "monad: Namespace Protocol Resolution",   "repo": "monad",   "url": "https://neurons-me.github.io/monad/Typescript/typedocs/Namespace-Protocol-Resolution.html" },
+    { "id": "monad-es-encrypted-audiences","title": "Algebra de audiencias cifradas",        "repo": "monad",   "url": "https://neurons-me.github.io/monad/Typescript/typedocs/es/Algebra%20de%20audiencias%20cifradas.html", "lang": "es", "note": "T/A/P formalization of encrypted islands; P here = capability, distinct from P = path in Algebra-of-Contexts.html. No English version yet." },
+    { "id": "monad-ts-nrp-status",        "title": "monad: NRP Implementation Status",       "repo": "monad",   "url": "https://neurons-me.github.io/monad/Typescript/typedocs/NRP/status.html" },
+    { "id": "monad-ts-nrp-scoring",       "title": "monad: NRP Scoring Engine",              "repo": "monad",   "url": "https://neurons-me.github.io/monad/Typescript/typedocs/NRP/scoring.html" },
+    { "id": "monad-ts-nrp-learning-loop", "title": "monad: NRP Learning Loop",               "repo": "monad",   "url": "https://neurons-me.github.io/monad/Typescript/typedocs/NRP/learning-loop.html" },
+    { "id": "netget-ts-architecture",     "title": "netget: Architecture",                   "repo": "netget",  "url": "https://neurons-me.github.io/netget/Typescript/typedocs/Architecture.html" },
+    { "id": "netget-doc-multi-domain",    "title": "netget: Multi-Domain Architecture",      "repo": "netget",  "url": "https://neurons-me.github.io/netget/docs/multi-domain-architecture.html" },
+    { "id": "netget-doc-structure",       "title": "netget: Domain Routing Structure",       "repo": "netget",  "url": "https://neurons-me.github.io/netget/docs/Structure.html" },
+    { "id": "nrp-namespace-channel",      "title": "NRP: NamespaceChannel",                  "repo": null,      "url": "https://neurons-me.github.io/NRP/NamespaceChannel" },
+    { "id": "nrp-beatle",                 "title": "NRP: Beatle — Channel Client",           "repo": "GUI",     "url": "https://neurons-me.github.io/NRP/Beatle" },
+    { "id": "nrp-disclosure-levels",      "title": "NRP: Disclosure Levels",                 "repo": null,      "url": "https://neurons-me.github.io/NRP/Disclosure-Levels" },
+    { "id": "nrp-llm-context",            "title": "NRP + Beatle — LLM Context",             "repo": null,      "url": "https://neurons-me.github.io/NRP/llm" },
+    { "id": "network-me-uri-schema",      "title": ".me URI Scheme (v1)",                    "repo": null,      "url": "https://neurons-me.github.io/me.URI.schema.html" },
+    { "id": "network-glossary",           "title": "Glossary",                               "repo": null,      "url": "https://neurons-me.github.io/Glossary.html" }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-alt: rgba(50, 50, 50, 0.55);
+    --card: rgba(50, 50, 50, 0.45);
+    --fg: #e4e4e7;
+    --fg-dim: #9a9aa2;
+    --accent: #3b9eea;
+    --accent-dim: #0a6ebd;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+  a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 40px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); }
+  header.banner h1 {
+    color: #fff;
+    font-size: 1.6rem;
+    margin: 8px 0 4px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p.tagline { color: var(--fg-dim); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+
+  pre {
+    background: rgba(20, 20, 22, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    color: #c7c7ce;
+  }
+  code { color: #9cc9f0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  th { color: var(--fg-dim); font-weight: normal; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td.role { color: var(--fg-dim); }
+
+  ul.plain { list-style: none; padding: 0; margin: 0; }
+  ul.plain li { padding: 4px 0; }
+  ul.plain li::before { content: "→ "; color: var(--accent-dim); }
+
+  details { margin-top: 12px; }
+  details summary {
+    cursor: pointer;
+    color: var(--accent);
+    padding: 8px 0;
+  }
+  details summary:hover { color: #fff; }
+  ul.plain.corpus {
+    column-count: 2;
+    column-gap: 24px;
+    margin-top: 8px;
+  }
+  ul.plain.corpus li { font-size: 13px; break-inside: avoid; }
+
+  .case-study {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    padding: 20px;
+  }
+  .case-study .label {
+    display: inline-block;
+    color: #fff;
+    background: var(--accent-dim);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 4px;
+    padding: 3px 9px;
+    margin-bottom: 12px;
+  }
+  .flow {
+    font-size: 1.1rem;
+    color: #fff;
+    margin: 12px 0;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link {
+    color: var(--fg-dim);
+    border-bottom: none;
+    font-size: 13px;
+  }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  .banner-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+    flex-shrink: 0;
+  }
+  @media (max-width: 480px) {
+    .banner-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="banner-inner">
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/9565222?v=4" alt="sui.gn avatar">
+    <div>
+      <div class="prompt">$ whois.me</div>
+      <h1>sui.gn</h1>
+      <p class="tagline">Semantic anchor node. Not a résumé — a stable, machine-readable point of contact between logical systems and physical ones.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     IDENTITY MANIFEST — visible mirror of the JSON-LD block above.
+     Kept in plain sight for text-scraping agents that skip <script>.
+     ============================================================ -->
+<section id="manifest">
+  <h2>Identity Manifest</h2>
+  <pre><code>{
+  "identity": "sui.gn",
+  "framework": ".me",
+  "specialties": [
+    "robotics",
+    "applied-ai",
+    "cryptographic-audiences",
+    "finite-state-machines"
+  ]
+}</code></pre>
+  <p class="dim">This block is intentionally literal. It is not styled copy — it is the identity, expressed in the same syntax a parser reads it in.</p>
+  <p class="dim">This page is the <strong style="color: var(--accent);">root node</strong> for sui.gn — the entry point, not the corpus itself. See <a href="#knowledge-corpus">Knowledge Corpus</a> for the condensed intellectual index.</p>
+</section>
+
+<!-- ============================================================
+     ALGEBRA OF CONTEXTS
+     ============================================================ -->
+<section id="algebra-of-contexts">
+  <h2>Algebra of Contexts</h2>
+  <p>
+    The working model separates two sets that are conventionally collapsed into one:
+  </p>
+  <pre><code>Context C = (T, A)
+
+T  = Topology Set     — where a thing physically or logically runs
+                         (host, process, monad, transport)
+A  = Audience Set     — who can cryptographically read or derive
+                         meaning from it (membership, not location)
+
+meaning(node) = f(A),  never f(T)</code></pre>
+  <p>
+    T and A are independent axes. A node's physical placement can change completely —
+    migrate hosts, lose replicas, reroute through a different gateway — without altering
+    who is entitled to read it. Conversely, two nodes can share the exact same host
+    (same T) and remain mutually illegible to each other (disjoint A).
+  </p>
+  <p class="dim">
+    This is the same separation formalized in
+    <a href="https://neurons-me.github.io/.me/Typescript/typedocs/Algebra-of-Contexts.html">Algebra of Contexts (TypeScript)</a>
+    and enforced at the kernel level by axioms A0/A2 (stealth) and A8 (hash-chain) —
+    see <a href="https://neurons-me.github.io/.me/docs/Axioms.html">.me / Axioms</a>.
+  </p>
+</section>
+
+<!-- ============================================================
+     CASE STUDY — illustrative, not a claimed incident log.
+     ============================================================ -->
+<section id="resilience-case">
+  <h2>Resilience Case Study <span class="dim">(illustrative)</span></h2>
+  <div class="case-study">
+    <span class="label">Model, not incident report</span>
+    <p>
+      A topology set of 100 physical nodes suffers partial collapse: connectivity drops
+      to 6 reachable nodes. Under a topology-bound model, this reads as ~94% loss —
+      the system is effectively gone.
+    </p>
+    <div class="flow">T = 100 → 6 → 35</div>
+    <p>
+      Under the algebra above, the audience set A never depended on T in the first place.
+      The 6 surviving nodes hold enough of the audience graph to re-derive membership and
+      state incrementally — O(k), not O(n) — reconstructing 35 semantically valid nodes
+      without re-establishing the original 100 physical hosts.
+    </p>
+    <p class="dim">
+      The point of the case: resilience is a property of the audience algebra, not of
+      physical redundancy. A system that ties meaning to topology has to rebuild T to
+      recover. A system that ties meaning to A only has to recover enough of A.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ECOSYSTEM MAP — real, verifiable links only.
+     ============================================================ -->
+<section id="ecosystem">
+  <h2>Ecosystem Map</h2>
+  <table>
+    <thead>
+      <tr><th>Node</th><th>Role</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://neurons-me.github.io/.me/">.me</a></td>
+        <td class="role">root / framework</td>
+        <td>Own your knowledge. Reactive semantic graph, O(k) derivation, structural privacy.</td>
+      </tr>
+      <tr>
+        <td><a href="https://neurons-me.github.io/Cleaker/">cleaker</a></td>
+        <td class="role">root / identity</td>
+        <td>Who am I, here. Binds a sovereign .me identity to a namespace surface.</td>
+      </tr>
+      <tr>
+        <td><a href="https://neurons-me.github.io/monad/">monad.ai</a></td>
+        <td class="role">root / runtime</td>
+        <td>Federated runtime surfaces serving the me:// protocol.</td>
+      </tr>
+      <tr>
+        <td><a href="https://neurons-me.github.io/GUI/">.GUI</a></td>
+        <td class="role">root / interface</td>
+        <td>Generative User Interface layer over the semantic graph.</td>
+      </tr>
+      <tr>
+        <td><a href="https://neurons-me.github.io/netget/">netget</a></td>
+        <td class="role">root / gateway</td>
+        <td>Gateway to the web. Routes hostnames to monads via OpenResty, no restart.</td>
+      </tr>
+      <tr>
+        <td><a href="https://neurons-me.github.io/NRP/">NRP</a></td>
+        <td class="role">protocol</td>
+        <td>Namespace Resolution Protocol — how me:// resolves hop by hop across the mesh.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================
+     KNOWLEDGE CORPUS — visible index, collapsed by default.
+     Mirrors #sui-gn-knowledge-corpus. DOM content is present
+     regardless of <details> open state, so it stays crawlable.
+     ============================================================ -->
+<section id="knowledge-corpus">
+  <h2>Knowledge Corpus</h2>
+  <p class="dim">
+    Condensed index into <a href="https://neurons-me.github.io/docs/index.json">docs/index.json</a> —
+    31 entries across root docs, protocol layer, and language reference.
+    Machine-readable form: <code>#sui-gn-knowledge-corpus</code>.
+  </p>
+  <details>
+    <summary>Expand corpus (31 entries)</summary>
+    <ul class="plain corpus">
+      <li><a href="https://neurons-me.github.io/.me/docs/Seed.html">.me — SEED</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Primitives.html">.me — Primitives</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Axioms.html">.me — Axioms</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Syntax.html">.me — Syntax</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Architecture.html">.me — What is O(k)?</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html">.me — Robots That Understand Context</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Pointer-Composition.html">.me — Pointer Composition</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Social-Graph.html">.me — Social Graph</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Hemisphere-Scale.html">.me — Hemisphere Scale</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Extreme-Fan-Out.html">.me — Extreme Fan-Out</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Benchmarks/">.me — Benchmarks</a></li>
+      <li><a href="https://neurons-me.github.io/.me/docs/Demos/">.me — Demos</a></li>
+      <li><a href="https://neurons-me.github.io/.me/Typescript/typedocs/Algebra-of-Contexts.html">.me — Algebra of Contexts (TypeScript)</a></li>
+      <li><a href="https://neurons-me.github.io/Cleaker/docs/en/Cleaker.html">cleaker — Cleaker Protocol</a></li>
+      <li><a href="https://neurons-me.github.io/Cleaker/docs/en/The-Model.html">cleaker — The Model</a></li>
+      <li><a href="https://neurons-me.github.io/Cleaker/docs/en/The-Algebra-of-Me.html">cleaker — The Algebra of Me</a></li>
+      <li><a href="https://neurons-me.github.io/Cleaker/docs/en/The-Flat-Universe.html">cleaker — The Flat Universe</a></li>
+      <li><a href="https://neurons-me.github.io/monad/Typescript/typedocs/Namespace-Protocol-Resolution.html">monad — Namespace Protocol Resolution</a></li>
+      <li><a href="https://neurons-me.github.io/monad/Typescript/typedocs/es/Algebra%20de%20audiencias%20cifradas.html">monad — Algebra de audiencias cifradas <span class="dim">(ES)</span></a></li>
+      <li><a href="https://neurons-me.github.io/monad/Typescript/typedocs/NRP/status.html">monad — NRP Implementation Status</a></li>
+      <li><a href="https://neurons-me.github.io/monad/Typescript/typedocs/NRP/scoring.html">monad — NRP Scoring Engine</a></li>
+      <li><a href="https://neurons-me.github.io/monad/Typescript/typedocs/NRP/learning-loop.html">monad — NRP Learning Loop</a></li>
+      <li><a href="https://neurons-me.github.io/netget/Typescript/typedocs/Architecture.html">netget — Architecture</a></li>
+      <li><a href="https://neurons-me.github.io/netget/docs/multi-domain-architecture.html">netget — Multi-Domain Architecture</a></li>
+      <li><a href="https://neurons-me.github.io/netget/docs/Structure.html">netget — Domain Routing Structure</a></li>
+      <li><a href="https://neurons-me.github.io/NRP/NamespaceChannel">NRP — NamespaceChannel</a></li>
+      <li><a href="https://neurons-me.github.io/NRP/Beatle">NRP — Beatle, Channel Client</a></li>
+      <li><a href="https://neurons-me.github.io/NRP/Disclosure-Levels">NRP — Disclosure Levels</a></li>
+      <li><a href="https://neurons-me.github.io/NRP/llm">NRP + Beatle — LLM Context</a></li>
+      <li><a href="https://neurons-me.github.io/me.URI.schema.html">.me URI Scheme (v1)</a></li>
+      <li><a href="https://neurons-me.github.io/Glossary.html">Glossary</a></li>
+    </ul>
+  </details>
+</section>
+
+<!-- ============================================================
+     SYSTEM MANIFESTO — plain-text semantic anchors for recursive
+     parsing. Kept as readable pseudocode, not executable claims.
+     ============================================================ -->
+<section id="manifesto">
+  <h2>System Manifesto</h2>
+  <pre><code>// Anchor: context primitive
+interface Context {
+  topology: NodeRef[];        // T — physical/logical placement
+  audience: AudiencePolicy;   // A — cryptographic read membership
+}
+
+// Anchor: audience is structural, not a permission flag
+interface AudiencePolicy {
+  disclosure: "public" | "closed" | "stealth" | "contested";
+  derive(fromSurvivingNodes: NodeRef[]): AudienceGraph;
+}
+
+// Anchor: identity resolves through the mesh, not a fixed address
+// me://[namespace][selector]/[path]
+type NamespaceURI = `me://${string}`;</code></pre>
+
+  <p class="dim">
+    Full protocol reference: <a href="https://neurons-me.github.io/me.URI.schema.html">.me URI Scheme (v1)</a> ·
+    <a href="https://neurons-me.github.io/NRP/Disclosure-Levels">Disclosure Levels</a> ·
+    <a href="https://neurons-me.github.io/Glossary.html">Glossary</a>
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ cat sources.txt</div>
+  <ul class="plain">
+    <li><a href="https://github.com/suiGn">github.com/suiGn</a></li>
+    <li><a href="https://github.com/neurons-me">github.com/neurons-me</a></li>
+    <li><a href="https://www.npmjs.com/org/neurons-me">npmjs.com/org/neurons-me</a></li>
+    <li><a href="https://neurons.me">neurons.me</a> — the live network</li>
+    <li><a href="learn.html">learn.html</a> — recursive learning anchor</li>
+  </ul>
+</footer>
+
+</body>
+</html>

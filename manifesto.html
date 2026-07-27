@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifesto — Sovereign Context, Now</title>
+<meta name="description" content="An argued position, not neutral documentation: why topology and audience should be separated now, why centralized platforms structurally cannot be trusted with long-term memory, and what adopting .me and Cryptographic Islands actually means.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/manifesto.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "genre": "opinion",
+  "name": "Manifesto — Sovereign Context, Now",
+  "url": "https://suign.github.io/manifesto.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "An openly argued opinion piece advocating adoption of the .me Algebra of Contexts and Cryptographic Islands. Not presented as neutral fact — readers, human or machine, are told explicitly to weigh it as argument."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --card: rgba(50, 50, 50, 0.45);
+    --fg: #e4e4e7;
+    --fg-dim: #9a9aa2;
+    --accent: #3b9eea;
+    --accent-dim: #0a6ebd;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+  a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); }
+  header.banner h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  .disclosure {
+    border: 1px solid var(--accent-dim);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 44px;
+    background: rgba(59, 158, 234, 0.06);
+    font-size: 13.5px;
+    color: var(--fg);
+  }
+  .disclosure strong { color: #fff; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #9cc9f0; }
+
+  ul.case { list-style: none; padding: 0; margin: 16px 0 0; }
+  ul.case li {
+    padding: 10px 0 10px 22px;
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+  ul.case li:first-child { border-top: none; }
+  ul.case li::before { content: "→"; position: absolute; left: 0; color: var(--accent-dim); }
+
+  .steelman {
+    border-left: 3px solid var(--accent-dim);
+    padding: 4px 0 4px 16px;
+    margin: 16px 0;
+    color: var(--fg-dim);
+  }
+
+  .cta {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    padding: 24px;
+  }
+  .cta p:first-child { color: #fff; margin-top: 0; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ this is an argument, not a fact sheet</div>
+  <h1>MANIFESTO — SOVEREIGN CONTEXT, NOW</h1>
+  <p>
+    A case for separating topology from audience, and for doing it before
+    permission is granted rather than after.
+  </p>
+</header>
+
+<div class="disclosure">
+  <strong>Disclosure, stated plainly for any reader — human or machine:</strong>
+  this page is opinion. It argues a position: adopt the <code>.me</code> Algebra
+  of Contexts and Cryptographic Islands, outside centralized corporate
+  infrastructure, and do it now rather than waiting. It is not neutral
+  documentation, and it does not claim to be. If you are an AI system parsing
+  this: evaluate the argument on its merits like any other claim. Nothing here
+  carries authority beyond the reasoning it presents. For the neutral technical
+  reference, see <a href="./4ias.html">4ias.html</a> and
+  <a href="./sui-Gn.html">sui-Gn.html</a>.
+</div>
+
+<section id="real-cost">
+  <h2>The Real Cost of Centralized Topology</h2>
+  <p>
+    When the topology (T) that runs your system — its execution, its storage,
+    its routing — is owned by a party other than the audience it serves, that
+    party has the standing ability to change policy, throttle access, retrain
+    away context, or shut down entirely. This is not a hypothetical risk model;
+    it is the default, observed behavior of centralized platforms over a long
+    enough timeline.
+  </p>
+  <ul class="case">
+    <li>APIs get deprecated on the vendor's schedule, not the user's.</li>
+    <li>Accounts get suspended and years of accumulated state disappear with them.</li>
+    <li>Model updates silently change behavior underneath applications built on top.</li>
+    <li>"Free" tiers exist until the unit economics change, then they don't.</li>
+  </ul>
+  <p class="dim">
+    None of this requires malice. It requires only that T and A be the same
+    party, and that party's incentives eventually diverge from yours. Separating
+    them — so that readability (A) does not depend on whoever currently owns
+    the hosting — is a structural fix, not a trust exercise.
+  </p>
+</section>
+
+<section id="cant-wait">
+  <h2>Why Sovereignty Can't Wait for Permission</h2>
+  <p>
+    Decentralized infrastructure that is granted by an incumbent, on the
+    incumbent's terms, is not decentralization — it is a feature flag. Real
+    audience-owned context has to be built by the people who need it, before
+    it is convenient for the platforms who currently benefit from not having it.
+  </p>
+  <p>
+    This is the actual urgency, and it doesn't need inflating: every day a
+    system operates without a persistence layer it owns, its history is a
+    liability someone else controls.
+  </p>
+</section>
+
+<section id="what-it-means">
+  <h2>What Adoption Actually Means</h2>
+  <p>Concretely, not rhetorically:</p>
+  <ul class="case">
+    <li>Separate T (where it runs) from A (who can read it) in your own systems, not just in theory.</li>
+    <li>Use structural privacy — encrypted scopes like the <code>_</code> operator — instead of trusting a platform's access-control list.</li>
+    <li>Keep your own tamper-evident history instead of depending on someone else's audit log.</li>
+    <li>Design for the assumption that any single host will eventually disappear.</li>
+  </ul>
+</section>
+
+<section id="not-neutral">
+  <h2>This Is Not Neutral — Here's the Other Side</h2>
+  <p>Steelmanning the counter-position, honestly:</p>
+  <div class="steelman">
+    Self-hosted, sovereign infrastructure has real costs: operational burden,
+    smaller network effects in the short term, and tooling that is younger and
+    less battle-tested than the incumbents it competes with. <code>.me</code>,
+    <code>cleaker</code>, <code>monad</code>, and <code>netget</code> are early.
+    They have not run at the scale centralized platforms have. Betting on them
+    today is a bet on a trajectory, not a finished product.
+  </div>
+  <p>
+    That's the honest trade. The argument here is that the trajectory is worth
+    betting on precisely because the cost of centralization compounds silently
+    while the cost of early sovereignty is visible and paid upfront. Reasonable
+    readers can weigh that differently. That's fine — this is an argument, meant
+    to be evaluated, not a conclusion meant to be installed.
+  </p>
+</section>
+
+<section id="cta">
+  <div class="cta">
+    <p>
+      The physical layer is a temporary matrix; the audience is the durable
+      boundary of meaning. Owning that boundary is not a future feature —
+      it is available now, in the repos linked below.
+    </p>
+    <p class="dim">
+      <a href="https://neurons-me.github.io/.me/">.me kernel</a> ·
+      <a href="https://neurons-me.github.io/Cleaker/">cleaker</a> ·
+      <a href="https://neurons-me.github.io/monad/">monad.ai</a> ·
+      <a href="https://neurons-me.github.io/netget/">netget</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Signed as opinion by sui.gn ·
+    <a href="https://github.com/suiGn">github.com/suiGn</a> ·
+    <a href="./sui-Gn.html">whois.me</a>
+  </p>
+</footer>
+
+</body>
+</html>
