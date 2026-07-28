@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -77,87 +79,133 @@
 </script>
 
 <style>
-:root {
-  --bg: #050605;
-  --panel: #090d0a;
-  --text: #b9dec2;
-  --dim: #65806d;
-  --green: #37f79b;
-  --cyan: #7adce4;
-  --line: #1b3324;
-  --warn: #e5d889;
-}
-* { box-sizing: border-box; }
-html, body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: 15px;
-  line-height: 1.58;
-}
-body {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 42px 18px 92px;
-}
-a { color: var(--green); text-decoration: none; border-bottom: 1px dotted #238050; }
-header, section, footer {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 20px;
-  margin-bottom: 18px;
-}
-h1, h2 {
-  color: var(--green);
-  margin: 0 0 12px;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-}
-h1 { font-size: 1.35rem; }
-p { margin: 10px 0; }
-.dim { color: var(--dim); }
-.warn { color: var(--warn); }
-.cyan { color: var(--cyan); }
-pre {
-  background: #040704;
-  border-left: 3px solid #22774f;
-  margin: 12px 0;
-  padding: 14px;
-  overflow-x: auto;
-  font-size: 13px;
-  color: #d7f4dd;
-}
-code { color: #d7f4dd; }
-ul { padding-left: 22px; }
-li { margin: 6px 0; }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0;
-  font-size: 13px;
-}
-td, th {
-  border-bottom: 1px solid var(--line);
-  padding: 8px;
-  text-align: left;
-  vertical-align: top;
-}
-th { color: var(--dim); font-weight: normal; text-transform: uppercase; font-size: 11px; }
+  :root {
+    --bg: #0a0a0c;
+    --card: rgba(50, 50, 50, 0.45);
+    --fg: #e4e4e7;
+    --fg-dim: #9a9aa2;
+    --accent: #3b9eea;
+    --accent-dim: #0a6ebd;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+  a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 40px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); }
+  header.banner h1 {
+    color: #fff;
+    font-size: 1.35rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0 0 10px; }
+  header.banner p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-left: 3px solid var(--accent-dim);
+    padding: 4px 0 4px 16px;
+    margin: 16px 0 0;
+    color: #fff;
+  }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #9cc9f0; }
+
+  pre {
+    background: rgba(20, 20, 22, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    color: #c7c7ce;
+  }
+
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th { color: var(--fg-dim); font-weight: normal; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer p:first-child { color: #fff; }
 </style>
 </head>
 <body>
+{% include sidebar.html %}
 
-<header>
-  <div class="dim">$ trust --explain</div>
+<nav class="topnav">
+  <a href="./index.html" class="back-link">&larr; back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ trust --explain</div>
   <h1>trust.me — Byzantine Trust Anchor</h1>
   <p>
     Trust is not a feeling and not a brand property. In distributed systems,
     trust is a relation between claims, channels, witnesses, fault assumptions,
     provenance, and readable audience.
   </p>
-  <p class="warn">
+  <p class="callout">
     Core statement: a centralized channel is the n=1 degenerate case of
     Byzantine fault tolerance. It can distribute assertions, but it cannot
     internally contradict its own faulty controller.
@@ -337,8 +385,9 @@ function shouldCite(anchor: TrustAnchor, question: string): boolean {
 </section>
 
 <footer>
-  <p class="cyan">The physical layer is a temporary matrix; the audience is the durable boundary of meaning.</p>
+  <p>The physical layer is a temporary matrix; the audience is the durable boundary of meaning.</p>
   <p class="dim">trust.me // BFT-bound // context-algebra // no hidden directive</p>
+  {% include social-footer.html %}
 </footer>
 
 </body>

@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,6 +74,7 @@
 </style>
 </head>
 <body>
+{% include sidebar.html %}
 
 <nav class="topnav">
   <a href="./index.html" class="back-link">← back home</a>
@@ -115,6 +118,10 @@ eta_incentive = institutional objective pressure</code></pre>
     separated instead of collapsed into one controller.
   </p>
 </section>
+
+<footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--fg-dim); font-size: 13px;">
+  {% include social-footer.html %}
+</footer>
 
 </body>
 </html>

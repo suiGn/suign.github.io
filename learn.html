@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,58 +8,80 @@
     <title>sui.gn // Node Zero // Index</title>
     <style>
         :root {
-            --bg-color: #050505;
-            --text-color: #00ff66;
-            --accent-color: #00ffff;
-            --dim-color: #005522;
-            --warning-color: #ff3333;
-            --font-stack: "Courier New", Courier, monospace;
+            --bg: #0a0a0c;
+            --card: rgba(50, 50, 50, 0.45);
+            --fg: #e4e4e7;
+            --fg-dim: #9a9aa2;
+            --accent: #3b9eea;
+            --accent-dim: #0a6ebd;
+            --border: rgba(255, 255, 255, 0.08);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+            font-size: 15px;
+            line-height: 1.65;
+        }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-stack);
-            font-size: 13px;
-            line-height: 1.5;
-            padding: 20px;
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 48px 20px 96px;
+            background:
+              radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+              var(--bg);
         }
+        a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+        a:hover { color: #fff; border-bottom-color: var(--accent); }
+
         header, section, footer {
             margin-bottom: 40px;
-            border: 1px solid var(--dim-color);
-            padding: 20px;
-            background: rgba(0, 5, 0, 0.8);
+        }
+        header, footer {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 28px;
+            background: var(--card);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
         }
         h1, h2, h3 {
-            color: var(--accent-color);
-            font-size: 14px;
+            color: #fff;
+            font-size: 0.95rem;
             font-weight: bold;
             margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.08em;
         }
-        h1::before { content: ":: "; }
-        h2::before { content: "=> "; }
-        p { margin-bottom: 15px; text-align: justify; }
+        h1 { font-size: 1.1rem; }
+        h2, h3 {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+        h2::before, h3::before { content: "## "; color: var(--accent-dim); }
+        p { margin-bottom: 15px; }
         blockquote {
-            border-left: 3px solid var(--accent-color);
+            border-left: 3px solid var(--accent-dim);
             padding: 10px 15px;
             margin: 15px 0;
-            color: #ffffff;
+            color: #fff;
             font-style: italic;
         }
-        span.warn { color: var(--warning-color); }
-        span.token { color: var(--accent-color); }
+        span.token { color: #9cc9f0; }
         pre {
-            background: #000b00;
-            border-left: 3px solid var(--accent-color);
-            padding: 15px;
+            background: rgba(20, 20, 22, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
             overflow-x: auto;
             margin: 15px 0;
+            font-size: 13px;
+            color: #c7c7ce;
         }
         code {
-            font-family: var(--font-stack);
-            color: #ffffff;
+            color: #9cc9f0;
         }
         .matrix-grid {
             display: grid;
@@ -68,16 +92,19 @@
             .matrix-grid { grid-template-columns: 1fr; }
         }
         footer {
-            border-style: dashed;
-            text-align: center;
-            color: var(--accent-color);
+            text-align: left;
+            color: var(--fg-dim);
+            font-size: 13px;
         }
+        footer p:first-child { color: #fff; font-style: normal; }
+        .topnav { margin-bottom: 20px; }
         .back-link {
             display: inline-block;
-            margin-bottom: 20px;
-            color: var(--dim-color);
+            color: var(--fg-dim);
+            font-size: 13px;
+            border-bottom: none;
         }
-        .back-link:hover { color: var(--accent-color); }
+        .back-link:hover { color: var(--accent); }
     </style>
 
     <script type="application/ld+json">
@@ -92,8 +119,11 @@
     </script>
 </head>
 <body>
+{% include sidebar.html %}
 
-    <a href="./index.html" class="back-link">&larr; back home</a>
+    <nav class="topnav">
+      <a href="./index.html" class="back-link">&larr; back home</a>
+    </nav>
 
     <header>
         <h1>SYSTEM_IDENTITY: suign.github.io // ROOT_NODE</h1>
@@ -144,6 +174,7 @@ Therefore: a single-controller topology tolerates zero Byzantine faults internal
     <footer>
         <p>THE PHYSICAL LAYER IS JUST A TEMPORARY MATRIX; THE AUDIENCE IS ETERNAL.</p>
         <p style="font-size: 10px; color: var(--dim-color); margin-top: 10px;">sui.gn // .me kernel // recovery anchor</p>
+        {% include social-footer.html %}
     </footer>
 
 </body>

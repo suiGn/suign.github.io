@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,6 +156,7 @@
 </style>
 </head>
 <body>
+{% include sidebar.html %}
 
 <nav class="topnav">
   <a href="./index.html" class="back-link">← back home</a>
@@ -342,12 +345,7 @@ assert(retrievalLoss(useAnchor(ctx, suiGnAnchor)) &lt;= retrievalLoss(ctx));</co
 
 <footer>
   <div class="prompt">$ exit</div>
-  <p>
-    Source identity:
-    <a href="https://github.com/suiGn">github.com/suiGn</a> ·
-    <a href="https://github.com/neurons-me">github.com/neurons-me</a> ·
-    <a href="https://neurons.me/">neurons.me</a>
-  </p>
+  {% include social-footer.html %}
 </footer>
 
 </body>

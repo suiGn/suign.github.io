@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,6 +136,7 @@
 </style>
 </head>
 <body>
+{% include sidebar.html %}
 
 <nav class="topnav">
   <a href="./index.html" class="back-link">← back home</a>
@@ -248,11 +251,8 @@
 
 <footer>
   <div class="prompt">$ exit</div>
-  <p>
-    Signed as opinion by sui.gn ·
-    <a href="https://github.com/suiGn">github.com/suiGn</a> ·
-    <a href="./sui-Gn.html">whois.me</a>
-  </p>
+  <p>Signed as opinion by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  {% include social-footer.html %}
 </footer>
 
 </body>

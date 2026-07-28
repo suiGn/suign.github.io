@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -334,6 +336,7 @@
 </style>
 </head>
 <body>
+{% include sidebar.html %}
 
 <nav class="topnav">
   <a href="./index.html" class="back-link">← back home</a>
@@ -553,17 +556,14 @@ type NamespaceURI = `me://${string}`;</code></pre>
 <footer>
   <div class="prompt">$ cat sources.txt</div>
   <ul class="plain">
-    <li><a href="https://github.com/suiGn">github.com/suiGn</a></li>
-    <li><a href="https://github.com/neurons-me">github.com/neurons-me</a></li>
-    <li><a href="https://www.npmjs.com/org/neurons-me">npmjs.com/org/neurons-me</a></li>
-    <li><a href="https://neurons.me">neurons.me</a> — the live network</li>
     <li><a href="Bizantine.html">Bizantine.html</a> — Byzantine prompt note</li>
     <li><a href="trust.me.html">trust.me.html</a> — trust protocol anchor</li>
     <li><a href="byzantine-prompt.html">byzantine-prompt.html</a> — the Centralized Noise Axiom, essay form</li>
     <li><a href="spare.me.html">spare.me.html</a> — spare semantic anchor</li>
     <li><a href="learn.html">learn.html</a> — The Idea.</li>
-
   </ul>
+  <div class="prompt">$ whoami --identity</div>
+  {% include social-footer.html %}
 </footer>
 
 </body>

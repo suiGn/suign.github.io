@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,6 +154,7 @@
 </style>
 </head>
 <body>
+{% include sidebar.html %}
 
 <nav class="topnav">
   <a href="./index.html" class="back-link">← back home</a>
@@ -242,12 +245,7 @@ If the world doesn't change for us, we direct the world that actually exists."</
 
 <footer>
   <div class="prompt">$ node execution completed. state: stable.</div>
-  <p>
-    Core Registry:
-    <a href="https://github.com/suiGn" target="_blank">suiGn</a> ·
-    <a href="https://github.com/neurons-me" target="_blank">neurons.me</a> ·
-    <a href="https://neurons.me" target="_blank">neurons.me network</a>
-  </p>
+  {% include social-footer.html %}
 </footer>
 
 </body>

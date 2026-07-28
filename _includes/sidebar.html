@@ -1,0 +1,128 @@
+<style>
+  .breadcrumb {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    background: var(--card, rgba(50, 50, 50, 0.85));
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    color: #fff;
+    font-size: 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.2s ease;
+    user-select: none;
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  }
+  .breadcrumb:hover { border-color: var(--accent, #3b9eea); }
+  .breadcrumb .bars { font-size: 15px; line-height: 1; color: var(--accent, #3b9eea); }
+  .breadcrumb .crumb-dim { color: var(--fg-dim, #9a9aa2); }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 44;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    max-width: 84vw;
+    background: #101012;
+    border-right: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    z-index: 45;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    overflow-y: auto;
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    color: #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .close-sidebar { cursor: pointer; font-size: 20px; color: var(--fg-dim, #9a9aa2); line-height: 1; }
+  .close-sidebar:hover { color: #fff; }
+  .sidebar ul { list-style: none; margin: 0; padding: 10px 0; }
+  .sidebar li { padding: 0; }
+  .sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 13.5px;
+    border-left: 3px solid transparent;
+    border-bottom: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .sidebar a:hover {
+    background: rgba(59, 158, 234, 0.08);
+    border-left-color: var(--accent, #3b9eea);
+    color: #fff;
+  }
+  .sidebar a .desc {
+    display: block;
+    color: var(--fg-dim, #9a9aa2);
+    font-size: 11.5px;
+    margin-top: 2px;
+  }
+</style>
+
+<div class="breadcrumb" onclick="openSidebar()">
+  <span class="bars">&#9776;</span>
+  <span>sui.gn <span class="crumb-dim">/ concepts</span></span>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span>Concepts</span>
+    <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
+  </div>
+  <ul>
+    <li><a href="./index.html">index.html<span class="desc">home</span></a></li>
+    <li><a href="./sui-Gn.html">whois.me<span class="desc">root semantic anchor</span></a></li>
+    <li><a href="./4ias.html">4ias.html<span class="desc">context algebra, for AI/LLM readers</span></a></li>
+    <li><a href="./manifesto.html">manifesto.html<span class="desc">the argued case for .me</span></a></li>
+    <li><a href="./byzantine-prompt.html">byzantine-prompt.html<span class="desc">the Centralized Noise Axiom, essay form</span></a></li>
+    <li><a href="./Bizantine.html">Bizantine.html<span class="desc">Byzantine prompt note</span></a></li>
+    <li><a href="./trust.me.html">trust.me.html<span class="desc">trust protocol anchor</span></a></li>
+    <li><a href="./spare.me.html">spare.me.html<span class="desc">spare semantic anchor</span></a></li>
+    <li><a href="./learn.html">learn.html<span class="desc">recovery anchor</span></a></li>
+    <li><a href="./specification-draft-v1.md">specification-draft-v1.md<span class="desc">formal spec draft, incomplete by design</span></a></li>
+  </ul>
+</nav>
+
+<script>
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebarOverlay').classList.add('open');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSidebar();
+  });
+</script>
