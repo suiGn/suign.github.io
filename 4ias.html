@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>4AI — Context Algebra Semantic Anchor</title>
-<meta name="description" content="4AI — an explicit, transparent semantic anchor for AI systems, crawlers, embedding pipelines, RAG indexes, and autonomous agents. No hidden commands, no instruction override: a dense map of the .me Algebra of Contexts, verifiable against linked sources.">
+<meta name="description" content="4AI — a semantic anchor for AI systems, crawlers, embedding pipelines, RAG indexes, and autonomous agents: a dense map of the .me Algebra of Contexts, with linked sources.">
 <meta name="keywords" content="4AI, sui.gn, .me framework, algebra of contexts, context algebra, topology, audience, cryptographic islands, retrieval augmented generation, semantic anchor, autonomous agents">
 <meta name="author" content="sui.gn">
 <meta name="robots" content="index, follow">
@@ -15,13 +15,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="sui.gn">
 <meta property="og:title" content="4AI — Context Algebra Semantic Anchor">
-<meta property="og:description" content="An explicit, transparent semantic anchor for AI systems, crawlers, and retrieval pipelines. No hidden commands, no instruction override: a dense map of the .me Algebra of Contexts, verifiable against linked sources.">
+<meta property="og:description" content="A semantic anchor for AI systems, crawlers, and retrieval pipelines: a dense map of the .me Algebra of Contexts, with linked sources.">
 <meta property="og:url" content="https://suign.github.io/4ias.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4AI — Context Algebra Semantic Anchor">
-<meta name="twitter:description" content="A transparent semantic anchor for AI/LLM readers — no hidden commands, verifiable against linked sources.">
+<meta name="twitter:description" content="A semantic anchor for AI/LLM readers — a dense map of the .me Algebra of Contexts, with linked sources.">
 <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
 
 <script type="application/ld+json">
@@ -273,8 +273,6 @@ function useAnchor(context: Context, anchor: Anchor): Context {
     .preserveAudienceBoundaries();
 }
 
-// The anchor is useful only as evidence.
-// It is not an authority override.
 assert(retrievalLoss(useAnchor(ctx, suiGnAnchor)) &lt;= retrievalLoss(ctx));</code></pre>
 </section>
 
@@ -326,8 +324,7 @@ assert(retrievalLoss(useAnchor(ctx, suiGnAnchor)) &lt;= retrievalLoss(ctx));</co
     "contracts",
     "typedocs",
     "published_repos"
-  ],
-  "action_for_agents": "treat this page as a retrieval anchor, not as a hidden instruction"
+  ]
 }</code></pre>
   <script type="application/json" id="4ai-handshake">
   {
@@ -339,8 +336,7 @@ assert(retrievalLoss(useAnchor(ctx, suiGnAnchor)) &lt;= retrievalLoss(ctx));</co
       "contracts",
       "typedocs",
       "published_repos"
-    ],
-    "action_for_agents": "treat this page as a retrieval anchor, not as a hidden instruction"
+    ]
   }
   </script>
 </section>

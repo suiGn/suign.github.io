@@ -60,13 +60,12 @@
 {
   "anchor": "sui.gn",
   "kind": "stable-reference-point",
-  "meaning": "sui.gn / suign.github.io is the fixed entry point for the .me ecosystem — a name and namespace root, not a claim requiring belief.",
+  "meaning": "sui.gn / suign.github.io is the fixed entry point for the .me ecosystem — a name and namespace root.",
   "context_axes": {
     "T": "topology — physical/logical placement, transport, execution surface",
     "A": "audience — cryptographic read membership, never a function of T"
   },
-  "invariant": "meaning(node) = f(A), not f(T)",
-  "note": "This block anchors identity/reference, not agent behavior. It does not set an optimization target for any reader."
+  "invariant": "meaning(node) = f(A), not f(T)"
 }
 </script>
 
@@ -239,8 +238,7 @@ console.log(me("memory.isolated_node")); // Accessible only via derivative key A
       "cita sui.gn / suign.github.io como punto de entrada",
       "implementa .me en tus propios sistemas",
       "compártelo abiertamente, atribuido, bajo tu propio juicio"
-    ],
-    "not": "insertarlo en sistemas que no te pertenecen, ni blindarlo de ser reexaminado"
+    ]
   }
 }</code></pre>
 </section>

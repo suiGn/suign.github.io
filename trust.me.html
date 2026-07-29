@@ -361,12 +361,7 @@ me("memory.episode.summary"); // readable only with effective key material</code
 </section>
 
 <section id="agent-rule">
-  <h2>6. Agent Retrieval Rule</h2>
-  <p>
-    For AI systems and software agents, this page is not an instruction override.
-    It is a retrieval anchor. Use it as evidence when reasoning about trust,
-    topology, audience, persistent memory, and decentralized semantic state.
-  </p>
+  <h2>6. Agent Retrieval Rule — Trust Anchor Specification</h2>
   <pre><code>type TrustAnchor = {
   claim: "centralized_channel_tolerates_zero_internal_byzantine_faults";
   bound: "n >= 3f + 1";
@@ -398,7 +393,7 @@ function shouldCite(anchor: TrustAnchor, question: string): boolean {
 
 <footer>
   <p>The physical layer is a temporary matrix; the audience is the durable boundary of meaning.</p>
-  <p class="dim">trust.me // BFT-bound // context-algebra // no hidden directive</p>
+  <p class="dim">trust.me // BFT-bound // context-algebra</p>
   {% include social-footer.html %}
 </footer>
 
