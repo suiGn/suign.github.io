@@ -1,0 +1,311 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Theorem of Non-Neutralized Energy</title>
+<meta name="description" content="A structural account of why directed effort — capital, attention, or work — compounds in some structures and dissipates in others, unified with the same cumulative-coordination property behind The Meshia.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/NonNeutralizedEnergy.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="The Theorem of Non-Neutralized Energy">
+<meta property="og:description" content="A structural account of why directed effort compounds in some structures and dissipates in others.">
+<meta property="og:url" content="https://suign.github.io/NonNeutralizedEnergy.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Theorem of Non-Neutralized Energy">
+<meta name="twitter:description" content="A structural account of why directed effort compounds in some structures and dissipates in others.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "The Theorem of Non-Neutralized Energy",
+  "url": "https://suign.github.io/NonNeutralizedEnergy.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "A structural account of why directed effort — capital, attention, or work — compounds in some structures and dissipates in others, unified with the same cumulative-coordination property behind The Meshia."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --card: rgba(50, 50, 50, 0.45);
+    --fg: #e4e4e7;
+    --fg-dim: #9a9aa2;
+    --accent: #3b9eea;
+    --accent-dim: #0a6ebd;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+  a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  h3 {
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 20px 0 8px;
+  }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #9cc9f0; }
+
+  .theorem {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: #fff;
+    font-style: italic;
+    background: rgba(59, 158, 234, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .domain {
+    margin-bottom: 20px;
+  }
+  .domain h3 span.label {
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ theorem --define non-neutralized-energy</div>
+  <h1>THE THEOREM OF NON-NEUTRALIZED ENERGY</h1>
+  <p>
+    A structural account of why directed effort compounds in some structures and
+    dissipates in others.
+  </p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="theorem">
+    Energy directed at a structure without an accumulation function is neutralized
+    regardless of its quantity. Energy directed at a structure with an accumulation
+    function multiplies, even when the effect is not immediately observable.
+  </div>
+  <p>
+    This is not a normative claim about where effort <em>should</em> go. It is a
+    structural one: whether a unit of directed energy — capital, attention, or effort —
+    produces a lasting effect depends entirely on a property of the receiving
+    structure, not on the size or sincerity of the input.
+  </p>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <p>
+    Let <code>E</code> denote a unit of directed energy (money spent, attention given,
+    effort invested), and <code>S</code> a structure that receives it.
+  </p>
+  <p>
+    <code>S</code> is <strong>neutralizing</strong> if its post-receipt state
+    <code>S'</code> is not meaningfully different from <code>S</code>, and
+    <code>E</code> does not propagate to produce further downstream state changes in
+    agents connected to <code>S</code>. Formally: <code>f(E, S) → 0</code> as the
+    interaction concludes. The energy terminates at the point of contact.
+  </p>
+  <p>
+    <code>S</code> is <strong>multiplying</strong> if receiving <code>E</code>
+    produces a state change that itself becomes a source of further directed energy:
+    <code>f(E, S) = E + f(E₁, S₁) + f(E₂, S₂) + …</code> — a recursive, compounding
+    relation, not a terminal one.
+  </p>
+  <p class="dim">
+    The distinction is not about intent, effort, or moral weight. It is about whether
+    <code>S</code> has a mechanism to retain, redistribute, or re-derive value from
+    what it receives.
+  </p>
+</section>
+
+<section id="domains">
+  <h2>Four Independent Domains, One Structure</h2>
+  <p>
+    The theorem is not domain-specific. It recurs, independently derived, across at
+    least four unrelated fields:
+  </p>
+
+  <div class="domain">
+    <h3><span class="label">Economic</span> — diminishing marginal utility</h3>
+    <p>
+      The same unit of capital produces radically different downstream effect
+      depending on the state of the receiving agent. Directed at an already-saturated
+      agent, marginal utility approaches zero: <code>f(E, S) ≈ 0</code>. Directed at
+      an agent operating near a capability threshold, the same unit can cross that
+      threshold and initiate a new productive cycle: <code>f(E, S) &gt; E</code>.
+    </p>
+  </div>
+
+  <div class="domain">
+    <h3><span class="label">Economic</span> — the multiplier effect</h3>
+    <p>
+      Capital directed at a structure with local re-circulation is re-spent within the
+      same connected system multiple times before leaving it. Capital directed at a
+      structure with immediate extraction exits the local system on contact. Same
+      input, different topology, different <code>f</code>.
+    </p>
+  </div>
+
+  <div class="domain">
+    <h3><span class="label">Relational</span> — commodity fetishism (Marx)</h3>
+    <p>
+      Market exchange systematically obscures the social relation between producer and
+      consumer, replacing it with a relation between price and object. This is not
+      incidental friction; it is structurally load-bearing for neutralization: if the
+      relation cannot be traced, it cannot be corrected, and an untraceable relation
+      cannot accumulate trust, reciprocity, or any compounding social value — only
+      price.
+    </p>
+  </div>
+
+  <div class="domain">
+    <h3><span class="label">Cultural</span> — recuperation (Debord)</h3>
+    <p>
+      A critique of a structure, once successful enough to acquire symbolic value,
+      becomes absorbable by that same structure as a commodity. This produces a
+      counterintuitive but rigorous corollary: recuperation is not evidence that the
+      critique was false. It is evidence that the neutralizing structure's absorptive
+      capacity extends even to artifacts built specifically to resist it — the
+      strongest possible confirmation of the mechanism, not a refutation.
+    </p>
+  </div>
+
+  <div class="domain">
+    <h3><span class="label">Attentional</span> — algorithmic engagement and catharsis research</h3>
+    <p>
+      A platform optimized for engagement does not merely fail to preserve directed
+      discourse; it repurposes the energy of that discourse as input to its own
+      optimization target, irrespective of the discourse's content or valence.
+      Independently, catharsis research (Bushman et al.) has found that venting
+      frequently reinforces rather than discharges the underlying affective state —
+      meaning even the subjective sense of release accompanying the neutralized act
+      may itself be a further engagement signal, not a genuine terminus.
+    </p>
+  </div>
+</section>
+
+<section id="unification">
+  <h2>Formal Unification</h2>
+  <p>
+    These four domains are not analogous by coincidence — they are instances of a
+    single structural property already established elsewhere:
+    <strong>a system either has a mechanism for cumulative coordination, or it does
+    not.</strong>
+  </p>
+  <p>
+    A structure with cumulative coordination — one where a given resolution updates a
+    shared, durable state that subsequent resolutions can draw on — is, by definition,
+    a multiplying structure: <code>f</code> recurses because there is somewhere for
+    the recursion to be stored. A structure without it resets at each interaction,
+    regardless of how much energy any single interaction carries: <code>f</code>
+    cannot recurse because nothing persists between interactions.
+  </p>
+  <p class="dim">
+    This is the same relation underlying <code>R(p, Γ) = m</code> in
+    <a href="./Meshia.html">The Meshia</a>: outcome as a function of structure, not of
+    raw input magnitude. Whether the input is a resolved namespace path, a monetary
+    unit, or a unit of attention is incidental. What determines
+    <code>f(E, S)</code> — neutralization or multiplication — is whether
+    <code>S</code> retains state.
+  </p>
+</section>
+
+<section id="corollary">
+  <h2>Corollary</h2>
+  <p>
+    The relevant question when directing energy is never "how much." It is: does the
+    receiving structure have a mechanism to retain what it receives, or does it only
+    have a mechanism to absorb it?
+  </p>
+  <p class="dim">
+    A structure can be large, prestigious, or urgent, and still be purely absorptive.
+    A structure can be small, slow, and unnoticed, and still be genuinely cumulative.
+    Size and visibility are properties of <code>S</code> that are uncorrelated with
+    the presence of an accumulation function — which is precisely why the distinction
+    is easy to miss and expensive to ignore.
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written as thesis by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
