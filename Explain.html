@@ -202,7 +202,9 @@
 <section id="what-it-returns">
   <h2>What <code>explain()</code> Actually Returns</h2>
   <p>
-    <code>self.explain(path)</code>, defined in <code>src/derivation.ts</code>, does
+    <code>self.explain(path)</code>, defined in
+    <a href="https://github.com/neurons-me/.me/blob/main/Typescript/src/derivation.ts"><code>src/derivation.ts</code></a>
+    of the <a href="https://github.com/neurons-me/.me/">.me kernel</a>, does
     not generate a description. It looks up the derivation record already stored for
     that path and returns it unmodified:
   </p>
@@ -266,9 +268,13 @@
 <section id="proof">
   <h2>Proof, Not Documentation</h2>
   <p>
-    This is not aspirational. In <code>tests/Demos/Robots_Contexts.ts</code>, four
-    robots share one physical object but resolve <code>canProceed</code> differently
-    depending on context — warehouse, hospital, street, operating room. The demo calls
+    This is not aspirational. In
+    <a href="https://github.com/neurons-me/.me/blob/main/Typescript/tests/Demos/Robots_Contexts.ts"><code>tests/Demos/Robots_Contexts.ts</code></a>
+    — written up as
+    <a href="https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html">Robots That Understand Context</a>
+    in the published docs — four robots share one physical object but resolve
+    <code>canProceed</code> differently depending on context: warehouse, hospital,
+    street, operating room. The demo calls
     <code>me.explain("robots.surgeon.canProceed")</code>, and the test asserts,
     directly, that the returned <code>dependsOn</code> list actually contains the true
     upstream paths — <code>robots.surgeon.softGripReady</code>,
@@ -277,10 +283,14 @@
   </p>
   <p class="dim">
     The cost of this is measured, not assumed to be free:
-    <code>tests/Benchmarks/benchmark.8.explain-overhead.test.ts</code> compares p50 /
-    p95 / p99 latency with and without <code>explain()</code> across 3,000 nodes and
-    300 iterations. A verifiable record has a real cost. The project tracks it instead
-    of hiding it.
+    <a href="https://github.com/neurons-me/.me/blob/main/Typescript/tests/Benchmarks/benchmark.8.explain-overhead.test.ts"><code>benchmark.8.explain-overhead.test.ts</code></a>
+    compares p50 / p95 / p99 latency with and without <code>explain()</code> across
+    3,000 nodes and 300 iterations. The measured result, published in the
+    <a href="https://neurons-me.github.io/.me/docs/Benchmarks/benchmarks.html">benchmarks page</a>:
+    p95 goes from 0.0122ms baseline to 0.0189ms with explanation enabled — roughly
+    0.007ms added for a full, disclosed derivation trace. A verifiable record has a
+    real, measured cost, and it's negligible. The project tracks it instead of
+    assuming it away.
   </p>
 </section>
 
@@ -299,12 +309,22 @@
 <section id="gap">
   <h2>What's Still Missing</h2>
   <p>
-    Not a single file in <code>docs/</code> documents any of this — not
-    <code>explain</code>, not <code>provenance</code>, not the reflective plane it
-    lives on. Everything above exists only in source, in type definitions, and in one
-    demo. It is the mechanism that answers, most directly, the exact reliability
-    problem this essay opened with — and it does not yet have a single page written
-    about it outside its own code.
+    <code>explain()</code> itself is documented — the
+    <a href="https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html">Robots demo</a>
+    has a dedicated Explainability section, the
+    <a href="https://neurons-me.github.io/.me/docs/Axioms.html">Axioms</a>
+    define the invariants it depends on, and the overhead is published with real
+    numbers. An earlier draft of this essay claimed otherwise — that claim was wrong,
+    and wrong for an avoidable reason: it searched the wrong directory before
+    concluding the documentation didn't exist. Fixed here, not quietly.
+  </p>
+  <p class="dim">
+    What's still missing is narrower: nowhere in the existing docs is
+    <code>explain()</code> framed as an answer to AI self-report reliability
+    specifically. It's documented as an auditability feature for derived values, which
+    is correct and true — but the connection this essay makes, between that feature
+    and the broader problem of models narrating their own reasoning, doesn't exist
+    anywhere else yet. That's the actual gap.
   </p>
 </section>
 
