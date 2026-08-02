@@ -1,0 +1,333 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cryptographic Set-Chemistry on Audiences</title>
+<meta name="description" content="Formal spec for audience-scoped encryption in the .me kernel: union and intersection audience sets over kernel identities, key wrapping, blob format, and axiom compatibility.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/SetChemistry.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="Cryptographic Set-Chemistry on Audiences">
+<meta property="og:description" content="Formal spec for audience-scoped encryption in the .me kernel: union and intersection audience sets over kernel identities.">
+<meta property="og:url" content="https://suign.github.io/SetChemistry.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cryptographic Set-Chemistry on Audiences">
+<meta name="twitter:description" content="Formal spec for audience-scoped encryption in the .me kernel.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Cryptographic Set-Chemistry on Audiences",
+  "url": "https://suign.github.io/SetChemistry.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "Formal spec for audience-scoped encryption in the .me kernel: union and intersection audience sets over kernel identities, key wrapping, blob format, and axiom compatibility."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  h3 {
+    color: #66fcf1;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 20px 0 8px;
+  }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+  pre code { color: #66fcf1; }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  dl.spec { margin: 0; }
+  dl.spec dt { color: #66fcf1; font-weight: normal; margin-top: 10px; }
+  dl.spec dd { margin: 2px 0 0; color: var(--fg-dim); }
+
+  ul.axioms { padding-left: 0; list-style: none; }
+  ul.axioms li { margin-bottom: 8px; }
+  ul.axioms .tag { color: var(--accent-dim); }
+  ul.axioms .status { color: var(--fg-dim); }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --spec audience-crypto</div>
+  <h1>CRYPTOGRAPHIC SET-CHEMISTRY ON AUDIENCES</h1>
+  <p>Sovereign topology, resolved wherever claimant intersection allows.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    Resolution is cryptographic wherever the exact claimant intersection allows
+    it. Only monads holding the mutual <code>.me</code> refs and keys can derive
+    the route. Everything else stays invisible — pure emergent, sovereign
+    topology.
+  </div>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <dl class="spec">
+    <dt>kernel</dt>
+    <dd>an instance of <code>ME</code>; one root seed, one secret-derivation chain</dd>
+    <dt>seed</dt>
+    <dd>64-hex namespace authority key; never leaves the kernel</dd>
+    <dt>path</dt>
+    <dd><code>SemanticPath</code> — ordered sequence of string segments</dd>
+    <dt>secret scope</dt>
+    <dd>a path marked <code>_("key")</code>; data under it encrypted from that scope's key material</dd>
+    <dt>noise boundary</dt>
+    <dd>a path marked <code>~("nonce")</code>; cuts secret-derivation inheritance (A3)</dd>
+    <dt>blob key</dt>
+    <dd><code>(encKey, macKey, pathContext)</code> from <code>deriveBlobV3Keys()</code></dd>
+    <dt>audience</dt>
+    <dd><code>A ⊆ { kernel identityHash }</code></dd>
+  </dl>
+</section>
+
+<section id="identity">
+  <h2>Kernel Identity as Audience Element</h2>
+  <pre><code>identityHash(K) = keccak256("this.me/identity:v1::" + K.seed)
+(P256_priv_K, P256_pub_K) = generateP256KeyPair(HKDF(K.seed, "this.me/p256/v1"))</code></pre>
+  <p class="dim">
+    <code>P256_pub_K</code> — encryption target, shareable.
+    <code>identityHash(K)</code> — membership identifier.
+    <code>(identityHash, P256_pub)</code> — the kernel's public audience credential.
+  </p>
+</section>
+
+<section id="primitives">
+  <h2>Existing Primitives</h2>
+  <pre><code>3.1 symmetric, v3, single-owner
+collectSecretChainV3(path, mode) → deriveBlobV3Keys(chain, mode, path)
+  → { encKey, macKey, pathContext }
+encryptBlobV3 / decryptBlobV3 — keccak XOR stream + MAC
+
+3.2 asymmetric, v1
+wrapSecretV1(P256_pub, secret)   → { ephemeralPublicKey, iv, ciphertext, tag }
+unwrapSecretV1(P256_priv, W)     → secret
+kex: ECDH-ES(P-256)  kdf: HKDF-SHA-256  aead: AES-256-GCM
+
+3.3 Ed25519
+signEd25519Proof(priv, data)     → signature
+verifyEd25519Signature(pub, data, sig) → boolean
+— identity proof, not audience encryption</code></pre>
+</section>
+
+<section id="algebra">
+  <h2>Audience Algebra</h2>
+
+  <h3>Union — A = K₁ ∪ K₂ ∪ ... ∪ Kₙ</h3>
+  <pre><code>S ← random(32)
+ciphertext = encryptSymmetric(S, V)
+∀ Kᵢ ∈ A:  Wᵢ = wrapSecretV1(P256_pub(Kᵢ), S)
+publish { ciphertext, wraps: [(identityHash(Kᵢ), Wᵢ)] }
+
+decrypt(Kⱼ ∈ A):
+  Wⱼ ← match identityHash(Kⱼ) in wraps
+  S  = unwrapSecretV1(P256_priv(Kⱼ), Wⱼ)
+  V  = decryptSymmetric(S, ciphertext)</code></pre>
+  <p class="dim">
+    O(|A|) wrapped keys. Any single member suffices. Removing a member requires
+    re-encryption of <code>S</code> for all remaining members — no backward
+    secrecy otherwise.
+  </p>
+
+  <h3>Intersection — A = K₁ ∩ K₂ ∩ ... ∩ Kₙ</h3>
+  <pre><code>S₁, ..., Sₙ₋₁ ← random(32) each
+Sₙ = S ⊕ S₁ ⊕ ... ⊕ Sₙ₋₁
+∀ Kᵢ ∈ A:  Wᵢ = wrapSecretV1(P256_pub(Kᵢ), Sᵢ)
+publish { ciphertext, shares: [(identityHash(Kᵢ), Wᵢ)] }
+
+decrypt: requires all Kᵢ
+  each Kᵢ unwraps Sᵢ; ⊕ all Sᵢ → S → decrypt(ciphertext)</code></pre>
+  <p class="dim">
+    Requires out-of-band coordination for share assembly. Threshold-k needs
+    Shamir's Secret Sharing, not XOR splitting.
+  </p>
+
+  <h3>Set Difference — A = K₁ \ K₂</h3>
+  <p class="dim">
+    Not directly constructible via wrapping alone. Requires revocation:
+    re-encrypt <code>S</code> for <code>A \ {K₂}</code> and rotate. Old
+    ciphertext and <code>W₂</code> invalidated only if <code>S</code> rotates.
+  </p>
+</section>
+
+<section id="blob-format">
+  <h2>Blob Format</h2>
+  <pre><code>type AudienceBlobV1 = {
+  version: "audience/v1";
+  ciphertext: Uint8Array;        // encryptSymmetric(S, value)
+  audience: AudienceMember[];
+};
+
+type AudienceMember = {
+  identityHash: string;          // hex — audience kernel fingerprint
+  wrapped: WrappedSecret;        // wrapSecretV1(P256_pub_K, S)
+};</code></pre>
+  <p class="dim">
+    Stored at the target path in the kernel's encrypted branch, alongside or
+    replacing the v3 blob, depending on whether the path is self-owned or
+    audience-scoped.
+  </p>
+</section>
+
+<section id="axioms">
+  <h2>Axiom Compatibility</h2>
+  <ul class="axioms">
+    <li><span class="tag">A0</span> secret root stealth — <span class="status">preserved</span>: audience blobs live under <code>_</code>-scoped paths, root stays invisible</li>
+    <li><span class="tag">A2</span> path-bound scope — <span class="status">preserved</span>: audience scope remains path-anchored</li>
+    <li><span class="tag">A3</span> noise reset — <span class="status">preserved</span>: boundary applies to the path anchor, not to <code>S</code></li>
+    <li><span class="tag">A7</span> public/secret coexistence — <span class="status">preserved</span>: audience blobs structurally equivalent to v3 blobs</li>
+    <li><span class="tag">A8</span> hash chain integrity — <span class="status">extended</span>: audience blob + all <code>wrapped</code> entries join the memory hash chain</li>
+    <li><span class="tag">A9</span> LWW conflict resolution — <span class="status">preserved</span>: timestamp + hash ordering applies identically</li>
+  </ul>
+</section>
+
+<section id="prerequisite">
+  <h2>Key Exchange Prerequisite</h2>
+  <p>
+    <code>wrapSecretV1</code> requires the sender to already know
+    <code>P256_pub(K_recipient)</code> — a distribution problem the kernel does
+    not solve itself.
+  </p>
+  <div class="note open">
+    Not solved anywhere in the current stack, checked directly against source.
+    <code>monad</code>'s real discovery surface, <code>/__surface</code>, does
+    publish a public key — but it is <strong>Ed25519</strong>, used for
+    routing-continuity signatures, not paired with <code>identityHash</code>,
+    and not usable for ECDH-ES wrapping. <code>/claims</code> is POST-only —
+    self-declaration, not third-party discovery. NRP's own spec excludes this
+    explicitly: "namespace key distribution across monads" is listed under
+    its own "What Is Not Specified Here." <code>netget</code> resolves network
+    routing only; <code>cleaker</code> binds identity to namespace, not key
+    discovery. This exchange is unencrypted by design once it exists —
+    <code>P256_pub</code> is meant to be public — but no component currently
+    makes it discoverable.
+  </div>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me">github.com/neurons-me/.me</a>
+  </p>
+  <p class="dim">
+    First published on <a href="https://medium.com/@suign/cryptographic-set-chemistry-on-audiences-ii-faad39682163">Medium</a>,
+    as "Cryptographic Set-Chemistry on Audiences II." This page is the
+    maintained, canonical version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

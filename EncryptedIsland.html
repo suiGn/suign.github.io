@@ -1,0 +1,254 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encrypted Semantic Island</title>
+<meta name="description" content="An Island whose audience set is composable — union or intersection over kernel identities — so that privacy is a property of derivation, never of a custodian's promise. The closing synthesis of Digital Space Algebra's audience work.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/EncryptedIsland.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="Encrypted Semantic Island">
+<meta property="og:description" content="An Island whose audience set is composable — union or intersection over kernel identities — so that privacy is a property of derivation, never of a custodian's promise.">
+<meta property="og:url" content="https://suign.github.io/EncryptedIsland.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Encrypted Semantic Island">
+<meta name="twitter:description" content="An Island whose audience set is composable, so that privacy is a property of derivation, never of a custodian's promise.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Encrypted Semantic Island",
+  "url": "https://suign.github.io/EncryptedIsland.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "An Island whose audience set is composable — union or intersection over kernel identities — so that privacy is a property of derivation, never of a custodian's promise."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+  pre code { color: #66fcf1; }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.compare th { color: #66fcf1; font-weight: normal; }
+  table.compare td { color: var(--fg); }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --define encrypted-semantic-island</div>
+  <h1>ENCRYPTED SEMANTIC ISLAND</h1>
+  <p>Privacy as a property of derivation, not of a custodian's promise.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    An Encrypted Semantic Island is a space resolvable only through its exact
+    derivation. Its audience is not a permission a custodian grants — it is a
+    cryptographic set, composable by union or intersection, independent of
+    where the ciphertext physically resides.
+  </div>
+</section>
+
+<section id="definition">
+  <h2>Definition</h2>
+  <pre><code>I = (path, ciphertext, T, A, C)
+
+A = A₁ ∪ A₂ ∪ ... ∪ Aₙ     (any member resolves independently)
+A = A₁ ∩ A₂ ∩ ... ∩ Aₙ     (all members required, jointly)</code></pre>
+  <p class="dim">
+    Same tuple as the base Island. The addition: <code>A</code> is no longer
+    atomic — it is itself a set expression over kernel identities.
+  </p>
+</section>
+
+<section id="composition">
+  <h2>Composition</h2>
+  <ul class="plain">
+    <li><strong>Space</strong> — <code>manifest(p | o, m, a) = x</code>: existence at a path is contextual, not stored. See <a href="./SpaceStructure.html">SpaceStructure</a>.</li>
+    <li><strong>Audience binding</strong> — <code>_(secret)</code> makes <code>A</code> a structural property of the path itself, enforced by decryption, not by a checked policy. See <a href="./EncryptedAudiences.html">EncryptedAudiences</a>.</li>
+    <li><strong>Multi-party algebra</strong> — <code>wrapSecretV1</code> over <code>identityHash(K)</code> extends single-owner <code>A</code> to union/intersection across kernels. See <a href="./SetChemistry.html">SetChemistry</a>.</li>
+  </ul>
+  <p class="dim">
+    An Encrypted Semantic Island is what these three produce composed: a space
+    (<code>manifest</code>) whose audience (<code>_</code>) is a set expression
+    (union/intersection) over independent kernel identities.
+  </p>
+</section>
+
+<section id="core-relation">
+  <h2>Core Relation</h2>
+  <pre><code>T ⊥ A</code></pre>
+  <p>
+    Topology and audience are independent variables. The party holding
+    <code>ciphertext</code> at a given <code>T</code> is not, by that fact,
+    a member of <code>A</code>. Holding the bytes and deriving their meaning
+    are separate capabilities.
+  </p>
+</section>
+
+<section id="contrast">
+  <h2>Contrast: Policy Custody vs. Derivation</h2>
+  <table class="compare">
+    <tr><th></th><th>Policy custody (ToS)</th><th>Encrypted Semantic Island</th></tr>
+    <tr><td>readability</td><td><code>f(custodian intent)</code></td><td><code>f(key derivation)</code></td></tr>
+    <tr><td>T and A</td><td>same party</td><td>independent (<code>T ⊥ A</code>)</td></tr>
+    <tr><td>enforcement point</td><td>external checkpoint, bypassable</td><td>fused into decryption itself</td></tr>
+    <tr><td>failure mode</td><td>silent policy violation</td><td>decrypt failure</td></tr>
+    <tr><td>what changes behavior</td><td>trust in a promise</td><td>possession of derived key material</td></tr>
+  </table>
+</section>
+
+<section id="scope">
+  <h2>Scope — What This Does Not Resolve</h2>
+  <div class="note open">
+    <code>T</code> is not a kernel data structure; where ciphertext physically
+    lives remains external infrastructure. Constructing a union or intersection
+    <code>A</code> requires each principal's <code>P256_pub</code> in advance —
+    a key-distribution problem the kernel does not solve. Removing a member
+    from a union <code>A</code> requires re-encryption for backward secrecy;
+    intersection <code>A</code> requires out-of-band coordination to reassemble
+    shares. None of this is promise-based — all of it is a protocol dependency,
+    not a trust dependency on a custodian who already holds the plaintext.
+  </div>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me">github.com/neurons-me/.me</a>
+  </p>
+  <p class="dim">
+    Original synthesis, composing <a href="./SpaceStructure.html">SpaceStructure</a>,
+    <a href="./EncryptedAudiences.html">EncryptedAudiences</a>, and
+    <a href="./SetChemistry.html">SetChemistry</a> — not sourced from a separate
+    external essay.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
