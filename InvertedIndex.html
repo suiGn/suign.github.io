@@ -1,0 +1,297 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inverted Dependency Indexing</title>
+<meta name="description" content="How .me updates derived values without scanning the graph: refSubscribers, eager/lazy recompute modes, and O(k) invalidation. Source-verified against the kernel.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/InvertedIndex.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="Inverted Dependency Indexing">
+<meta property="og:description" content="How .me updates derived values without scanning the graph: refSubscribers, eager/lazy recompute modes, and O(k) invalidation.">
+<meta property="og:url" content="https://suign.github.io/InvertedIndex.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Inverted Dependency Indexing">
+<meta name="twitter:description" content="How .me updates derived values without scanning the graph. Source-verified against the kernel.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Inverted Dependency Indexing",
+  "url": "https://suign.github.io/InvertedIndex.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "How .me updates derived values without scanning the graph: refSubscribers, eager/lazy recompute modes, and O(k) invalidation. Source-verified against the kernel."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  h3 {
+    color: #66fcf1;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 20px 0 8px;
+  }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+  pre code { color: #66fcf1; }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe inverted-index</div>
+  <h1>INVERTED DEPENDENCY INDEXING</h1>
+  <p>Cost of an update is a function of what depends on it, not of the graph.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    A source path indexes its dependents, not the reverse. A mutation walks
+    only its dependency frontier. Cost is <code>O(k)</code> — the size of that
+    frontier — never <code>O(n)</code>, the size of the graph.
+  </div>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <pre><code>refSubscribers: Record&lt;string, Set&lt;string&gt;&gt;
+  // source path -> Set of dependent target paths
+
+k = |affected dependency frontier|   (a mutation's cost)
+n = |total graph size|               (irrelevant to that cost)
+
+recomputeMode: "eager" | "lazy"      (kernel-wide setting)</code></pre>
+</section>
+
+<section id="registration">
+  <h2>Registration</h2>
+  <pre><code>me.order["="]("total", "price * quantity");
+
+// refSubscribers["order.price"].add("order.total")
+// refSubscribers["order.quantity"].add("order.total")</code></pre>
+  <p class="dim">
+    Refs are extracted and resolved when the derivation is <em>declared</em>,
+    not discovered lazily at mutation time. Resolution rule: a dotted label is
+    an absolute path; an undotted label resolves relative to the declaring
+    scope.
+  </p>
+</section>
+
+<section id="eager">
+  <h2>Propagation — Eager Mode</h2>
+  <pre><code>queue ← [changed path]
+seen  ← {}
+while queue not empty:
+  p ← queue.pop()
+  for target in refSubscribers[p]:
+    if target in seen: continue
+    seen.add(target)
+    recompute(target)
+    queue.push(target)</code></pre>
+  <p class="dim">
+    A push-BFS over <code>refSubscribers</code>, not single-level fanout:
+    <code>order.price → order.total → order.withTax</code> propagates in full,
+    deduplicated against cycles. This is the mechanism an earlier draft of
+    this page called "bubbling" — a descriptive label, not a term that appears
+    in the kernel source itself.
+  </p>
+</section>
+
+<section id="lazy">
+  <h2>Propagation — Lazy Mode</h2>
+  <pre><code>me["!"].runtime.setRecomputeMode("lazy");
+
+write(path):
+  bumpRefVersion(path)          // no walk, no recompute
+
+read(path):
+  if stale(path.refVersions):   // ensureTargetFresh — pull, recursive
+    recompute(path)
+  return value</code></pre>
+  <p class="dim">
+    Lazy mode skips the BFS entirely on write — it only bumps a version
+    counter. Staleness is resolved on read, by walking <em>downward</em>
+    through the derivation's own inputs rather than outward through
+    subscribers. Eager and lazy are mechanistically different code paths, not
+    the same logic on a delay.
+  </p>
+  <div class="note open">
+    Distinct from <code>bumpSecretEpoch</code>, which exists in the kernel but
+    drives only key-derivation cache invalidation on a <code>~</code>
+    noise-boundary reset — unrelated to recompute timing. The two are easy to
+    conflate by name; the code keeps them fully separate.
+  </div>
+</section>
+
+<section id="complexity">
+  <h2>Complexity</h2>
+  <pre><code>cost(mutation) = O(k), not O(n)</code></pre>
+  <p class="dim">
+    Holds when dependencies are local. If a single path has 100,000
+    subscribers, <code>k = 100,000</code> — the mutation is genuinely
+    expensive; the index doesn't hide that cost, it just refuses to add graph
+    size on top of it.
+  </p>
+</section>
+
+<section id="explain">
+  <h2>Explainability</h2>
+  <pre><code>me["!"].explain("order.total")
+→ {
+    path, value, expr,
+    derivation: { expression, inputs },
+    meta: { dependsOn, lastComputedAt, k, recomputed, recomputedAt, sourcePath }
+  }</code></pre>
+  <p class="dim">
+    <code>meta.k</code> and <code>meta.sourcePath</code> are real returned
+    fields. There is no field literally named "last recompute wave" — that
+    phrase, where it appears in prior drafts, is a gloss over
+    <code>recomputedAt</code> and <code>recomputed</code> together, not a
+    verbatim key.
+  </p>
+</section>
+
+<section id="secret">
+  <h2>Secret Scopes</h2>
+  <pre><code>{
+  label: "walletBalance",
+  path: "wallet.balance",
+  value: "●●●●",
+  origin: "stealth",
+  masked: true
+}</code></pre>
+  <p class="dim">
+    When a dependency input crosses a stealth-scoped path, <code>explain()</code>
+    masks the value instead of exposing or erroring. Dependency tracking still
+    functions across the boundary — the structure of the derivation is
+    visible, the secret value is not.
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me">github.com/neurons-me/.me</a>
+  </p>
+  <p class="dim">
+    First published on <a href="https://medium.com/@suign/inverted-dependency-indexing-b2d6418d3ed1">Medium</a>,
+    with a longer walkthrough on dev.to. This page is the maintained,
+    canonical version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
