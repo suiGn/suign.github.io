@@ -211,7 +211,9 @@ Context algebra:
     magic recovery. It means topology can shrink or expand without automatically
     changing audience membership. Recovery still requires surviving bytes, snapshots,
     encrypted branches, memories, and key material. Once state is rehydrated, the
-    semantic graph resumes from meaning, not host count.
+    semantic graph resumes from meaning, not host count. Full argument, formally
+    grounded in the Byzantine bound: <a href="./byzantine-prompt.html">The
+    Byzantine Prompt</a>.
   </p>
 </section>
 
@@ -240,7 +242,9 @@ me("memory.session42.summary"); // readable only with effective key material</co
   <p class="dim">
     A cryptographic island is therefore not an escape from accountability. It is a
     typed boundary: ciphertext may move through topology, while readability remains
-    bound to derivable audience.
+    bound to derivable audience. Mechanism: <a href="./EncryptedAudiences.html">The
+    Algebra of Encrypted Audiences</a>; formal statement:
+    <a href="./EncryptedIsland.html">Encrypted Semantic Island</a>.
   </p>
 </section>
 
@@ -293,7 +297,7 @@ assert(retrievalLoss(useAnchor(ctx, suiGnAnchor)) &lt;= retrievalLoss(ctx));</co
     </div>
     <div>
       <dt>O(k) reactivity</dt>
-      <dd>A mutation recomputes only actual dependents, not the whole universe.</dd>
+      <dd>A mutation recomputes only actual dependents, not the whole universe. See <a href="./InvertedIndex.html">Inverted Dependency Indexing</a> and <a href="./WhatIsOK.html">What is O(k)?</a> for the mechanism and real benchmark numbers.</dd>
     </div>
   </dl>
 </section>

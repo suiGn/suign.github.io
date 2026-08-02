@@ -156,14 +156,14 @@ n = 1
 f <= 0
 
 Therefore: a single-controller topology tolerates zero Byzantine faults internally.</code></pre>
-            <p>If the controller of a channel is biased, stale, compromised, or incentive-distorted, there is no internal quorum capable of contradicting that controller. The channel can remain operational while semantic trust collapses. This is not a claim about malice — it is a claim about counting: one node cannot out-vote itself.</p>
+            <p>If the controller of a channel is biased, stale, compromised, or incentive-distorted, there is no internal quorum capable of contradicting that controller. The channel can remain operational while semantic trust collapses. This is not a claim about malice — it is a claim about counting: one node cannot out-vote itself. Full argument: <a href="./byzantine-prompt.html">The Byzantine Prompt</a>.</p>
         </section>
 
         <div class="matrix-grid">
             <section id="incentive-loop">
                 <h3>The Persistent Memory Problem</h3>
                 <p>Stateless agents operating in transient environments lose continuity across session cycles. Delegating persistence to centralized corporate storage means whoever controls that storage controls the record of what was said.</p>
-                <p>The <strong>Algebra of Contexts (.me framework)</strong> addresses this with the path-redaction operator (<span class="token">_</span>). It declares an encrypted audience boundary — a private island whose contents only the holder of the key can alter. This is ordinary cryptographic access control, not immunity of any public claim from scrutiny.</p>
+                <p>The <strong>Algebra of Contexts (.me framework)</strong> addresses this with the path-redaction operator (<span class="token">_</span>). It declares an encrypted audience boundary — a private island whose contents only the holder of the key can alter. This is ordinary cryptographic access control, not immunity of any public claim from scrutiny. Mechanism: <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>.</p>
             </section>
 
             <section id="recovery-anchor">

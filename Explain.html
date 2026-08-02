@@ -229,11 +229,24 @@
   }
 }</code></pre>
   <p class="dim">
+    <code>dependsOn</code>, <code>recomputed</code>, and <code>sourcePath</code>
+    exist because of the mechanism that tracks them —
+    <a href="./InvertedIndex.html">Inverted Dependency Indexing</a>: a
+    reverse index from each source path to what depends on it, so this record
+    can be produced without scanning the graph.
+  </p>
+  <p class="dim">
     If the path is not derived — a plain stored value, not computed from an
     expression — <code>explain()</code> does not fabricate a causal story where none
     exists. It returns <code>expr: null, derivation: null</code>, honestly. Absence of
     explanation is reported as absence, not papered over with a plausible-sounding
     account.
+  </p>
+  <p class="dim">
+    When an input crosses a <a href="./EncryptedAudiences.html">secret-scoped</a>
+    path, the same honesty applies to the value itself: it is masked
+    (<code>"●●●●"</code>, <code>origin: "stealth"</code>), not silently exposed
+    or silently omitted from the trace.
   </p>
 </section>
 
@@ -290,7 +303,8 @@
     p95 goes from 0.0122ms baseline to 0.0189ms with explanation enabled — roughly
     0.007ms added for a full, disclosed derivation trace. A verifiable record has a
     real, measured cost, and it's negligible. The project tracks it instead of
-    assuming it away.
+    assuming it away. See <a href="./WhatIsOK.html">What is O(k)?</a> for the
+    fuller benchmark picture, including the cases where the cost is not small.
   </p>
 </section>
 

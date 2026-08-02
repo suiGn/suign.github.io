@@ -1,0 +1,271 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is O(k)?</title>
+<meta name="description" content="O(k): the cost of a mutation scales with its dependency frontier, not with total graph size. Real, verified benchmark numbers — including the ones that don't flatter the claim.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/WhatIsOK.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="What is O(k)?">
+<meta property="og:description" content="The cost of a mutation scales with its dependency frontier, not with total graph size. Real, verified benchmark numbers.">
+<meta property="og:url" content="https://suign.github.io/WhatIsOK.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What is O(k)?">
+<meta name="twitter:description" content="The cost of a mutation scales with its dependency frontier, not with total graph size.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "What is O(k)?",
+  "url": "https://suign.github.io/WhatIsOK.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "O(k): the cost of a mutation scales with its dependency frontier, not with total graph size. Real, verified benchmark numbers, including the ones that don't flatter the claim."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+  pre code { color: #66fcf1; }
+
+  table.bench {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 13.5px;
+  }
+  table.bench th, table.bench td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.bench th { color: #66fcf1; font-weight: normal; }
+  table.bench td { color: var(--fg); }
+  table.bench td.num { color: #66fcf1; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --bench o-k</div>
+  <h1>WHAT IS O(K)?</h1>
+  <p>Cost tracks the dependency frontier, not the graph. Not a claim that it's cheap.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    <code>cost(mutation) = O(k)</code>, where <code>k</code> is the number of
+    paths that actually depend on what changed — independent of
+    <code>n</code>, the total size of the graph. This is a locality claim,
+    not a speed guarantee: when <code>k</code> itself is large, the cost is
+    genuinely large.
+  </div>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <pre><code>n = total graph size
+k = |affected dependency frontier| for a given mutation
+cost(mutation) = O(k)</code></pre>
+</section>
+
+<section id="fanout">
+  <h2>Benchmark: Root_Fanout_100k</h2>
+  <p class="dim"><code>n</code> = 100,000 dependents, all subscribed to one root.</p>
+  <table class="bench">
+    <tr><th>phase</th><th>measured</th></tr>
+    <tr><td>wiring 100,000 subscribers</td><td class="num">137,451.08 ms</td></tr>
+    <tr><td>one mutation, <code>k</code> = 100,000</td><td class="num">21,283.534 ms</td></tr>
+  </table>
+  <p class="dim">
+    This is <code>k</code> at its worst: every one of 100,000 nodes
+    genuinely depends on the changed value, so all 100,000 recompute. Real
+    cost, ~21.3s, not hidden by the formula. <code>O(k)</code> does not mean
+    fast — it means proportional to <code>k</code>, and here <code>k</code>
+    is enormous.
+  </p>
+</section>
+
+<section id="hemisphere">
+  <h2>Benchmark: Hemisphere_1M</h2>
+  <p class="dim"><code>n</code> = 1,000,000 nodes.</p>
+  <table class="bench">
+    <tr><th>phase</th><th>measured</th></tr>
+    <tr><td>setup, 1,000,000 nodes</td><td class="num">21,899 ms</td></tr>
+    <tr><td>one mutation, <code>k</code> = 6</td><td class="num">4.346 ms</td></tr>
+    <tr><td>heap</td><td class="num">~533 MB</td></tr>
+  </table>
+  <p class="dim">
+    This is the actual demonstration of <code>O(k)</code>, not <code>O(n)</code>:
+    a million-node graph, but the specific mutation tested only has 6 real
+    dependents — so it costs 4.346ms, not something scaled to a million.
+    <code>n</code> being huge did not touch this number. <code>k</code> did.
+  </p>
+</section>
+
+<section id="explain-overhead">
+  <h2>Benchmark: explain() Overhead</h2>
+  <p class="dim">3,000 nodes, 300 iterations — whole-loop latency, not per-node.</p>
+  <table class="bench">
+    <tr><th>mode</th><th>p95</th></tr>
+    <tr><td>baseline</td><td class="num">0.0154 ms</td></tr>
+    <tr><td>with <code>explain()</code></td><td class="num">0.0198 ms (+28.11%)</td></tr>
+  </table>
+  <div class="note open">
+    An earlier draft of this page cited "~0.06ms per node" for this
+    benchmark — that figure does not appear anywhere in the actual test
+    output and misdescribes what's measured (a full mutation+read loop over
+    3,000 nodes, not a per-node cost). Dropped; the real numbers above
+    replace it.
+  </div>
+</section>
+
+<section id="refactor">
+  <h2>Historical: Array → Set</h2>
+  <p>
+    Subscriber tracking and recompute-wave tracking were both refactored from
+    linear-scan array patterns to <code>Set</code>-backed structures —
+    confirmed in the kernel's git history (commit <code>a186449</code>):
+  </p>
+  <pre><code>// before
+if (!list.includes(value)) list.push(value);
+
+// after
+set.add(value);</code></pre>
+  <p class="dim">
+    Applied in both <code>cascade.ts</code>'s dependency graph and
+    <code>derivation.ts</code>'s <code>refSubscribers</code> and recompute-wave
+    tracking. This is what makes membership checks and inserts
+    <code>O(1)</code> instead of <code>O(k)</code> on top of the already-real
+    <code>O(k)</code> traversal — removing a second, avoidable cost layered on
+    the first.
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me/blob/main/Typescript/reports/me-v3.7.1-what-we-proved.md">me-v3.7.1-what-we-proved.md</a> ·
+    <a href="https://github.com/neurons-me/.me/blob/main/Typescript/tests/Demos/Root_Fanout_100k.ts">Root_Fanout_100k.ts</a> ·
+    <a href="https://neurons-me.github.io/.me/docs/Architecture.html">docs: What is O(k)?</a>
+  </p>
+  <p class="dim">
+    The numbers on this page are pulled from the kernel's own recorded
+    benchmark reports, not restated from the public doc summary — two of the
+    four figures in the original doc did not match the actual test output.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
