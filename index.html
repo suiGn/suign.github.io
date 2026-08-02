@@ -47,6 +47,8 @@
       margin: 0;
       padding: 0;
       height: 100%;
+      height: 100dvh;
+      background: #050505;
       overflow: hidden;
       font-family: Arial, sans-serif;
     }
@@ -58,8 +60,10 @@
       left: 0;
       width: 100%;
       height: 100%;
+      height: 100dvh;
       z-index: -1;
       overflow: hidden;
+      background: #050505;
     }
     .video-container video {
       position: absolute;
@@ -78,6 +82,7 @@
       left: 0;
       width: 100%;
       height: 100%;
+      height: 100dvh;
       background: rgba(5, 5, 5, 0.85);
       z-index: 0;
     }
@@ -241,30 +246,44 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(50, 50, 50, 0.9);
+      background: rgba(40, 40, 40, 0.96);
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       text-align: left;
       color: white;
       z-index: 20;
-      max-width: 600px;
+      width: min(600px, calc(100vw - 40px));
+      max-height: min(80vh, 80dvh);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       display: none;
     }
     .readme-modal h1 {
       font-size: 22px;
-      margin-bottom: 10px;
+      margin: 0 28px 10px 0;
     }
     .readme-modal p {
       margin: 0 0 10px;
     }
     .close-readme {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 14px;
       cursor: pointer;
       font-size: 20px;
+      line-height: 1;
       color: white;
+    }
+
+    @media (max-width: 480px) {
+      .modal { width: calc(100vw - 40px); }
+      .readme-modal {
+        padding: 18px;
+        max-height: min(75vh, 75dvh);
+      }
+      .readme-modal h1 { font-size: 19px; }
+      .readme-modal ul { padding-left: 20px; margin: 0 0 10px; }
     }
   </style>
 </head>
@@ -273,7 +292,7 @@
 
   <!-- Background Video -->
   <div class="video-container">
-    <video autoplay muted loop>
+    <video autoplay muted loop playsinline webkit-playsinline="true" disablePictureInPicture preload="auto">
       <source src="./assets/suiGn.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
