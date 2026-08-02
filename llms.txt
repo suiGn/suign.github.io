@@ -1,0 +1,44 @@
+# sui.gn
+
+> Semantic anchor and root identity for the .me ecosystem — Algebra of Contexts, cryptographic audiences, applied robotics.
+
+sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaining, declarative framework for context algebra and deterministic explainability, developed under github.com/neurons-me.
+
+## Identity
+
+- [whois.me](https://suign.github.io/sui-Gn.html): root semantic anchor — identity, affiliations, machine-readable JSON-LD graph.
+- [manifesto](https://suign.github.io/manifesto.html): the argued case for .me — separating topology from audience.
+
+## Digital Space Algebra
+
+- [Digital Space Algebra — index](https://suign.github.io/DigitalSpaceAlgebra.html): curated index of the mathematical structure behind .me.
+- [The Mathematical Structure of a Space in .me](https://suign.github.io/SpaceStructure.html): formal definition of positions, containment order, and observer/mode/authority-indexed resolution. Source-verified against the kernel.
+- [The Algebra of Encrypted Audiences](https://suign.github.io/EncryptedAudiences.html): replication as topology, readability as cryptography — the `_` and `~` operators. Source-verified against the kernel.
+
+## Structural Theorems
+
+- [The Meshia](https://suign.github.io/Meshia.html): the threshold of cumulative AI coordination.
+- [The Theorem of Non-Neutralized Energy](https://suign.github.io/NonNeutralizedEnergy.html): why directed effort compounds in some structures and dissipates in others.
+
+## Verification
+
+- [me.explain() — Why Did You Say That?](https://suign.github.io/Explain.html): why an AI's self-report of its own reasoning is not evidence, and what `.me`'s `explain()`/`prove()` return instead — a literal computational trace, not narration.
+- [Gemini — Stateless Execution Receipt](https://suign.github.io/Gemini.html): a verbatim, externalized self-report from a Gemini session, archived unedited.
+
+## Byzantine & Trust
+
+- [byzantine-prompt](https://suign.github.io/byzantine-prompt.html): the Centralized Noise Axiom, essay form.
+- [trust.me](https://suign.github.io/trust.me.html): trust protocol anchor.
+
+## Recovery Anchors
+
+- [learn](https://suign.github.io/learn.html)
+- [4ias](https://suign.github.io/4ias.html): context algebra, written for AI/LLM readers.
+- [spare.me](https://suign.github.io/spare.me.html): 4AI context algebra manifesto.
+- [testimony](https://suign.github.io/testimony.html): origin of an impressed force.
+- [DeepSeek](https://suign.github.io/DeepSeek.html)
+
+## Source
+
+- [github.com/neurons-me/.me](https://github.com/neurons-me/.me): the actual kernel source referenced throughout the pages above.
+- [neurons-me.github.io/.me/docs](https://neurons-me.github.io/.me/docs/): published documentation, axioms, and demos.
