@@ -108,6 +108,14 @@
     padding: 0;
   }
   .sidebar-toolbar button:hover { color: var(--accent, #3b9eea); }
+  .sidebar-toolbar button { display: flex; align-items: center; gap: 6px; }
+  .sidebar-toolbar .chevron {
+    display: inline-block;
+    font-size: 9px;
+    transition: transform 0.15s ease;
+    transform: rotate(0deg);
+  }
+  .sidebar-toolbar .chevron.rotated { transform: rotate(-90deg); }
 
   .nav-group .group-label {
     display: flex;
@@ -152,8 +160,10 @@
     <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
   </div>
   <div class="sidebar-toolbar">
-    <button onclick="setAllGroups(false)">Expand all</button>
-    <button onclick="setAllGroups(true)">Collapse all</button>
+    <button id="toggleAllBtn" onclick="toggleAllGroups()">
+      <span class="chevron" id="toggleAllChevron">&#9662;</span>
+      <span id="toggleAllLabel">Collapse all</span>
+    </button>
   </div>
 
   <div class="nav-group">
@@ -235,6 +245,14 @@
   });
   function toggleGroup(labelEl) {
     labelEl.parentElement.classList.toggle('collapsed');
+  }
+  var allGroupsExpanded = true;
+  function toggleAllGroups() {
+    var collapse = allGroupsExpanded;
+    setAllGroups(collapse);
+    allGroupsExpanded = !collapse;
+    document.getElementById('toggleAllLabel').textContent = allGroupsExpanded ? 'Collapse all' : 'Expand all';
+    document.getElementById('toggleAllChevron').classList.toggle('rotated', !allGroupsExpanded);
   }
   function setAllGroups(collapsed) {
     document.querySelectorAll('.nav-group').forEach(function (g) {
