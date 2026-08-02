@@ -66,6 +66,39 @@
   header.banner h1 { color: #fff; font-size: 1.5rem; margin: 8px 0 16px; letter-spacing: 0.01em; }
   header.banner p { color: var(--fg); margin: 0; }
   p.dim { color: var(--fg-dim); }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  code { color: #9cc9f0; }
+  pre {
+    background: rgba(20, 20, 22, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13px;
+    color: #c7c7ce;
+  }
+  ol.index { padding-left: 22px; }
+  ol.index li { margin-bottom: 14px; }
+  ol.index .step-label {
+    display: block;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
+  }
 </style>
 </head>
 <body>
@@ -84,11 +117,81 @@
   </p>
 </header>
 
-<p class="dim">
-  Pending curation. This page will index the mathematical essays already published
-  elsewhere — set theory, category theory, and the algebra of encrypted audiences
-  underlying <code>.me</code> — arranged to be read in order, not chronologically.
-</p>
+<section id="anchor">
+  <h2>The Anchor</h2>
+  <p>
+    This section takes its name from
+    <a href="https://medium.suign.com/algebra-de-espacios-digitales-331f9c9ffac6">Algebra de Espacios Digitales</a>,
+    which proposes a mathematical framework for decentralized identity and data
+    sovereignty: digital interactions modeled as independent, self-managed states
+    rather than rows in a hierarchical database.
+  </p>
+  <p>
+    Its core object is the <strong>Island</strong> — an autonomous digital state:
+  </p>
+  <pre><code>I = (path, ciphertext, T, A, C)</code></pre>
+  <p class="dim">
+    <code>path</code> — the unique identifier within the network.
+    <code>ciphertext</code> — the cryptographically protected content.
+    <code>T</code> — topology, which nodes store or replicate the data.
+    <code>A</code> — audience, which identities can decrypt it.
+    <code>C</code> — capability, what actions are permitted on that state.
+  </p>
+  <p class="dim">
+    This is the same <code>A</code>/<code>T</code>/<code>C</code> reading used
+    throughout this section: <code>private → A = {self}</code>,
+    <code>shared → |A| &gt; 1</code>,
+    <code>encrypted → A enforced cryptographically</code>,
+    <code>replicated → |T| &gt; 1</code>. Adjectives stop being categories and
+    become properties of sets.
+  </p>
+  <p>
+    Treating users and permissions as intersecting mathematical sets produces
+    identity and information management where the user keeps absolute, private
+    control over their own interactions through cryptography — not through a
+    platform's permission, but through the structure of the math itself.
+  </p>
+</section>
+
+<section id="what-this-is">
+  <h2>What This Section Is</h2>
+  <p>
+    <code>.me</code> is not one idea written once — it's a body of work, refined
+    across many essays over more than a year, most of it published on Medium and
+    not indexed anywhere as a single path. This page is that path: the mathematics
+    underneath everything else on this site, arranged to be read in order, not
+    chronologically — from the concept, through the structure, to the parts that
+    make it fast.
+  </p>
+</section>
+
+<section id="index">
+  <h2>Index — In Progress</h2>
+  <p class="dim">
+    Curated, not exhaustive. Two entries placed so far, beyond the anchor above;
+    more queued pending source links.
+  </p>
+  <ol class="index">
+    <li>
+      <span class="step-label">Structural Geometry</span>
+      <a href="./SpaceStructure.html">The Mathematical Structure of a Space in .me</a>
+      — the formal definition: positions, containment order, and
+      observer/mode/authority-indexed resolution, source-verified against the
+      kernel.
+    </li>
+    <li>
+      <span class="step-label">Cryptographic Layer</span>
+      <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>
+      — replication as topology, readability as cryptography: the
+      <code>_</code> and <code>~</code> operators, source-verified against the
+      kernel.
+    </li>
+  </ol>
+  <p class="dim">
+    Still to be placed: the case for/against calling it a category, and the
+    complexity notes.
+  </p>
+</section>
 
 </body>
 </html>

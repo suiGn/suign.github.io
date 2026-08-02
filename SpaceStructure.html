@@ -1,0 +1,429 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mathematical Structure of a Space in .me</title>
+<meta name="description" content="A formal definition of what a 'space' is in .me: positions, containment order, observer/mode/authority-indexed resolution, and the manifestations that resolution produces. Source-verified against the .me kernel.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/SpaceStructure.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="The Mathematical Structure of a Space in .me">
+<meta property="og:description" content="A formal definition of what a 'space' is in .me, source-verified against the kernel: positions, containment order, and observer/mode/authority-indexed resolution.">
+<meta property="og:url" content="https://suign.github.io/SpaceStructure.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Mathematical Structure of a Space in .me">
+<meta name="twitter:description" content="A formal definition of what a 'space' is in .me, source-verified against the kernel.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "The Mathematical Structure of a Space in .me",
+  "url": "https://suign.github.io/SpaceStructure.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "A formal definition of what a 'space' is in .me: positions, containment order, observer/mode/authority-indexed resolution, and the manifestations that resolution produces."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --card: rgba(50, 50, 50, 0.45);
+    --fg: #e4e4e7;
+    --fg-dim: #9a9aa2;
+    --accent: #3b9eea;
+    --accent-dim: #0a6ebd;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+  a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  h3 {
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 20px 0 8px;
+  }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #9cc9f0; }
+  pre {
+    background: rgba(20, 20, 22, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #c7c7ce;
+  }
+  pre code { color: #c7c7ce; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(59, 158, 234, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe space</div>
+  <h1>THE MATHEMATICAL STRUCTURE OF A SPACE IN .ME</h1>
+  <p>
+    A formal definition, not a question: what a <code>.me</code> space is, and what
+    it is made of.
+  </p>
+</header>
+
+<section id="definition">
+  <h2>Definition</h2>
+  <p>
+    A space in <code>.me</code> is not a set of key-value pairs — that description
+    already fits a plain JavaScript object, and it explains none of the behavior
+    that actually needs formalizing: stealth roots that hide without deleting,
+    pointers that dereference without duplicating, derivations that recompute only
+    their dependents, and reads that resolve differently depending on who is asking
+    and how they are asking.
+  </p>
+  <p>
+    The core move: value is not a property a path holds. It is something a path
+    <strong>produces</strong>, jointly, from where it sits, who is asking, and what
+    kind of question is being asked.
+  </p>
+  <pre><code>manifest(p | o, m, a) = x
+
+<span class="dim">— not —</span>
+
+value(p) = v</code></pre>
+  <p>
+    That shift, from a fixed property to a contextual manifestation, is what makes
+    it possible to explain several distinct behaviors as one mechanism rather than
+    a list of unrelated features: a root that doesn't appear under enumeration, an
+    exact leaf that is still directly reachable, a pointer that manifests as data
+    when resolution stops at it and as a transition when resolution continues
+    through it, a bracket selector that turns one position into an indexed family,
+    and a forensic log that manifests events rather than current state.
+  </p>
+</section>
+
+<section id="base-structure">
+  <h2>The Base Structure: Positions and Containment</h2>
+  <p>
+    <code>docs/me/Algebra-of-Contexts.md</code> states containment directly:
+    <code>profile.contact.email ⊆ profile.contact ⊆ profile</code>. Written as an
+    order:
+  </p>
+  <pre><code>q ≤ p  ⟺  q is a descendant of p</code></pre>
+  <p>
+    so <code>profile.contact.email ≤ profile.contact ≤ profile</code> — deeper
+    path, smaller region.
+  </p>
+  <p>
+    One correction is required before calling this a tree: if only
+    <code>profile.contact.email</code> was ever written, <code>profile</code> and
+    <code>profile.contact</code> have no memory of their own — they were never the
+    target of a write, only implied by one. So the position set has to be defined
+    as a closure, not as the literal set of paths that appear in the memory log:
+  </p>
+  <pre><code>Let P_declared be the set of paths that were actually written.
+Let P = PrefixClosure(P_declared).</code></pre>
+  <p>
+    Under descendant containment, <code>P</code> is a rooted, tree-shaped poset.
+    This matches how the kernel actually behaves: a path can be a meaningful
+    position in the space — something you can descend into, something an
+    ancestor-walk like <code>hasStealthBarrier</code> checks against — purely by
+    virtue of being a prefix of something written, with no value of its own. The
+    space exists structurally even where no leaf has been stored.
+  </p>
+</section>
+
+<section id="resolution-context">
+  <h2>Resolution Context</h2>
+  <p>
+    Observing directly, enumerating children, and reading the forensic log are all
+    things an observer chooses to do — but a dereference is not chosen the same
+    way; it's triggered by the shape of the path itself once resolution continues
+    past a pointer. And the forensic log (<code>inspect()</code>, reading
+    <code>_memories</code>) doesn't answer to the same authority as an ordinary
+    read — it exposes hash-chained history a normal caller scope was never checked
+    against.
+  </p>
+  <p>Resolution context is therefore a triple, not a pair:</p>
+  <pre><code>Γ = (o, m, a)</code></pre>
+  <p>
+    where <code>o</code> is the observer, <code>m</code> is the mode of
+    observation, and <code>a</code> is the authority or capability under which the
+    request is made.
+  </p>
+</section>
+
+<section id="resolution-relation">
+  <h2>The Resolution Relation</h2>
+  <pre><code>R : P × Γ ⇀ M</code></pre>
+  <p>
+    where <code>M</code>, the space of manifestations, is a tagged union of
+    genuinely different result shapes — not one uniform value type:
+  </p>
+  <pre><code>M = Value + Pointer + Family + Children + History + {⊥}</code></pre>
+  <p>
+    Five distinct code paths in the kernel produce these, not one function with
+    flags on it:
+  </p>
+  <ul class="plain">
+    <li><strong>Direct read</strong> (<code>src/core.ts: readPath</code>) → <code>Value</code>, <code>Pointer</code>, or <code>⊥</code>.</li>
+    <li><strong>Enumeration</strong> (<code>src/core-read.ts: collectChildrenForPrefix</code>, <code>me.ts: inspect()</code>) → <code>Children</code>, silently excluding anything inside a secret scope, since those writes were never registered in the public index.</li>
+    <li><strong>Traversal through a pointer</strong> (<code>src/core-index.ts: resolveIndexPointerPath</code>, recursing through <code>readPath</code>) → the target's <code>Value</code>.</li>
+    <li><strong>Selection</strong> (<code>src/core-read.ts: evaluateSelectionPath</code> / <code>evaluateFilterPath</code>) → a <code>Family</code>, an indexed collection, not a plain list.</li>
+    <li><strong>Forensic inspection</strong> (<code>me.ts: inspect()</code> reading <code>_memories</code>) → <code>History</code>, under a different authority than an ordinary read.</li>
+  </ul>
+  <p class="dim">
+    Keeping these under one relation <code>R</code> is defensible at this level of
+    formality only because <code>M</code> is explicitly declared a tagged union —
+    collapsing <code>inspect()</code> and an ordinary public read into "two
+    equivalent modes" would understate that they answer to different authority,
+    which is exactly the distinction <code>Γ</code>'s third component exists to
+    preserve.
+  </p>
+</section>
+
+<section id="addressability">
+  <h2>Addressability and Discoverability</h2>
+  <p>Axiom A0 in <code>tests/axioms.test.ts</code> states the behavior directly:</p>
+  <pre><code>me.wallet["_"]("secret");
+me.wallet.income(100);
+
+console.log(me("wallet"));        // undefined
+console.log(me("wallet.income")); // 100</code></pre>
+  <p>The mechanism is two separate code paths:</p>
+  <ul class="plain">
+    <li><code>src/core-index.ts: applyMemoryToIndex</code> checks whether a write falls inside a secret scope and, if so, never adds it to the public <code>index</code> — that's what removes <code>wallet</code> from enumeration.</li>
+    <li><code>src/core.ts: readPath</code>'s branch-resolution block does not consult the public index at all for a secret-scoped path; it derives the effective scope secret and decrypts the branch chunk directly — reachable only if the exact path is already known.</li>
+  </ul>
+  <p>
+    So: <code>E_o(wallet) = ∅</code>, while
+    <code>R_o(wallet.income, direct) = 100</code>. You can resolve something you
+    cannot discover by browsing from its root.
+  </p>
+  <p class="dim">
+    This is real, but the claim is narrower than it might sound. Other systems can
+    reproduce the same behavior — row-level security, database views, unguessable
+    identifiers, capability URLs, endpoints with no list operation — through
+    policies layered outside the data model. The precise claim for <code>.me</code>
+    is that addressability and discoverability are distinct consequences of the
+    <em>same</em> mechanism — the semantic path structure plus the secret-scope
+    operator — rather than the product of separately-designed access-control
+    machinery bolted on beside the data.
+  </p>
+</section>
+
+<section id="pointers">
+  <h2>Pointers: The Root/Suffix Asymmetry</h2>
+  <p>
+    A pointer at <code>p</code> targeting <code>q</code> behaves asymmetrically. At
+    the empty suffix, resolution stops at the pointer and returns it as data:
+  </p>
+  <pre><code>R(p, o, direct) = Pointer(q)</code></pre>
+  <p>
+    For any non-empty suffix, resolution continues through the pointer — a
+    different mode, traversal, not "direct" applied further along:
+  </p>
+  <pre><code>R(p.s, o, traverse) = R(q.s, o, direct),  for s ≠ ε
+
+π[p,q](p.s) = q.s</code></pre>
+  <p>
+    Opaque at its own root, transparent along its extension. When
+    <code>readPath</code> substitutes to a target path that still needs resolving,
+    it recurses through <code>me.ts</code>'s wrapper, which re-runs the stealth
+    check against the new path's ancestors under the same caller scope — so the
+    observer is conserved by construction across the traversal, not by an assumed
+    side-condition.
+  </p>
+  <div class="note open">
+    <strong>Open question, not a settled bound:</strong> the pointer-chaining loop
+    inside <code>resolveIndexPointerPath</code> is bounded (<code>maxHops = 8</code>)
+    only for chains that resolve entirely within the flat public index. A chain
+    that crosses into a secret branch instead proceeds through the outer,
+    unbounded <code>self.readPath</code> recursion, with no cycle detection
+    visible at that layer.
+  </div>
+</section>
+
+<section id="multiplicity">
+  <h2>Multiplicity and Locality</h2>
+  <p><code>[·]</code> produces an indexed family, not a bare list — the index survives resolution:</p>
+  <pre><code>me("shops[menu.isPremium == true].name")
+// { 2: "Riverside", 3: "Station" }
+
+R*(p[φ], o) = ( i ↦ R(p.i, o, direct) )  for i ∈ I_φ
+where I_φ = { i ∈ children(p) | φ(p.i, o) holds }</code></pre>
+  <p>
+    Derivation cost is a locality claim, not a constancy claim.
+    <code>tests/Demos/Root_Fanout_100k.ts</code> documents <code>k = 100000</code>
+    for a single mutation with that many real dependents — not constant, exactly
+    as large as what actually depends on the change:
+  </p>
+  <pre><code>T(Δp) = O(|Reach_D(p)| + C_eval)</code></pre>
+  <p>
+    <code>Reach_D(p)</code> is the support of the mutation — the set of derived
+    paths transitively subscribed through <code>src/derivation.ts</code>'s
+    <code>refSubscribers</code>. The invariant is that this cost is independent of
+    <code>|P|</code>, the total size of the space, not that it is small in
+    absolute terms.
+  </p>
+</section>
+
+<section id="two-structures">
+  <h2>Two Structures, Not One</h2>
+  <p>
+    What a space <em>is</em> and what the <code>.me</code> kernel <em>adds</em> to
+    it are two different structures, kept separate rather than folded into one
+    tuple.
+  </p>
+  <p>A semantic space:</p>
+  <pre><code>S = (P, ≤, Γ, M, R)</code></pre>
+  <p>
+    — positions, containment order, resolution contexts, manifestations, and the
+    partial relation between them. An ordered structure that manifests positions
+    under resolution contexts.
+  </p>
+  <p>The <code>.me</code> kernel enriches that space:</p>
+  <pre><code>K = (S, π, Σ, H, D)</code></pre>
+  <p>
+    — path substitutions (<code>π</code>, pointers), expansion to indexed
+    families (<code>Σ</code>, selection), event-sourced history (<code>H</code>,
+    the hash-chained memory log), and locally-scoped derivation causality
+    (<code>D</code>, the dependency graph).
+  </p>
+  <p class="dim">
+    Keeping these separate matters, because it avoids defining "space" by
+    enumerating every capability the implementation happens to have. A space is
+    the order and the contextual resolution; everything else is structure carried
+    on top of it.
+  </p>
+</section>
+
+<section id="scope">
+  <h2>Scope of This Claim</h2>
+  <p>
+    Not a modal semantics — that word carries a specific technical commitment: a
+    formula language, modal operators, an accessibility relation between contexts,
+    a satisfaction relation, and frame conditions that could in principle be
+    characterized. None of that is exhibited here. What is shown is narrower and
+    fully earned by the definitions above:
+  </p>
+  <div class="note">
+    <code>.me</code> is a mode- and observer-indexed semantics of manifestation
+    over an ordered set of semantic spaces. Its separation of addressability,
+    discoverability, authority, and observation suggests a possible future modal
+    or epistemic formalization — that structure remains to be exhibited, not
+    assumed.
+  </div>
+  <p>
+    Meaning at a position in <code>.me</code> is not a stored substance waiting to
+    be read. It is a manifestation produced jointly by position, identity,
+    authority, and mode of observation. <code>.me</code> is not a language that
+    describes a space. It is the structure in which meaning takes shape at the
+    moment it is resolved.
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me">github.com/neurons-me/.me</a> ·
+    Docs: <a href="https://neurons-me.github.io/.me">neurons-me.github.io/.me</a>
+  </p>
+  <p class="dim">
+    An earlier draft of this essay was first published on
+    <a href="https://medium.com/@suign/what-is-the-mathematical-structure-of-a-space-in-me-6fc61a2b89d2">Medium</a>,
+    under the title "What Is the Mathematical Structure of a Space in .me?" This
+    page is the maintained, canonical version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

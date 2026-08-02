@@ -1,0 +1,307 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Algebra of Encrypted Audiences</title>
+<meta name="description" content="Replication is topology. Readability is cryptography. How .me binds audience membership to ciphertext itself via the `_` and `~` operators, source-verified against the kernel, so replication and access control become independent variables.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/EncryptedAudiences.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="The Algebra of Encrypted Audiences">
+<meta property="og:description" content="Replication is topology. Readability is cryptography. How .me binds audience membership to ciphertext itself, source-verified against the kernel.">
+<meta property="og:url" content="https://suign.github.io/EncryptedAudiences.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Algebra of Encrypted Audiences">
+<meta name="twitter:description" content="Replication is topology. Readability is cryptography. How .me binds audience membership to ciphertext itself.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "The Algebra of Encrypted Audiences",
+  "url": "https://suign.github.io/EncryptedAudiences.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "Replication is topology. Readability is cryptography. How .me binds audience membership to ciphertext itself via the `_` and `~` operators, source-verified against the kernel."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --card: rgba(50, 50, 50, 0.45);
+    --fg: #e4e4e7;
+    --fg-dim: #9a9aa2;
+    --accent: #3b9eea;
+    --accent-dim: #0a6ebd;
+    --border: rgba(255, 255, 255, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(59, 158, 234, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59, 158, 234, 0.35); }
+  a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  h3 {
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 20px 0 8px;
+  }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #9cc9f0; }
+  pre {
+    background: rgba(20, 20, 22, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #c7c7ce;
+  }
+  pre code { color: #c7c7ce; }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(59, 158, 234, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe audience</div>
+  <h1>THE ALGEBRA OF ENCRYPTED AUDIENCES</h1>
+  <p>Replication is topology. Readability is cryptography.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    Audience membership is a property of ciphertext, derived cryptographically —
+    not a property of a policy layer, checked externally. Topology (<code>T</code>)
+    and readability (<code>A</code>) are independent variables.
+  </div>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <ul class="plain">
+    <li><code>T</code> — topology set. Nodes/processes holding a piece of ciphertext.</li>
+    <li><code>A</code> — audience set. Principals that can derive the key and decrypt.</li>
+    <li><code>C</code> — capability set. Operations permitted on that state, beyond reading.</li>
+  </ul>
+  <p class="dim">
+    Implementation status, precisely: <code>A</code> is enforced directly by the
+    kernel (<code>ME</code>). <code>T</code> is not a kernel data structure — the
+    kernel emits ciphertext; placement is decided by infrastructure outside it.
+    <code>C</code> is partial: wrapped-key metadata exists, but no uniform
+    <code>read</code>/<code>write</code>/<code>delegate</code>/<code>revoke</code>
+    algebra applies across every scope yet.
+  </p>
+</section>
+
+<section id="core-relation">
+  <h2>Core Relation</h2>
+  <pre><code>replicate(T) ↛ change(A)</code></pre>
+  <p>
+    Encryption does not remove data from topology. It restricts membership in
+    readability. A node holding ciphertext without the derivable key holds bytes,
+    not data.
+  </p>
+</section>
+
+<section id="operator-secret">
+  <h2>Operator: <code>_</code> — Declare Scope</h2>
+  <pre><code>me.wallet["_"]("secret");
+me.wallet.income(100);
+
+me("wallet")        // undefined
+me("wallet.income") // 100 — inside a kernel holding "secret"</code></pre>
+  <p>
+    <code>_(secret)</code> binds audience to a path at write time.
+    <code>me("wallet")</code> is <code>undefined</code>: the public index
+    excludes secret-scope roots by construction, not by deletion.
+    <code>wallet.income</code> resolves only where <code>"secret"</code> is
+    already held — a different kernel instance gets <code>undefined</code> at
+    both paths.
+  </p>
+  <p class="dim">
+    <code>_(secret)</code> defines what membership in <code>A</code> requires. It
+    does not itself add a second principal.
+  </p>
+</section>
+
+<section id="wrapping">
+  <h2>Sharing: Key Wrapping</h2>
+  <pre><code>kex:  ECDH-ES
+kdf:  HKDF-SHA-256
+aead: AES-256-GCM</code></pre>
+  <p>
+    A scope secret wrapped to a recipient's public key transmits membership
+    without plaintext exposure outside that recipient's endpoint. One wrap, one
+    additional principal. Tested against correct and corrupted recipients.
+  </p>
+</section>
+
+<section id="refinement">
+  <h2>Refinement</h2>
+  <pre><code>wallet.hidden ⊆ wallet
+⟹ A(wallet.hidden) satisfies A(wallet), not conversely</code></pre>
+  <p>
+    Key material for a descendant path chains its own scope secret with its
+    ancestor's full lineage — path, scope, active noise boundary. Refining the
+    path and refining the audience are the same operation.
+  </p>
+</section>
+
+<section id="operator-noise">
+  <h2>Operator: <code>~</code> — Reset Derivation</h2>
+  <pre><code>me.wallet["_"]("alpha");
+me.wallet.hidden.notes("alpha-note");
+
+me.wallet["~"]("noise");
+me.wallet["_"]("beta");
+me.wallet.hidden.seed("beta-seed");
+
+// effectiveSecret(alpha-chain) ≠ effectiveSecret(beta-chain)</code></pre>
+  <p>
+    <code>~</code> discontinues inherited derivation at a chosen boundary. Same
+    structural parent, unrelated audiences.
+  </p>
+</section>
+
+<section id="predicates">
+  <h2>Predicates as Set Statements</h2>
+  <ul class="plain">
+    <li>public — <code>A</code> unbounded (no encryption)</li>
+    <li>private — <code>A = {self}</code></li>
+    <li>shared — <code>|A| ≥ 2</code> (via key wrapping)</li>
+    <li>encrypted — <code>A</code> enforced cryptographically</li>
+    <li>replicated — <code>|T| &gt; 1</code>, orthogonal to <code>A</code></li>
+  </ul>
+</section>
+
+<section id="cost">
+  <h2>Cost</h2>
+  <pre><code>cost(scoped_read)  ≈ 10¹–10² × cost(public_read)
+tamper(ciphertext) ⟹ decrypt_failure, not corrupted_read</code></pre>
+  <p>
+    Every scoped access performs real key derivation — no cached policy
+    decision, no admin bypass. The check and the access are the same operation.
+  </p>
+</section>
+
+<section id="scope-note">
+  <h2>Notation and Scope</h2>
+  <div class="note open">
+    This page uses <code>C</code> for capability, matching "Algebra de
+    Audiencias Cifradas" (Apr 2026), the anchor piece, and "Algebra of
+    Contexts." The Medium essay of the same title as this page uses
+    <code>P</code> instead — treated here as drift, not preserved.
+  </div>
+  <p class="dim">
+    A separate, earlier piece, "Álgebra de Audiencias Encriptadas," frames this
+    problem via homomorphic encryption and secure multi-party computation.
+    Neither exists in the current kernel — that piece is a forward-looking
+    direction, not current architecture. Everything above is source-verified
+    against the running code.
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me">github.com/neurons-me/.me</a> ·
+    Docs: <a href="https://neurons-me.github.io/.me/docs/Axioms.html">neurons-me.github.io/.me/docs/Axioms</a> ·
+    <a href="https://github.com/neurons-me/.me/blob/main/Typescript/typedocs/Algebra-of-Contexts.md">Algebra of Contexts (source)</a>
+  </p>
+  <p class="dim">
+    First published on <a href="https://medium.suign.com/the-algebra-of-encrypted-audiences-a9d2a8195bbb">Medium</a>,
+    under the same title. This page is the maintained, canonical version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
