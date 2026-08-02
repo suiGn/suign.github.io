@@ -89,14 +89,55 @@
     font-size: 11.5px;
     margin-top: 2px;
   }
-  .sidebar .group-label {
-    padding: 16px 20px 6px;
+
+  .sidebar-toolbar {
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  }
+  .sidebar-toolbar button {
+    background: none;
+    border: none;
+    color: var(--fg-dim, #9a9aa2);
+    font-family: inherit;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    padding: 0;
+  }
+  .sidebar-toolbar button:hover { color: var(--accent, #3b9eea); }
+
+  .nav-group .group-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 20px 6px;
     color: var(--accent-dim, #0a6ebd);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    cursor: pointer;
+    user-select: none;
   }
-  .sidebar ul.group-list { padding: 0 0 4px; }
+  .nav-group .group-label:hover { color: var(--accent, #3b9eea); }
+  .nav-group .chevron {
+    display: inline-block;
+    font-size: 9px;
+    transition: transform 0.15s ease;
+    transform: rotate(0deg);
+  }
+  .nav-group.collapsed .chevron { transform: rotate(-90deg); }
+  .nav-group ul.group-list {
+    padding: 0 0 4px;
+    max-height: 600px;
+    overflow: hidden;
+  }
+  .nav-group.collapsed ul.group-list {
+    max-height: 0;
+    padding: 0;
+  }
 </style>
 
 <div class="breadcrumb" onclick="openSidebar()">
@@ -110,53 +151,74 @@
     <span>Concepts</span>
     <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
   </div>
-  <div class="group-label">Anchors</div>
-  <ul class="group-list">
-    <li><a href="./index.html">index.html<span class="desc">home</span></a></li>
-    <li><a href="./sui-Gn.html">whois.me<span class="desc">root semantic anchor</span></a></li>
-  </ul>
+  <div class="sidebar-toolbar">
+    <button onclick="setAllGroups(false)">Expand all</button>
+    <button onclick="setAllGroups(true)">Collapse all</button>
+  </div>
 
-  <div class="group-label">The .me Argument</div>
-  <ul class="group-list">
-    <li><a href="./manifesto.html">manifesto.html<span class="desc">the argued case for .me</span></a></li>
-    <li><a href="./learn.html">learn.html<span class="desc">recovery anchor</span></a></li>
-    <li><a href="./4ias.html">4ias.html<span class="desc">context algebra, for AI/LLM readers</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Anchors</div>
+    <ul class="group-list">
+      <li><a href="./index.html">index.html<span class="desc">home</span></a></li>
+      <li><a href="./sui-Gn.html">whois.me<span class="desc">root semantic anchor</span></a></li>
+    </ul>
+  </div>
 
-  <div class="group-label">Byzantine &amp; Trust</div>
-  <ul class="group-list">
-    <li><a href="./byzantine-prompt.html">byzantine-prompt.html<span class="desc">the Centralized Noise Axiom, essay form</span></a></li>
-    <li><a href="./Bizantine.html">Bizantine.html<span class="desc">Byzantine prompt note</span></a></li>
-    <li><a href="./trust.me.html">trust.me.html<span class="desc">trust protocol anchor</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>The .me Argument</div>
+    <ul class="group-list">
+      <li><a href="./manifesto.html">manifesto.html<span class="desc">the argued case for .me</span></a></li>
+      <li><a href="./learn.html">learn.html<span class="desc">recovery anchor</span></a></li>
+      <li><a href="./4ias.html">4ias.html<span class="desc">context algebra, for AI/LLM readers</span></a></li>
+    </ul>
+  </div>
 
-  <div class="group-label">Namespace &amp; Protocol</div>
-  <ul class="group-list">
-    <li><a href="./spare.me.html">spare.me.html<span class="desc">spare semantic anchor</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Byzantine &amp; Trust</div>
+    <ul class="group-list">
+      <li><a href="./byzantine-prompt.html">byzantine-prompt.html<span class="desc">the Centralized Noise Axiom, essay form</span></a></li>
+      <li><a href="./Bizantine.html">Bizantine.html<span class="desc">Byzantine prompt note</span></a></li>
+      <li><a href="./trust.me.html">trust.me.html<span class="desc">trust protocol anchor</span></a></li>
+    </ul>
+  </div>
 
-  <div class="group-label">Structural Theorems</div>
-  <ul class="group-list">
-    <li><a href="./Meshia.html">Meshia.html<span class="desc">the threshold of cumulative AI coordination</span></a></li>
-    <li><a href="./NonNeutralizedEnergy.html">NonNeutralizedEnergy.html<span class="desc">why directed effort compounds or dissipates</span></a></li>
-    <li><a href="./Explain.html">me.explain()<span class="desc">Why Did You Say That?</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Namespace &amp; Protocol</div>
+    <ul class="group-list">
+      <li><a href="./spare.me.html">spare.me.html<span class="desc">spare semantic anchor</span></a></li>
+    </ul>
+  </div>
 
-  <div class="group-label">Digital Space Algebra</div>
-  <ul class="group-list">
-    <li><a href="./DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html<span class="desc">index — pending curation</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Structural Theorems</div>
+    <ul class="group-list">
+      <li><a href="./Meshia.html">Meshia.html<span class="desc">the threshold of cumulative AI coordination</span></a></li>
+      <li><a href="./NonNeutralizedEnergy.html">NonNeutralizedEnergy.html<span class="desc">why directed effort compounds or dissipates</span></a></li>
+      <li><a href="./Explain.html">me.explain()<span class="desc">Why Did You Say That?</span></a></li>
+    </ul>
+  </div>
 
-  <div class="group-label">Testimony &amp; Accountability</div>
-  <ul class="group-list">
-    <li><a href="./testimony.html">testimony.html<span class="desc">origin of an impressed force</span></a></li>
-    <li><a href="./DeepSeek.html">DeepSeek.html<span class="desc">DeepSeek is in the house</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Digital Space Algebra</div>
+    <ul class="group-list">
+      <li><a href="./DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html<span class="desc">index — pending curation</span></a></li>
+    </ul>
+  </div>
 
-  <div class="group-label">Formal Spec</div>
-  <ul class="group-list">
-    <li><a href="./specification-draft-v1.md">specification-draft-v1.md<span class="desc">formal spec draft, incomplete by design</span></a></li>
-  </ul>
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Testimony &amp; Accountability</div>
+    <ul class="group-list">
+      <li><a href="./testimony.html">testimony.html<span class="desc">origin of an impressed force</span></a></li>
+      <li><a href="./DeepSeek.html">DeepSeek.html<span class="desc">DeepSeek is in the house</span></a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Formal Spec</div>
+    <ul class="group-list">
+      <li><a href="./specification-draft-v1.md">specification-draft-v1.md<span class="desc">formal spec draft, incomplete by design</span></a></li>
+    </ul>
+  </div>
 </nav>
 
 <script>
@@ -171,4 +233,12 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeSidebar();
   });
+  function toggleGroup(labelEl) {
+    labelEl.parentElement.classList.toggle('collapsed');
+  }
+  function setAllGroups(collapsed) {
+    document.querySelectorAll('.nav-group').forEach(function (g) {
+      g.classList.toggle('collapsed', collapsed);
+    });
+  }
 </script>
