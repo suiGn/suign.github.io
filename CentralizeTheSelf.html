@@ -1,0 +1,250 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centralize the Self, Distribute the Data</title>
+<meta name="description" content="The modern internet inverts two requirements: identity fragments across platform accounts while data locks into platform servers. The correction, stated formally: one root for identity (seed, identityHash), free topology for data (T independent of A).">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/CentralizeTheSelf.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="Centralize the Self, Distribute the Data">
+<meta property="og:description" content="Identity fragments across platform accounts while data locks into platform servers. The correction: one root for identity, free topology for data.">
+<meta property="og:url" content="https://suign.github.io/CentralizeTheSelf.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centralize the Self, Distribute the Data">
+<meta name="twitter:description" content="One root for identity. Free topology for data. Stated formally.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Centralize the Self, Distribute the Data",
+  "url": "https://suign.github.io/CentralizeTheSelf.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "The modern internet inverts two requirements: identity fragments across platform accounts while data locks into platform servers. The correction, stated formally: one root for identity, free topology for data."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.compare th { color: #66fcf1; font-weight: normal; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe inversion</div>
+  <h1>CENTRALIZE THE SELF, DISTRIBUTE THE DATA</h1>
+  <p>The internet inverted both. The correction is structural, not political.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    Identity requires one coherent root; data requires freedom to move.
+    Most systems invert both: identity fragments across N platform-specific
+    accounts, while data centralizes, locked to whichever platform captured
+    it. The correction reverses the inversion — not "decentralize
+    everything," but placing each property where it structurally belongs.
+  </div>
+</section>
+
+<section id="inversion">
+  <h2>The Inversion, Stated Formally</h2>
+  <pre><code>current:    identity = distributed (N fragmented accounts)
+            data     = centralized (locked to platform T)
+
+corrected:  identity = centralized (one root)
+            data     = distributed (T independent of A)</code></pre>
+</section>
+
+<section id="centralize">
+  <h2>Centralize the Self</h2>
+  <p>
+    "One root" is not a slogan here — it names an existing, verified
+    mechanism. A kernel has exactly one seed and one deterministic identity
+    derived from it:
+  </p>
+  <pre><code>identityHash(K) = keccak256("this.me/identity:v1::" + K.seed)</code></pre>
+  <p class="dim">
+    <code>seed</code> — a 64-hex namespace authority key that never leaves
+    the kernel. Every context, mount, or namespace a person appears under —
+    <em>who am I, here</em> — is computed from that one root rather than
+    issued separately per platform. Identity does not fragment into N
+    accounts; it's one function evaluated in N contexts.
+  </p>
+</section>
+
+<section id="distribute">
+  <h2>Distribute the Data</h2>
+  <p>
+    Data's freedom is the same relation already established for audience
+    and topology: replicating it does not, by itself, change who can read
+    it.
+  </p>
+  <pre><code>replicate(T) ↛ change(A)</code></pre>
+  <p class="dim">
+    A backup, a second device, a new host — none of it requires permission
+    from, or expands the reach of, any single custodian. Full mechanism:
+    <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>.
+  </p>
+</section>
+
+<section id="table">
+  <h2>Where Each Property Belongs</h2>
+  <table class="compare">
+    <tr><th></th><th>Identity</th><th>Data</th></tr>
+    <tr><td>Wants</td><td>coherence — one root</td><td>freedom — unconstrained topology</td></tr>
+    <tr><td>Common web</td><td>fragmented (N accounts)</td><td>centralized (locked to platform)</td></tr>
+    <tr><td>Corrected</td><td><code>identityHash(seed)</code> — one function</td><td><code>T ⊥ A</code> — replication independent of readability</td></tr>
+  </table>
+</section>
+
+<section id="scope">
+  <h2>Scope</h2>
+  <div class="note open">
+    "One root, computable, portable" is real and verified — the
+    <code>identityHash</code>/<code>seed</code> mechanism above exists in
+    the current kernel. What is not shipped: a system that simply asks
+    "which self is present" instead of "which platform are you logged into"
+    across arbitrary third-party services. That requires those services to
+    integrate against the root, which is an adoption question, not a
+    cryptographic one — stated here as the actual remaining gap, not
+    glossed over.
+  </div>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  <p class="dim">
+    First published on <a href="https://medium.com/@neurons.me/centralize-the-self-distribute-the-data-aa058a84e1a0">Medium</a>,
+    under neurons.me. This page is the maintained, canonical version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

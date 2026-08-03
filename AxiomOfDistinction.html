@@ -1,0 +1,229 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Axiom of Distinction</title>
+<meta name="description" content="Distinction is the minimal condition for any possible system. Three axioms — distinction, state, transition — and where .me's actual secret-scope mechanism instantiates them, verified against the kernel.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/AxiomOfDistinction.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="The Axiom of Distinction">
+<meta property="og:description" content="Distinction is the minimal condition for any possible system. Three axioms, and where .me's real mechanism instantiates them.">
+<meta property="og:url" content="https://suign.github.io/AxiomOfDistinction.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Axiom of Distinction">
+<meta name="twitter:description" content="Distinction is the minimal condition for any possible system, formally.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "The Axiom of Distinction",
+  "url": "https://suign.github.io/AxiomOfDistinction.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "Distinction is the minimal condition for any possible system. Three axioms — distinction, state, transition — and where .me's actual secret-scope mechanism instantiates them, verified against the kernel."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ axiom --define distinction</div>
+  <h1>THE AXIOM OF DISTINCTION</h1>
+  <p>If you cannot differentiate A from not-A, there is nothing.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    Distinction is the minimal condition for any possible system. A system
+    incapable of separating A from not-A cannot contain information — not
+    as a design limitation, but as a formal one. Distinction requires no
+    object, matter, energy, or space. Only the possibility of separation.
+  </div>
+</section>
+
+<section id="axioms">
+  <h2>Three Axioms</h2>
+  <pre><code>Axiom 0 — Distinction
+  Any system capable of containing information requires
+  at least one distinction. Formal structure, not physical.
+
+Axiom 1 — State
+  A distinction implies at least two mutually exclusive states.
+
+Axiom 2 — Transition
+  The transition between states is what is called movement.</code></pre>
+  <p class="dim">
+    Nothing above requires a substrate. Classical logic's <code>0/1</code>
+    is one instance of Axiom 0, not its foundation — every computable
+    system is built on some distinction, of which binary is only the most
+    familiar case.
+  </p>
+</section>
+
+<section id="emergence">
+  <h2>Emergence</h2>
+  <pre><code>consistent transition   → stable pattern
+stable pattern           → structure
+consistent structure     → geometry
+stable geometry          → the dynamics we call physics</code></pre>
+  <p class="dim">
+    Each step is a claim about what consistency across iteration permits,
+    not an assertion that any given system reaches the next stage.
+  </p>
+</section>
+
+<section id="instantiation">
+  <h2>Where <code>.me</code> Instantiates This, Verified</h2>
+  <p>
+    This isn't left at the level of metaphor. The same A / ¬A distinction
+    is the literal, source-verified behavior of a secret scope:
+  </p>
+  <pre><code>me.wallet["_"]("vault-key");
+
+me("wallet")   // ⊥ — not "locked": the branch is not in the public index at all</code></pre>
+  <p class="dim">
+    Without the key, <code>wallet</code> does not resolve as hidden data —
+    it does not resolve at all, because the public index the kernel reads
+    from was never populated with that prefix. The distinction isn't
+    enforced after the fact by a check; it's what the space either does or
+    doesn't contain. Full mechanism:
+    <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>.
+  </p>
+  <p class="dim">
+    The application of this same axiom specifically to identity — self-
+    validation, fractal recursion, and computational sovereignty — is
+    developed separately: <a href="./OntologyOfIdentity.html">The Ontology
+    of Identity</a>.
+  </p>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  <p class="dim">
+    First published on <a href="https://medium.suign.com/la-distinci%C3%B3n-es-la-condici%C3%B3n-ontol%C3%B3gica-m%C3%ADnima-de-cualquier-sistema-posible-418c59b25ca9">Medium</a>,
+    as "La distinción es la condición ontológica mínima de cualquier sistema
+    posible." This page is the maintained, canonical, English-language
+    version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

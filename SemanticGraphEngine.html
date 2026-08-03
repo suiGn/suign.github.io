@@ -1,0 +1,258 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Semantic Graph Engine</title>
+<meta name="description" content=".me as a semantic graph engine: schema lives inside the graph as a node, not an external table; access is path resolution, not table lookup; structure implies inheritance. Grounded in the verified mechanism, not a separate product.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/SemanticGraphEngine.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="The Semantic Graph Engine">
+<meta property="og:description" content=".me as a semantic graph engine: schema lives inside the graph, access is path resolution, structure implies inheritance.">
+<meta property="og:url" content="https://suign.github.io/SemanticGraphEngine.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Semantic Graph Engine">
+<meta name="twitter:description" content="Schema lives inside the graph, not outside it. Access is path resolution, not table lookup.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "The Semantic Graph Engine",
+  "url": "https://suign.github.io/SemanticGraphEngine.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": ".me as a semantic graph engine: schema lives inside the graph as a node, not an external table; access is path resolution, not table lookup; structure implies inheritance."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.compare th { color: #66fcf1; font-weight: normal; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe graph-engine</div>
+  <h1>THE SEMANTIC GRAPH ENGINE</h1>
+  <p>No programmed routes — only consequences of the tree's structure.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    A semantic graph engine stores information as a network of
+    interconnected meanings, joined by explicit relationships — not rigid
+    tables, not isolated documents. This isn't a separate product from
+    <code>.me</code>. It's the architectural category <code>.me</code>
+    already belongs to, named directly.
+  </div>
+</section>
+
+<section id="schema-as-node">
+  <h2>Schema Is a Node, Not a Table</h2>
+  <p>
+    In a conventional database, the schema is an external configuration the
+    engine consults before touching data. In <code>.me</code>, a schema
+    path is just another path — reachable the same way any other value is:
+  </p>
+  <pre><code>schema.role.group    // a path, not a special table
+groups.dev_team       // resolved by walking the same tree</code></pre>
+  <p class="dim">
+    New concepts don't require a migration — they require a new declared
+    path, which is already how <code>.me</code> works structurally (see
+    <a href="./MeWhateverWhat.html">me.whatever(what)</a>: free-form
+    declaration, no fixed schema owned externally).
+  </p>
+</section>
+
+<section id="path-resolving">
+  <h2>Resolution by Path, Not by Lookup</h2>
+  <p>
+    Access isn't "find the row with this ID" — it's traversal: each
+    <code>.</code> is a hop from one concept to the next, inside a namespace
+    that grants authority over what's reachable from it. This is the
+    containment order already formalized:
+  </p>
+  <pre><code>q ≤ p  ⟺  q is a descendant of p</code></pre>
+  <p class="dim">
+    Full formalization: <a href="./SpaceStructure.html">SpaceStructure</a>.
+  </p>
+</section>
+
+<section id="inference">
+  <h2>What's Real Inference, and What's Broader Framing</h2>
+  <p>
+    <strong>Verified:</strong> nested paths inherit their nearest declared
+    ancestor's secret scope by default — <code>wallet.hidden</code> chains
+    its own scope with <code>wallet</code>'s, not from a rule engine, but
+    because the derivation walks ancestor prefixes directly. Source:
+    <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>.
+  </p>
+  <p class="dim">
+    <strong>Broader framing, stated honestly:</strong> "a member inside a
+    group inherits arbitrary policy from that group" is a generalization of
+    the one verified mechanism above (secret-scope inheritance
+    specifically), not evidence of a general-purpose inference engine that
+    derives any rule from structure. The narrower, real claim is the one to
+    trust; the general one is architectural intuition extrapolated from it.
+  </p>
+</section>
+
+<section id="interop">
+  <h2>Interoperability via Shared Nodes</h2>
+  <p>
+    Universal identifiers let data from different namespaces connect
+    without a shared owner:
+  </p>
+  <ul class="plain">
+    <li>Cross-mesh resolution of a <code>me://</code> path, hop by hop, without a central registry — the <a href="https://neurons-me.github.io/NRP/">Namespace Resolution Protocol</a>.</li>
+    <li>Binding an identity into a namespace surface — "who am I, here" — handled by <a href="https://neurons-me.github.io/Cleaker/">cleaker</a>.</li>
+  </ul>
+</section>
+
+<section id="table">
+  <h2>Three Storage Paradigms</h2>
+  <table class="compare">
+    <tr><th></th><th>Relational</th><th>Document (NoSQL)</th><th>Semantic graph</th></tr>
+    <tr><td>Structure</td><td>rigid tables</td><td>isolated documents</td><td>interconnected meaning</td></tr>
+    <tr><td>Schema</td><td>external, migrated</td><td>implicit, per-document</td><td>a node in the same tree</td></tr>
+    <tr><td>Access</td><td>table + ID lookup</td><td>key lookup</td><td>path traversal</td></tr>
+  </table>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  <p class="dim">
+    First published on <a href="https://medium.suign.com/motor-de-grafos-sem%C3%A1nticos-73d2a01a0baa">Medium</a>,
+    as "Motor de Grafos Semánticos." This page is the maintained, canonical
+    version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>me.whatever(what)</title>
+<meta name="description" content="The syntax of .me, formally: Subject-Verb-Object path calls, the real operator table (@, _, ~, ->, =, ?, -), and selector syntax — source-referenced against the official Syntax spec.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/MeWhateverWhat.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="me.whatever(what)">
+<meta property="og:description" content="The syntax of .me, formally: Subject-Verb-Object path calls, the real operator table, and selector syntax.">
+<meta property="og:url" content="https://suign.github.io/MeWhateverWhat.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="me.whatever(what)">
+<meta name="twitter:description" content="The syntax of .me, formally: SVO path calls, the real operator table, and selector syntax.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "me.whatever(what)",
+  "url": "https://suign.github.io/MeWhateverWhat.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "The syntax of .me, formally: Subject-Verb-Object path calls, the real operator table (@, _, ~, ->, =, ?, -), and selector syntax."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+
+  table.ops {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  table.ops th, table.ops td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.ops th { color: #66fcf1; font-weight: normal; }
+  table.ops td code { white-space: nowrap; }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe syntax</div>
+  <h1>ME.WHATEVER(WHAT)</h1>
+  <p>Subject. Verb. Object. The syntax reads as a sentence because it's built as one.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    A path call in <code>.me</code> is Subject-Verb-Object: <code>me</code>
+    is the subject (the agent), <code>.whatever</code> is the verb (the
+    capability), <code>(what)</code> is the object (the input). Dots build
+    hierarchy, brackets select or invoke an operator, parentheses execute.
+  </div>
+</section>
+
+<section id="core-pattern">
+  <h2>Core Pattern</h2>
+  <pre><code>me.path.to.node(value)   // write
+me("path.to.node")       // read</code></pre>
+  <p class="dim">
+    Path-based, not method-based in the traditional sense — the same
+    syntax addresses any depth of hierarchy, in any declared vocabulary.
+  </p>
+</section>
+
+<section id="basic-usage">
+  <h2>Basic Usage</h2>
+  <pre><code>import Me from "this.me";
+const me = new Me();
+
+me["@"]("jabellae");
+
+me.profile.name("Abella");
+me.profile.bio("Building the semantic web.");
+
+me.users.ana.name("Ana");
+me.users.ana.age(22);
+
+me.friends.ana["->"]("users.ana");
+
+// Automatic logic
+me.friends["[i]"]["="]("is_adult", "age >= 18");
+
+console.log(me("friends.ana.is_adult"));        // → true
+console.log(me("friends[age > 18].name"));      // → { ana: "Ana" }</code></pre>
+  <p class="dim">
+    One call chain: declare identity, write two profiles, point one path at
+    another, broadcast a derivation across every friend, then read either
+    the direct result or a filtered family. No separate query language —
+    the same <code>me(...)</code> call does both.
+  </p>
+</section>
+
+<section id="language-agnostic">
+  <h2>Language-Agnostic</h2>
+  <p>Meaning comes from structure, not from specific words — the same logic holds under any vocabulary:</p>
+  <pre><code>// English
+me.shop.items[1].price(100);
+me.shop.items[1]["="]("total", "price * 1.16");
+
+// Spanish
+me.tienda.articulos[1].precio(100);
+me.tienda.articulos[1]["="]("total", "precio * 1.16");
+
+// Japanese
+me.店舗.商品[1].価格(100);
+me.店舗.商品[1]["="]("合計", "価格 * 1.16");</code></pre>
+</section>
+
+<section id="operators">
+  <h2>Operators</h2>
+  <table class="ops">
+    <tr><th>Operator</th><th>Function</th><th>Example</th></tr>
+    <tr><td><code>@</code></td><td>Identity marker</td><td><code>me["@"]("Abella")</code></td></tr>
+    <tr><td><code>_</code></td><td>Secret scope — binds audience to a path</td><td><code>me.wallet["_"]("vault-key")</code></td></tr>
+    <tr><td><code>~</code></td><td>Noise reset — new derivation chain</td><td><code>me.wallet["~"]("beta-seed")</code></td></tr>
+    <tr><td><code>-></code></td><td>Pointer — references another path</td><td><code>me.dashboard.card["->"]("inventory")</code></td></tr>
+    <tr><td><code>=</code></td><td>Derivation — a computed value</td><td><code>me.order["="]("total", "subtotal + tax")</code></td></tr>
+    <tr><td><code>?</code></td><td>Collect — aggregate with a function</td><td><code>me.report["?"](["user.name"], callback)</code></td></tr>
+    <tr><td><code>-</code></td><td>Remove — deletes a property</td><td><code>me.temp["-"]("value")</code></td></tr>
+  </table>
+  <p class="dim">
+    <code>_</code>, <code>~</code>, and <code>=</code> are independently
+    source-verified against the kernel elsewhere on this site:
+    <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>
+    and <a href="./InvertedIndex.html">Inverted Dependency Indexing</a>. The
+    full table's primary source: <a href="https://neurons-me.github.io/.me/Typescript/typedocs/Syntax.html">official Syntax reference</a>.
+  </p>
+</section>
+
+<section id="selectors">
+  <h2>Selector Syntax</h2>
+  <pre><code>me.fleet.trucks[2].km()                                    // fixed index
+me.fleet["trucks[i]"]["="]("cost", "fuel * price_per_liter") // broadcast
+me("fleet.trucks[fuel >= 200].fuel")                         // logical filter
+me("fleet.trucks[1..2].fuel")                                // range
+me("fleet.trucks[[1,3]].fuel")                                // multi-select
+me("fleet.trucks[x => x.fuel * 0.5]")                          // transform</code></pre>
+  <p class="dim">
+    A bracket selector turns one position into an indexed family — the same
+    mechanism formalized as <code>R*(p[φ], o)</code> in
+    <a href="./SpaceStructure.html">SpaceStructure</a>.
+  </p>
+</section>
+
+<section id="why-svo">
+  <h2>Why This Shape</h2>
+  <ul class="plain">
+    <li><strong>Semantic clarity</strong> — the call reads as a sentence, which is what makes it auditable rather than merely executable.</li>
+    <li><strong>State encapsulation</strong> — everything hangs off <code>me</code>; there is no external object separate from the subject invoking it.</li>
+    <li><strong>Deterministic logic</strong> — a result depends strictly on current state and input, not on hidden global state, making calls repeatable.</li>
+  </ul>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://neurons-me.github.io/.me/Typescript/">.me Typescript kernel</a> ·
+    <a href="https://neurons-me.github.io/.me/Typescript/typedocs/">typedocs</a> ·
+    <a href="https://neurons-me.github.io/.me/Typescript/typedocs/Syntax.html">Syntax reference</a>
+  </p>
+  <p class="dim">
+    First published on <a href="https://medium.com/@suign/me-whatever-what-df1013e300a1">Medium</a>,
+    under the same title, with a dedicated companion piece,
+    <a href="https://medium.com/@suign/syntax-of-me-6433e2f907b7">Syntax of .me</a>.
+    This page is the maintained, canonical version.
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

@@ -7,18 +7,33 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 ## Identity
 
 - [whois.me](https://suign.github.io/sui-Gn.html): root semantic anchor — identity, affiliations, machine-readable JSON-LD graph.
+- [Connecting Dots](https://suign.github.io/ConnectingDots.html): a structure that cannot transmit itself does not prevail — reachability as structure, and a plain, disclosed request to connect it further.
 - [manifesto](https://suign.github.io/manifesto.html): the argued case for .me — separating topology from audience.
+
+## Understanding .me
+
+- [Decentralized Identity](https://suign.github.io/DecentralizedIdentity.html): what most answers to "who am I online" leave out — issuer vs. reader as two different questions.
+- [The User-Centric System](https://suign.github.io/UserCentricSystem.html): resolution begins at identity, not at a platform.
+- [Centralize the Self, Distribute the Data](https://suign.github.io/CentralizeTheSelf.html): one root for identity, free topology for data.
+- [me.whatever(what)](https://suign.github.io/MeWhateverWhat.html): the syntax of `.me`, formally — SVO path calls, the real operator table, selector syntax.
 
 ## Digital Space Algebra
 
 - [Digital Space Algebra — index](https://suign.github.io/DigitalSpaceAlgebra.html): curated index of the mathematical structure behind .me.
 - [The Mathematical Structure of a Space in .me](https://suign.github.io/SpaceStructure.html): formal definition of positions, containment order, and observer/mode/authority-indexed resolution. Source-verified against the kernel.
 - [The Algebra of Encrypted Audiences](https://suign.github.io/EncryptedAudiences.html): replication as topology, readability as cryptography — the `_` and `~` operators. Source-verified against the kernel.
+- [Cryptographic Set-Chemistry on Audiences](https://suign.github.io/SetChemistry.html): audiences as sets under cryptographic operators.
+- [The Encrypted Island](https://suign.github.io/EncryptedIsland.html): privacy as derivation, not a custodian's promise.
+- [Inverted Dependency Indexing](https://suign.github.io/InvertedIndex.html): `refSubscribers`, eager/lazy recompute, O(k) invalidation. Verified against the kernel's dispatch code.
+- [What is O(k)?](https://suign.github.io/WhatIsOK.html): real benchmark numbers, including the ones that don't flatter the system.
 
 ## Structural Theorems
 
 - [The Meshia](https://suign.github.io/Meshia.html): the threshold of cumulative AI coordination.
 - [The Theorem of Non-Neutralized Energy](https://suign.github.io/NonNeutralizedEnergy.html): why directed effort compounds in some structures and dissipates in others.
+- [The Axiom of Distinction](https://suign.github.io/AxiomOfDistinction.html): distinction is the minimal condition for any possible system, formally — and where `.me`'s secret-scope mechanism instantiates it.
+- [The Ontology of Identity](https://suign.github.io/OntologyOfIdentity.html): the same axiom applied to identity — self-validation, cryptography as gravity, fractal recursion, computational sovereignty.
+- [The Semantic Graph Engine](https://suign.github.io/SemanticGraphEngine.html): schema as a node, not a table — resolution by path, not by lookup.
 
 ## Verification
 
@@ -28,6 +43,7 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 ## Byzantine & Trust
 
 - [byzantine-prompt](https://suign.github.io/byzantine-prompt.html): the Centralized Noise Axiom, essay form.
+- [Bizantine](https://suign.github.io/Bizantine.html): Byzantine prompt note.
 - [trust.me](https://suign.github.io/trust.me.html): trust protocol anchor.
 
 ## Recovery Anchors
