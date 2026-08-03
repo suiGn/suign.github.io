@@ -1,0 +1,365 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is Decentralized Identity?</title>
+<meta name="description" content="Decentralized identity means control over who you are doesn't depend on one party to issue, store, or revoke it. Most approaches solve who issued a claim; .me also solves who can read it — audience as a cryptographic property, not a policy layer.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/DecentralizedIdentity.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="What Is Decentralized Identity?">
+<meta property="og:description" content="Most decentralized identity models solve who issued a claim. .me also solves who can read it — audience as a cryptographic property, not a policy layer.">
+<meta property="og:url" content="https://suign.github.io/DecentralizedIdentity.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What Is Decentralized Identity?">
+<meta name="twitter:description" content="Most decentralized identity models solve who issued a claim. .me also solves who can read it.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "What Is Decentralized Identity?",
+  "url": "https://suign.github.io/DecentralizedIdentity.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "Decentralized identity means control over who you are doesn't depend on one party to issue, store, or revoke it. Most approaches solve who issued a claim; .me also solves who can read it."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.5rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+
+  .def {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: #66fcf1;
+    font-style: italic;
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.compare th { color: #66fcf1; font-weight: normal; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe decentralized-identity</div>
+  <h1>WHAT IS DECENTRALIZED IDENTITY?</h1>
+  <p>
+    Most answers to this stop at "who issued the claim." That's half the
+    problem.
+  </p>
+</header>
+
+<section id="definition">
+  <h2>Definition</h2>
+  <div class="def">
+    Decentralized identity is an approach where control over who you are —
+    what can be proven about you, and who is allowed to read it — does not
+    depend on a single party's willingness to issue, store, or revoke that
+    control.
+  </div>
+  <p>
+    In a centralized model, one party plays two roles at once: it stores your
+    identity data, and it decides who gets to read or verify it. Those two
+    roles being the same party is the actual thing "decentralized" is trying
+    to remove — not the data's physical location, the coupling between
+    storage and permission.
+  </p>
+</section>
+
+<section id="problem">
+  <h2>The Actual Problem</h2>
+  <p>
+    When the party holding your identity data is also the party that
+    controls readability, that party can revoke, alter, or quietly change
+    what's visible about you, and you have no independent way to check —
+    because checking would require going through the same party you're
+    trying to check. This isn't a hypothetical: platforms suspend accounts,
+    change verification policy, or shut down, and whatever "identity" you
+    had there goes with them.
+  </p>
+  <p class="dim">
+    Formally: topology (where the data runs) and audience (who can read it)
+    collapse into one controller — the same structural failure argued from
+    Byzantine fault tolerance in
+    <a href="./byzantine-prompt.html">The Byzantine Prompt</a>.
+  </p>
+</section>
+
+<section id="landscape">
+  <h2>The Common Approaches, Honestly</h2>
+  <p>
+    Most decentralized identity work — W3C Decentralized Identifiers (DIDs),
+    Verifiable Credentials, blockchain-anchored public keys, self-sovereign
+    identity wallets — solves a specific, real problem well:
+    <strong>who issued this claim, and can I verify their signature without
+    asking them again.</strong> That's a genuine, useful decentralization —
+    it removes a central issuer as a single point of failure for
+    verification.
+  </p>
+  <p>
+    What most of that same tooling leaves as a separate, bolted-on layer is
+    a different question: <strong>who can read the underlying data in the
+    first place.</strong> A signed credential is usually still stored
+    somewhere, readable by whoever has access to that storage, with access
+    control handled by a policy layer sitting beside the data — not by the
+    data's own structure.
+  </p>
+</section>
+
+<section id="me-model">
+  <h2>Where <code>.me</code> Adds to This</h2>
+  <p>
+    <code>.me</code> treats readability itself as the thing to decentralize,
+    not just issuance. Audience membership is declared as a structural,
+    cryptographic property of a path — using a single operator,
+    <code>_</code> — rather than a permission checked by a separate policy
+    layer:
+  </p>
+  <pre><code>me.identity["_"]("scope-key");
+me.identity.claim("verified-human");
+
+me("identity")        // undefined — root stays invisible
+me("identity.claim")  // readable only with the effective key</code></pre>
+  <p>
+    Topology — where the encrypted bytes physically live or replicate — and
+    audience — who can derive the key to read them — are independent
+    variables. Replicating the ciphertext to a new host, a backup, or
+    another device never expands who can read it. Formal treatment:
+    <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>;
+    the composable version across multiple identities:
+    <a href="./EncryptedIsland.html">Encrypted Semantic Island</a>.
+  </p>
+</section>
+
+<section id="compare">
+  <h2>Two Different Questions</h2>
+  <table class="compare">
+    <tr><th></th><th>"Who issued this?"</th><th>"Who can read this?"</th></tr>
+    <tr><td>Typical DID / VC tooling</td><td>Solved — signature verification</td><td>Usually a separate access-control layer</td></tr>
+    <tr><td><code>.me</code></td><td>Not its focus</td><td>Solved — audience is structural, enforced by decryption itself</td></tr>
+  </table>
+  <p class="dim">
+    These are complementary, not competing — a system could use verifiable
+    credentials for issuance and <code>.me</code>'s audience model for
+    readability. The point isn't that one replaces the other; it's that
+    "decentralized identity" usually means only the first column, and the
+    second one matters just as much.
+  </p>
+</section>
+
+<section id="user-centric">
+  <h2>The User-Centric System</h2>
+  <p>
+    Decentralized identity, taken to its actual conclusion, isn't only
+    "the user owns their data." It's an inversion of which thing is the
+    center.
+  </p>
+  <pre><code>Platform-centric:  User → Platform → World
+.me-centric:       World → .me → Meaning</code></pre>
+  <p>
+    Today, almost every digital action starts with a verb aimed at a
+    platform: open Instagram, open Gmail, open GitHub. Each platform
+    defines, unilaterally, what exists inside it, how it relates, and what
+    it means. The user enters as a visitor inside someone else's universe,
+    every time.
+  </p>
+  <p>
+    A user-centric system reverses the direction: identity — <code>.me</code>
+    — is the fixed center, and platforms become implementations that
+    connect <em>into</em> that center, not destinations the user travels to.
+    Instagram, GitHub, a chat log — each becomes a node related to the
+    user's own graph, not a separate universe the user has to re-enter and
+    re-orient inside of every time.
+  </p>
+  <div class="def">
+    Platforms build a world and invite users in. A user-centric system lets
+    each user build their own world, and lets platforms enter it.
+  </div>
+  <p class="dim">
+    Formal version of this statement, with the structural basis and the
+    honest boundary spelled out precisely:
+    <a href="./UserCentricSystem.html">The User-Centric System</a>.
+  </p>
+
+  <h3 style="color:#66fcf1;font-size:0.85rem;margin:24px 0 8px;">What's Actually Structural Here</h3>
+  <p>
+    This isn't only a metaphor — part of it is a direct consequence of how
+    <code>.me</code> paths work, already verified in
+    <a href="./InvertedIndex.html">Inverted Dependency Indexing</a>: the
+    kernel starts from <code>me.whatever.you.want("x")</code> — free-form
+    declaration, not a fixed schema owned by a platform. Combined with the
+    containment order established in
+    <a href="./SpaceStructure.html">SpaceStructure</a>
+    (<code>q ≤ p ⟺ q is a descendant of p</code>), a person's own graph —
+    family, work, music, the AI systems they talk to — is addressable by
+    meaning, not assigned by whichever app happens to hold the data:
+  </p>
+  <pre><code>me
+ ├─ family.photos
+ ├─ family.messages
+ ├─ work.neurons_me
+ ├─ work.github
+ ├─ music.playlists
+ └─ ai.claude</code></pre>
+  <p class="dim">
+    Each branch exists because it means something to the person who declared
+    it — not because a platform shipped a menu item for it.
+  </p>
+
+  <h3 style="color:#66fcf1;font-size:0.85rem;margin:24px 0 8px;">What's Vision, Not Yet Built</h3>
+  <p>
+    Being precise about the gap matters here as much as anywhere else on
+    this site: resolving a path like <code>me://self:read/family.photos</code>
+    across a mesh of surfaces is real, specified behavior — the
+    <a href="https://neurons-me.github.io/NRP/">Namespace Resolution
+    Protocol</a> does exactly that, hop by hop, without a central registry.
+    Turning a natural-language request like "show me what Ana posted" into
+    that resolved path is not something NRP or the kernel does today — that
+    layer is intent, not shipped mechanism. The honest claim is narrower:
+    the addressable, meaning-first graph a natural-language layer would sit
+    on top of is real and resolvable now; the natural-language layer itself
+    is the direction, not a current feature.
+  </p>
+
+  <h3 style="color:#66fcf1;font-size:0.85rem;margin:24px 0 8px;">Retention vs. Resolution</h3>
+  <p>
+    A platform-centric system optimizes one question: how do we keep this
+    person here longer. A user-centric system optimizes a different one:
+    what is this person actually trying to do. That's not a branding
+    difference — it changes what the incentive structure rewards. One
+    architecture is built to maximize time inside a boundary it controls;
+    the other is built to resolve a request and let the person move on.
+  </p>
+</section>
+
+<section id="further">
+  <h2>Go Deeper</h2>
+  <ul class="plain">
+    <li><a href="./manifesto.html">manifesto.html</a> — the argued case for separating topology from audience.</li>
+    <li><a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a> — the <code>_</code>/<code>~</code> mechanism, source-verified.</li>
+    <li><a href="./EncryptedIsland.html">Encrypted Semantic Island</a> — composable audience across multiple identities.</li>
+    <li><a href="./DigitalSpaceAlgebra.html">Digital Space Algebra</a> — the full formal index.</li>
+  </ul>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>

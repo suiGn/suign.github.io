@@ -48,17 +48,43 @@ const server = http.createServer((req, res) => {
   }
 
   const ext = path.extname(filePath);
-  let content = fs.readFileSync(filePath);
+  const mimeType = MIME[ext] || 'application/octet-stream';
 
   if (ext === '.html') {
-    let html = content.toString('utf8');
+    let html = fs.readFileSync(filePath, 'utf8');
     html = stripFrontMatter(html);
     html = resolveIncludes(html);
-    content = html;
+    res.writeHead(200, { 'Content-Type': mimeType });
+    res.end(html);
+    return;
   }
 
-  res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
-  res.end(content);
+  // Range request support (required by <video>/<audio> elements in real browsers)
+  const stat = fs.statSync(filePath);
+  const range = req.headers.range;
+
+  if (range) {
+    const match = /bytes=(\d*)-(\d*)/.exec(range);
+    const start = match[1] ? parseInt(match[1], 10) : 0;
+    const end = match[2] ? parseInt(match[2], 10) : stat.size - 1;
+    const chunkSize = end - start + 1;
+
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${stat.size}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunkSize,
+      'Content-Type': mimeType,
+    });
+    fs.createReadStream(filePath, { start, end }).pipe(res);
+    return;
+  }
+
+  res.writeHead(200, {
+    'Content-Type': mimeType,
+    'Accept-Ranges': 'bytes',
+    'Content-Length': stat.size,
+  });
+  fs.createReadStream(filePath).pipe(res);
 });
 
 server.listen(PORT, () => console.log(`suign.github.io dev server (Jekyll includes resolved) on http://localhost:${PORT}`));

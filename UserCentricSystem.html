@@ -1,0 +1,247 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The User-Centric System</title>
+<meta name="description" content="A formal statement of resolution-centric identity: platforms as nodes resolved into a user's own graph, not destinations the user enters. Structural basis in free-form paths, containment order, and NRP — with an explicit boundary on what's vision, not shipped.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/UserCentricSystem.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="The User-Centric System">
+<meta property="og:description" content="Resolution-centric identity, formally: platforms as nodes resolved into a user's own graph, not destinations the user enters.">
+<meta property="og:url" content="https://suign.github.io/UserCentricSystem.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The User-Centric System">
+<meta name="twitter:description" content="Platforms as nodes resolved into a user's own graph, not destinations the user enters.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/9565222?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "The User-Centric System",
+  "url": "https://suign.github.io/UserCentricSystem.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "A formal statement of resolution-centric identity: platforms as nodes resolved into a user's own graph, not destinations the user enters. Structural basis in free-form paths, containment order, and NRP."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #66fcf1;
+    --accent-dim: #45f3ff;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(102, 252, 241, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(102, 252, 241, 0.35); }
+  a:hover { color: #66fcf1; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #66fcf1;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #66fcf1;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #66fcf1; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #66fcf1;
+  }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+  table.compare th { color: #66fcf1; font-weight: normal; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(102, 252, 241, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --describe user-centric</div>
+  <h1>THE USER-CENTRIC SYSTEM</h1>
+  <p>Resolution begins at identity. Platforms are nodes, not destinations.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    A user-centric system inverts the point resolution starts from. Not
+    <code>user → platform → world</code>, where each platform unilaterally
+    defines what exists and what it means. Instead
+    <code>world → .me → meaning</code>, where identity is the fixed root and
+    platforms are nodes resolved <em>into</em> it.
+  </div>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <pre><code>Platform-centric:  resolve(request) = platform.scope(request)
+.me-centric:       resolve(request) = me.graph(request)</code></pre>
+  <p class="dim">
+    In the platform-centric case, <code>platform.scope</code> bounds what
+    the request can even mean — the platform is the containing context. In
+    the <code>.me</code>-centric case, the graph is the containing context;
+    a platform is a reachable node inside it, not the boundary around it.
+  </p>
+</section>
+
+<section id="structural-basis">
+  <h2>Structural Basis</h2>
+  <p>What makes this a structural claim, not only a preference, is already verified:</p>
+  <ul class="plain">
+    <li><strong>Free-form declaration</strong> — <code>me.whatever.you.want("x")</code>. No fixed schema owned by a platform; a person's graph shape is not assigned in advance. See <a href="./InvertedIndex.html">Inverted Dependency Indexing</a>.</li>
+    <li><strong>Containment order</strong> — <code>q ≤ p ⟺ q is a descendant of p</code>. Meaning is addressed by position in a personal graph, not by which app's database row holds it. See <a href="./SpaceStructure.html">SpaceStructure</a>.</li>
+    <li><strong>Hop-by-hop resolution</strong> — a <code>me://</code> URI resolves across a mesh of surfaces without a central registry, per the <a href="https://neurons-me.github.io/NRP/">Namespace Resolution Protocol</a>.</li>
+  </ul>
+</section>
+
+<section id="graph">
+  <h2>The Graph, Not the Menu</h2>
+  <pre><code>me
+ ├─ family.photos
+ ├─ family.messages
+ ├─ work.neurons_me
+ ├─ work.github
+ ├─ music.playlists
+ └─ ai.claude</code></pre>
+  <p class="dim">
+    Each branch is addressable because it was declared, not because a
+    platform shipped a menu item for it. A platform integrating with this
+    graph occupies a node; it does not define the graph's shape.
+  </p>
+</section>
+
+<section id="compare">
+  <h2>Two Architectures</h2>
+  <table class="compare">
+    <tr><th></th><th>Platform-centric</th><th>.me-centric</th></tr>
+    <tr><td>Containing context</td><td>the platform</td><td>the user's graph</td></tr>
+    <tr><td>Addressing</td><td>assigned by the app</td><td>declared by the user, free-form</td></tr>
+    <tr><td>Optimized for</td><td>retention — time inside a boundary</td><td>resolution — completing a request</td></tr>
+    <tr><td>What a platform is</td><td>a destination</td><td>a reachable node</td></tr>
+  </table>
+</section>
+
+<section id="scope">
+  <h2>Scope — What's Not Yet Resolved</h2>
+  <div class="note open">
+    NRP resolves an already-formed <code>me://</code> URI across a mesh —
+    that part is real, specified, hop-by-hop. Turning a natural-language
+    request ("show me what Ana posted") into that resolved URI is not
+    something NRP or the kernel does today; no natural-language resolution
+    layer is shipped. The addressable, meaning-first graph such a layer
+    would sit on top of is real now. The layer itself is direction, not a
+    current mechanism — stated plainly rather than implied.
+  </div>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  <p class="dim">
+    Accessible companion piece: <a href="./DecentralizedIdentity.html">What Is
+    Decentralized Identity?</a>
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
