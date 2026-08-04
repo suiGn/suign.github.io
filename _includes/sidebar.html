@@ -76,7 +76,7 @@
     font-size: 13.5px;
     border-left: 3px solid transparent;
     border-bottom: none;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   }
   .sidebar a:hover {
     background: rgba(59, 158, 234, 0.08);
@@ -89,6 +89,15 @@
     font-size: 11.5px;
     margin-top: 2px;
   }
+
+  /* Current-page marker */
+  .sidebar a.current {
+    background: rgba(102, 252, 241, 0.09);
+    border-left-color: var(--accent, #3b9eea);
+    color: #fff;
+    box-shadow: inset 0 0 16px rgba(102, 252, 241, 0.10);
+  }
+  .sidebar a.current .desc { color: var(--accent-dim, #3b9eea); }
 
   .sidebar-toolbar {
     display: flex;
@@ -145,6 +154,18 @@
   .nav-group.collapsed ul.group-list {
     max-height: 0;
     padding: 0;
+  }
+
+  /* Desktop docked mode: sidebar open pushes content instead of overlaying it.
+     !important is deliberate — this must win over each page's own inline
+     body { padding: ... } without needing to edit 30 separate stylesheets. */
+  body.sidebar-push {
+    padding-left: 320px !important;
+    transition: padding-left 0.28s ease;
+  }
+  @media (max-width: 720px) {
+    /* Mobile always overlays, never pushes — no room to push into. */
+    body.sidebar-push { padding-left: 20px !important; }
   }
 </style>
 
@@ -236,13 +257,26 @@
 </nav>
 
 <script>
+  function isMobileSidebar() {
+    return window.matchMedia('(max-width: 720px)').matches;
+  }
+  function isIndexPage() {
+    var p = window.location.pathname;
+    return p === '/' || p === '' || /\/index\.html$/.test(p);
+  }
+
   function openSidebar() {
     document.getElementById('sidebar').classList.add('open');
-    document.getElementById('sidebarOverlay').classList.add('open');
+    if (isMobileSidebar()) {
+      document.getElementById('sidebarOverlay').classList.add('open');
+    } else {
+      document.body.classList.add('sidebar-push');
+    }
   }
   function closeSidebar() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('open');
+    document.body.classList.remove('sidebar-push');
   }
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeSidebar();
@@ -263,4 +297,38 @@
       g.classList.toggle('collapsed', collapsed);
     });
   }
+
+  // Mark the current page in the sidebar and make sure its group is visible.
+  (function markCurrentPage() {
+    var current = window.location.pathname.split('/').filter(Boolean).pop() || 'index.html';
+    document.querySelectorAll('.sidebar a[href]').forEach(function (a) {
+      var href = a.getAttribute('href').replace(/^\.\//, '');
+      if (href === current) {
+        a.classList.add('current');
+        var group = a.closest('.nav-group');
+        if (group) group.classList.remove('collapsed');
+      }
+    });
+  })();
+
+  // Default state: expanded + docked on desktop for every page except
+  // index.html, collapsed everywhere on mobile. Set instantly, without
+  // animating the reveal transition, so it doesn't look like it's sliding
+  // open on every fresh load.
+  (function setDefaultSidebarState() {
+    if (isIndexPage() || isMobileSidebar()) return;
+    var sidebar = document.getElementById('sidebar');
+    sidebar.style.transition = 'none';
+    openSidebar();
+    void sidebar.offsetHeight; // force reflow before restoring transition
+    sidebar.style.transition = '';
+  })();
+
+  // If the window is resized across the mobile breakpoint while the
+  // sidebar is docked open, drop the push so nothing overlaps.
+  window.addEventListener('resize', function () {
+    if (isMobileSidebar() && document.body.classList.contains('sidebar-push')) {
+      document.body.classList.remove('sidebar-push');
+    }
+  });
 </script>
