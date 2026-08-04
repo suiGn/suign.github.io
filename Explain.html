@@ -247,7 +247,11 @@
     When an input crosses a <a href="./EncryptedAudiences.html">secret-scoped</a>
     path, the same honesty applies to the value itself: it is masked
     (<code>"●●●●"</code>, <code>origin: "stealth"</code>), not silently exposed
-    or silently omitted from the trace.
+    or silently omitted from the trace — exactly as run in
+    <a href="https://neurons-me.github.io/.me/docs/Smart-Cities.html">Smart
+    Cities</a>, where <code>explain("security.alertLevel")</code> discloses
+    the full derivation of a stealth-scoped path without exposing
+    <code>incidentsToday</code> itself.
   </p>
 </section>
 

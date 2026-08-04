@@ -243,6 +243,16 @@ me("identity.claim")  // readable only with the effective key</code></pre>
     the composable version across multiple identities:
     <a href="./EncryptedIsland.html">Encrypted Semantic Island</a>.
   </p>
+  <p class="dim">
+    Not a toy example — <a href="https://neurons-me.github.io/.me/docs/Smart-Cities.html">Smart
+    Cities</a> runs it: a city security branch declared
+    <code>_</code>-scoped, an internal rule that still evaluates
+    (<code>incidentsToday > 2</code>), and a public caller reading the exact
+    same path — <code>me.as(null)("security.alertLevel")</code> — back as
+    <code>undefined</code>. Identity issuance and readability stay separate
+    the entire time; no policy layer decided that at read time, the
+    structure did.
+  </p>
 </section>
 
 <section id="compare">

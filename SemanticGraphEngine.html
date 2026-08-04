@@ -201,6 +201,16 @@ groups.dev_team       // resolved by walking the same tree</code></pre>
   <p class="dim">
     Full formalization: <a href="./SpaceStructure.html">SpaceStructure</a>.
   </p>
+  <p class="dim">
+    Run at multi-agent scale in
+    <a href="https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html">Robots
+    That Understand Context</a>: one object, <code>objects.canister7</code>,
+    resolved differently by four robots pointing at it from four different
+    context branches (<code>robots.loader.context["->"]("contexts.warehouse")</code>,
+    <code>robots.surgeon.context["->"]("contexts.operatingRoom")</code>, and so
+    on). There is one canister with four interpretations, not four canisters —
+    the same traversal mechanism, not four copies of the data.
+  </p>
 </section>
 
 <section id="inference">
@@ -211,6 +221,14 @@ groups.dev_team       // resolved by walking the same tree</code></pre>
     its own scope with <code>wallet</code>'s, not from a rule engine, but
     because the derivation walks ancestor prefixes directly. Source:
     <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>.
+    Run as a working system in
+    <a href="https://neurons-me.github.io/.me/docs/Smart-Cities.html">Smart
+    Cities</a>: <code>me.security["_"]("city-security-ops-2026")</code> turns
+    the whole branch into a stealth root; the derived rule
+    <code>alertLevel = incidentsToday > 2</code> still evaluates internally,
+    while <code>me.as(null)("security.alertLevel")</code> returns
+    <code>undefined</code> to a public observer — inheritance and audience
+    enforced by structure, not by a permissions table checked at read time.
   </p>
   <p class="dim">
     <strong>Broader framing, stated honestly:</strong> "a member inside a

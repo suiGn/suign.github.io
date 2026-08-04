@@ -259,6 +259,18 @@ me("fleet.trucks[x => x.fuel * 0.5]")                          // transform</cod
     mechanism formalized as <code>R*(p[φ], o)</code> in
     <a href="./SpaceStructure.html">SpaceStructure</a>.
   </p>
+  <p class="dim">
+    Run at two different extremes in the published docs:
+    <a href="https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html">Robots
+    That Understand Context</a> uses <code>me.robots["[i]"]["="](...)</code>
+    to write one rule across four heterogeneous agents at once; the
+    <a href="https://neurons-me.github.io/.me/docs/Extreme-Fan-Out.html">Extreme
+    Fan-Out</a> benchmark uses the same pattern across 100,000 dependents from
+    a single write — <code>me.explain("dep[100000].out")</code> returns the
+    full <code>recomputed</code> list, <code>k: 100000</code>, and the exact
+    upstream <code>sourcePath</code>. Same operator, four agents or a hundred
+    thousand.
+  </p>
 </section>
 
 <section id="why-svo">
