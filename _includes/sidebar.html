@@ -19,8 +19,12 @@
     user-select: none;
     font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
   }
-  /* Push existing in-flow "back home" nav below the fixed breadcrumb pill */
-  .topnav { margin-top: 56px; }
+  /* Push existing in-flow "back home" nav below the fixed breadcrumb pill —
+     only needed when the pill is actually floating over content. Once the
+     sidebar is docked open, content starts to the right of it, so the
+     extra clearance is just dead space. */
+  .topnav { margin-top: 56px; transition: margin-top 0.2s ease; }
+  body.sidebar-push .topnav { margin-top: 0; }
 
   .breadcrumb:hover { border-color: var(--accent, #3b9eea); }
   .breadcrumb .bars { font-size: 15px; line-height: 1; color: var(--accent, #3b9eea); }
