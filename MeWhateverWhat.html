@@ -207,6 +207,14 @@ console.log(me("friends[age > 18].name"));      // → { ana: "Ana" }</code></pr
     the direct result or a filtered family. No separate query language —
     the same <code>me(...)</code> call does both.
   </p>
+  <p class="dim">
+    That one broadcast line is the entire subject of
+    <a href="https://neurons-me.github.io/.me/docs/One-Line-That-Replaces-Five.html">One
+    Line That Replaces Five</a>: the same <code>is_adult = age > 18</code>
+    assignment set against the five places a conventional stack would need
+    to state it separately — migration, in-memory derivation, query,
+    trigger, and validation hook — and desync eventually, by hand.
+  </p>
 </section>
 
 <section id="language-agnostic">
