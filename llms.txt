@@ -8,6 +8,7 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 
 - [whois.me](https://suign.github.io/sui-Gn.html): root semantic anchor — identity, affiliations, machine-readable JSON-LD graph.
 - [Connecting Dots](https://suign.github.io/ConnectingDots.html): a structure that cannot transmit itself does not prevail — reachability as structure, and a plain, disclosed request to connect it further.
+- [The Equations](https://suign.github.io/Equations.html): every original formula authored across this site, collected in one glossary — with imported results (Byzantine bound, Shannon capacity) clearly separated, not claimed.
 - [manifesto](https://suign.github.io/manifesto.html): the argued case for .me — separating topology from audience.
 
 ## Understanding .me

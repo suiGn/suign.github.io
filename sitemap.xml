@@ -23,6 +23,13 @@
   </url>
 
   <url>
+    <loc>https://suign.github.io/Equations.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://suign.github.io/manifesto.html</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
