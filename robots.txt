@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://suign.github.io/sitemap.xml
