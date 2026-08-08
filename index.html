@@ -133,6 +133,27 @@
       background-color: #555;
     }
 
+    /* Overlay color + opacity, top-right — one circle, drag directly on it.
+       No modal, no separate slider: left/right drag shifts hue, up/down
+       drag shifts opacity, in a single gesture. */
+    .overlay-swatch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.15);
+      cursor: grab;
+      z-index: 10;
+      touch-action: none;
+      user-select: none;
+    }
+    .overlay-swatch:active {
+      cursor: grabbing;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.35);
+    }
+
     /* Container for bottom-right icons */
     .icon-container {
       position: fixed;
@@ -288,6 +309,10 @@
   <!-- Overlay -->
   <div class="overlay"></div>
 
+  <!-- Overlay color + opacity: drag directly on this circle
+       (left/right = hue, up/down = opacity) -->
+  <div class="overlay-swatch" id="overlaySwatch" title="Drag: ↔ color · ↕ opacity"></div>
+
   <!-- Centered Modal -->
   <div class="modal">
     <img src="https://suign.github.io/assets/imgs/smileyFace.png" alt="SuiGn Avatar">
@@ -347,6 +372,90 @@
     function closeReadme() {
       document.getElementById('readmeModal').style.display = 'none';
     }
+
+    // Overlay color + opacity — one circle, one drag gesture, no modal.
+    // Left/right shifts hue, up/down shifts opacity; saturation/lightness
+    // stay fixed at the default color's own values. Default is always
+    // rgb(115 173 156 / 89%) — a saved drag position (if any) overrides
+    // where you land, but never what the default itself is.
+    (function () {
+      var DEFAULT_RGB = [115, 173, 156];
+      var DEFAULT_OPACITY = 89;
+      var STORAGE_KEY = 'suign-overlay-hsl';
+      var HUE_PER_PX = 1;       // degrees per px dragged horizontally
+      var OPACITY_PER_PX = 0.6; // percent per px dragged vertically
+
+      var overlay = document.querySelector('.overlay');
+      var swatch = document.getElementById('overlaySwatch');
+
+      function rgbToHsl(r, g, b) {
+        r /= 255; g /= 255; b /= 255;
+        var max = Math.max(r, g, b), min = Math.min(r, g, b);
+        var h, s, l = (max + min) / 2;
+        if (max === min) {
+          h = s = 0;
+        } else {
+          var d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+          else if (max === g) h = (b - r) / d + 2;
+          else h = (r - g) / d + 4;
+          h *= 60;
+        }
+        return [h, s * 100, l * 100];
+      }
+
+      var defaultHsl = rgbToHsl(DEFAULT_RGB[0], DEFAULT_RGB[1], DEFAULT_RGB[2]);
+
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) { /* ignore */ }
+
+      var state = {
+        h: (saved && typeof saved.h === 'number') ? saved.h : defaultHsl[0],
+        s: defaultHsl[1],
+        l: defaultHsl[2],
+        a: (saved && typeof saved.a === 'number') ? saved.a : DEFAULT_OPACITY,
+      };
+
+      function apply() {
+        var hs = state.h.toFixed(1) + ' ' + state.s.toFixed(1) + '% ' + state.l.toFixed(1) + '%';
+        overlay.style.background = 'hsl(' + hs + ' / ' + state.a + '%)';
+        // Swatch stays fully opaque so its hue reads clearly at any opacity setting.
+        swatch.style.backgroundColor = 'hsl(' + hs + ')';
+      }
+
+      apply();
+
+      var dragging = false;
+      var startX = 0, startY = 0, startHue = 0, startOpacity = 0;
+
+      swatch.addEventListener('pointerdown', function (e) {
+        dragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        startHue = state.h;
+        startOpacity = state.a;
+        swatch.setPointerCapture(e.pointerId);
+      });
+
+      swatch.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var dx = e.clientX - startX;
+        var dy = e.clientY - startY;
+        state.h = ((startHue + dx * HUE_PER_PX) % 360 + 360) % 360;
+        state.a = Math.max(0, Math.min(100, startOpacity - dy * OPACITY_PER_PX));
+        apply();
+      });
+
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ h: state.h, a: state.a })); } catch (err) { /* ignore */ }
+      }
+
+      swatch.addEventListener('pointerup', endDrag);
+      swatch.addEventListener('pointercancel', endDrag);
+    })();
   </script>
 </body>
 </html>
