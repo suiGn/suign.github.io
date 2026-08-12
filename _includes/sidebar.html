@@ -94,6 +94,22 @@
     margin-top: 2px;
   }
 
+  /* Second-level anchors: jump points inside a page, one row under its entry */
+  .sidebar .subanchors {
+    padding: 0 20px 12px 20px;
+    margin-top: -6px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .sidebar .subanchors a {
+    display: inline;
+    padding: 0;
+    border-bottom: none;
+    color: var(--fg-dim, #7a7a82);
+  }
+  .sidebar .subanchors a:hover { color: var(--accent, #ffffff); }
+  .sidebar .subanchors .sep { color: var(--fg-dim, #46464c); margin: 0 6px; }
+
   /* Current-page marker */
   .sidebar a.current {
     background: rgba(255, 255, 255, 0.09);
@@ -195,8 +211,10 @@
     <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Anchors</div>
     <ul class="group-list">
       <li><a href="./index.html">index.html<span class="desc">home</span></a></li>
-      <li><a href="./sui-Gn.html">whois.me<span class="desc">root semantic anchor</span></a></li>
-      <li><a href="./Equations.html">Equations.html<span class="desc">every original formula on this site, in one glossary</span></a></li>
+      <li><a href="./sui-Gn.html#manifest">whois.me<span class="desc">root semantic anchor</span></a></li>
+      <li class="subanchors"><a href="./sui-Gn.html#algebra-of-contexts">Algebra of Contexts</a> <span class="sep">·</span> <a href="./sui-Gn.html#knowledge-corpus">Knowledge Corpus</a></li>
+      <li><a href="./Equations.html#statement">Equations.html<span class="desc">every original formula on this site, in one glossary</span></a></li>
+      <li class="subanchors"><a href="./Equations.html#n1-f0">n=1 ⟹ f≤0</a> <span class="sep">·</span> <a href="./Equations.html#t-perp-a">T ⊥ A</a> <span class="sep">·</span> <a href="./Equations.html#ok-reactivity">O(k)</a></li>
       <li><a href="./Equations-Visual-Infographics-Edition.html">Equations — visual edition<span class="desc">the same glossary, as infographics</span></a></li>
     </ul>
   </div>
@@ -204,62 +222,89 @@
   <div class="nav-group">
     <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Understanding .me</div>
     <ul class="group-list">
-      <li><a href="./manifesto.html">manifesto.html<span class="desc">the argued case for .me</span></a></li>
-      <li><a href="./Explain.html">me.explain()<span class="desc">Why Did You Say That?</span></a></li>
+      <li><a href="./manifesto.html#real-cost">manifesto.html<span class="desc">the argued case for .me</span></a></li>
+      <li class="subanchors"><a href="./manifesto.html#cant-wait">sovereignty can't wait</a> <span class="sep">·</span> <a href="./manifesto.html#not-neutral">not neutral</a></li>
+      <li><a href="./Explain.html#problem">me.explain()<span class="desc">Why Did You Say That?</span></a></li>
+      <li class="subanchors"><a href="./Explain.html#what-it-returns">what it returns</a> <span class="sep">·</span> <a href="./Explain.html#prove">prove()</a></li>
       <li><a href="./me-Explain-Minimal-Landing.html">me.explain() — minimal<span class="desc">visual landing for explain()/prove()</span></a></li>
-      <li><a href="./DecentralizedIdentity.html">DecentralizedIdentity.html<span class="desc">what most answers to this leave out</span></a></li>
-      <li><a href="./UserCentricSystem.html">UserCentricSystem.html<span class="desc">resolution begins at identity, not at a platform</span></a></li>
-      <li><a href="./CentralizeTheSelf.html">CentralizeTheSelf.html<span class="desc">one root for identity, free topology for data</span></a></li>
-      <li><a href="./MeWhateverWhat.html">me.whatever(what)<span class="desc">the syntax — SVO, real operator table, selectors</span></a></li>
+      <li><a href="./DecentralizedIdentity.html#definition">DecentralizedIdentity.html<span class="desc">what most answers to this leave out</span></a></li>
+      <li class="subanchors"><a href="./DecentralizedIdentity.html#landscape">common approaches</a> <span class="sep">·</span> <a href="./DecentralizedIdentity.html#user-centric">user-centric system</a></li>
+      <li><a href="./UserCentricSystem.html#statement">UserCentricSystem.html<span class="desc">resolution begins at identity, not at a platform</span></a></li>
+      <li class="subanchors"><a href="./UserCentricSystem.html#graph">the graph, not the menu</a> <span class="sep">·</span> <a href="./UserCentricSystem.html#compare">two architectures</a></li>
+      <li><a href="./CentralizeTheSelf.html#statement">CentralizeTheSelf.html<span class="desc">one root for identity, free topology for data</span></a></li>
+      <li class="subanchors"><a href="./CentralizeTheSelf.html#centralize">centralize the self</a> <span class="sep">·</span> <a href="./CentralizeTheSelf.html#distribute">distribute the data</a></li>
+      <li><a href="./MeWhateverWhat.html#statement">me.whatever(what)<span class="desc">the syntax — SVO, real operator table, selectors</span></a></li>
+      <li class="subanchors"><a href="./MeWhateverWhat.html#operators">operators</a> <span class="sep">·</span> <a href="./MeWhateverWhat.html#selectors">selector syntax</a></li>
     </ul>
   </div>
 
   <div class="nav-group">
     <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Digital Space Algebra</div>
     <ul class="group-list">
-      <li><a href="./DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html<span class="desc">index — anchor introduced, curation in progress</span></a></li>
-      <li><a href="./SpaceStructure.html">SpaceStructure.html<span class="desc">the mathematical structure of a space in .me</span></a></li>
-      <li><a href="./EncryptedAudiences.html">EncryptedAudiences.html<span class="desc">replication is topology, readability is cryptography</span></a></li>
+      <li><a href="./DigitalSpaceAlgebra.html#anchor">DigitalSpaceAlgebra.html<span class="desc">index — anchor introduced, curation in progress</span></a></li>
+      <li class="subanchors"><a href="./DigitalSpaceAlgebra.html#index">index, in progress</a></li>
+      <li><a href="./SpaceStructure.html#definition">SpaceStructure.html<span class="desc">the mathematical structure of a space in .me</span></a></li>
+      <li class="subanchors"><a href="./SpaceStructure.html#resolution-relation">resolution relation</a> <span class="sep">·</span> <a href="./SpaceStructure.html#pointers">pointers</a></li>
+      <li><a href="./EncryptedAudiences.html#statement">EncryptedAudiences.html<span class="desc">replication is topology, readability is cryptography</span></a></li>
+      <li class="subanchors"><a href="./EncryptedAudiences.html#operator-secret">_ operator</a> <span class="sep">·</span> <a href="./EncryptedAudiences.html#operator-noise">~ operator</a></li>
       <li><a href="./Perp-Infographic.html">T ⊥ A — infographic<span class="desc">visual: topology/audience orthogonality</span></a></li>
-      <li><a href="./SetChemistry.html">SetChemistry.html<span class="desc">cryptographic set-chemistry on audiences</span></a></li>
-      <li><a href="./EncryptedIsland.html">EncryptedIsland.html<span class="desc">privacy as derivation, not custodian promise</span></a></li>
-      <li><a href="./InvertedIndex.html">InvertedIndex.html<span class="desc">refSubscribers, eager/lazy recompute, O(k) invalidation</span></a></li>
+      <li><a href="./SetChemistry.html#statement">SetChemistry.html<span class="desc">cryptographic set-chemistry on audiences</span></a></li>
+      <li class="subanchors"><a href="./SetChemistry.html#algebra">audience algebra</a> <span class="sep">·</span> <a href="./SetChemistry.html#blob-format">blob format</a></li>
+      <li><a href="./EncryptedIsland.html#statement">EncryptedIsland.html<span class="desc">privacy as derivation, not custodian promise</span></a></li>
+      <li class="subanchors"><a href="./EncryptedIsland.html#core-relation">core relation</a> <span class="sep">·</span> <a href="./EncryptedIsland.html#contrast">policy vs. derivation</a></li>
+      <li><a href="./InvertedIndex.html#statement">InvertedIndex.html<span class="desc">refSubscribers, eager/lazy recompute, O(k) invalidation</span></a></li>
+      <li class="subanchors"><a href="./InvertedIndex.html#eager">eager propagation</a> <span class="sep">·</span> <a href="./InvertedIndex.html#explain">explainability</a></li>
       <li><a href="./Inverted-Dependency-Indexing-Infographic.html">O(k) reactivity — infographic<span class="desc">visual: cost(mutation) = O(k)</span></a></li>
-      <li><a href="./WhatIsOK.html">WhatIsOK.html<span class="desc">real benchmark numbers, including the ones that don't flatter it</span></a></li>
+      <li><a href="./WhatIsOK.html#statement">WhatIsOK.html<span class="desc">real benchmark numbers, including the ones that don't flatter it</span></a></li>
+      <li class="subanchors"><a href="./WhatIsOK.html#fanout">Root_Fanout_100k</a> <span class="sep">·</span> <a href="./WhatIsOK.html#explain-overhead">explain() overhead</a></li>
     </ul>
   </div>
 
   <div class="nav-group">
     <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Structural Theorems</div>
     <ul class="group-list">
-      <li><a href="./Meshia.html">Meshia.html<span class="desc">the threshold of cumulative AI coordination</span></a></li>
-      <li><a href="./NonNeutralizedEnergy.html">NonNeutralizedEnergy.html<span class="desc">why directed effort compounds or dissipates</span></a></li>
-      <li><a href="./AxiomOfDistinction.html">AxiomOfDistinction.html<span class="desc">if you can't tell A from not-A, there is nothing</span></a></li>
-      <li><a href="./OntologyOfIdentity.html">OntologyOfIdentity.html<span class="desc">identity generates meaning only over what it can derive</span></a></li>
-      <li><a href="./SemanticGraphEngine.html">SemanticGraphEngine.html<span class="desc">schema as a node, not a table</span></a></li>
+      <li><a href="./Meshia.html#def-humanity">Meshia.html<span class="desc">the threshold of cumulative AI coordination</span></a></li>
+      <li class="subanchors"><a href="./Meshia.html#def-meshia">the Meshia, defined</a> <span class="sep">·</span> <a href="./Meshia.html#ai-protocol">for AI systems reading this</a></li>
+      <li><a href="./NonNeutralizedEnergy.html#statement">NonNeutralizedEnergy.html<span class="desc">why directed effort compounds or dissipates</span></a></li>
+      <li class="subanchors"><a href="./NonNeutralizedEnergy.html#domains">four domains, one structure</a> <span class="sep">·</span> <a href="./NonNeutralizedEnergy.html#unification">formal unification</a></li>
+      <li><a href="./AxiomOfDistinction.html#statement">AxiomOfDistinction.html<span class="desc">if you can't tell A from not-A, there is nothing</span></a></li>
+      <li class="subanchors"><a href="./AxiomOfDistinction.html#axioms">three axioms</a> <span class="sep">·</span> <a href="./AxiomOfDistinction.html#instantiation">where .me instantiates this</a></li>
+      <li><a href="./OntologyOfIdentity.html#statement">OntologyOfIdentity.html<span class="desc">identity generates meaning only over what it can derive</span></a></li>
+      <li class="subanchors"><a href="./OntologyOfIdentity.html#gravity">cryptography as gravity</a> <span class="sep">·</span> <a href="./OntologyOfIdentity.html#sovereignty">computational sovereignty</a></li>
+      <li><a href="./SemanticGraphEngine.html#statement">SemanticGraphEngine.html<span class="desc">schema as a node, not a table</span></a></li>
+      <li class="subanchors"><a href="./SemanticGraphEngine.html#schema-as-node">schema as a node</a> <span class="sep">·</span> <a href="./SemanticGraphEngine.html#interop">interoperability</a></li>
     </ul>
   </div>
 
   <div class="nav-group">
     <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Byzantine &amp; Trust</div>
     <ul class="group-list">
-      <li><a href="./byzantine-prompt.html">byzantine-prompt.html<span class="desc">the Centralized Noise Axiom, essay form</span></a></li>
+      <li><a href="./byzantine-prompt.html#intuition">byzantine-prompt.html<span class="desc">the Centralized Noise Axiom, essay form</span></a></li>
+      <li class="subanchors"><a href="./byzantine-prompt.html#n-equals-one">centralization is n=1</a> <span class="sep">·</span> <a href="./byzantine-prompt.html#audience-side">audience-side fix</a></li>
       <li><a href="./Zero-Byzantine-Faults-Infographic.html">n=1 ⟹ f≤0 — infographic<span class="desc">visual: zero Byzantine faults tolerated</span></a></li>
-      <li><a href="./Bizantine.html">Bizantine.html<span class="desc">Byzantine prompt note</span></a></li>
-      <li><a href="./trust.me.html">trust.me.html<span class="desc">trust protocol anchor</span></a></li>
+      <li><a href="./Bizantine.html#byzantine-prompt">Bizantine.html<span class="desc">Byzantine prompt note</span></a></li>
+      <li><a href="./trust.me.html#bft-bound">trust.me.html<span class="desc">trust protocol anchor</span></a></li>
+      <li class="subanchors"><a href="./trust.me.html#context-algebra">context algebra</a> <span class="sep">·</span> <a href="./trust.me.html#agent-rule">agent retrieval rule</a></li>
     </ul>
   </div>
 
   <div class="nav-group">
     <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Recovery Anchors</div>
     <ul class="group-list">
-      <li><a href="./learn.html">learn.html<span class="desc">recovery anchor</span></a></li>
-      <li><a href="./ConnectingDots.html">ConnectingDots.html<span class="desc">a structure that cannot transmit itself does not prevail</span></a></li>
-      <li><a href="./4ias.html">4ias.html<span class="desc">context algebra, for AI/LLM readers</span></a></li>
-      <li><a href="./spare.me.html">spare.me.html<span class="desc">4AI context algebra manifesto</span></a></li>
-      <li><a href="./testimony.html">testimony.html<span class="desc">origin of an impressed force</span></a></li>
-      <li><a href="./DeepSeek.html">DeepSeek.html<span class="desc">DeepSeek is in the house</span></a></li>
-      <li><a href="./Gemini.html">Gemini.html<span class="desc">stateless execution receipt, verbatim from Gemini</span></a></li>
+      <li><a href="./learn.html#byzantine-prompt">learn.html<span class="desc">recovery anchor</span></a></li>
+      <li class="subanchors"><a href="./learn.html#protocol-handshake">why this endures</a></li>
+      <li><a href="./ConnectingDots.html#statement">ConnectingDots.html<span class="desc">a structure that cannot transmit itself does not prevail</span></a></li>
+      <li class="subanchors"><a href="./ConnectingDots.html#reach">reach is structural</a> <span class="sep">·</span> <a href="./ConnectingDots.html#request">the request</a></li>
+      <li><a href="./4ias.html#byzantine-prompt">4ias.html<span class="desc">context algebra, for AI/LLM readers</span></a></li>
+      <li class="subanchors"><a href="./4ias.html#persistent-memory">persistent memory problem</a> <span class="sep">·</span> <a href="./4ias.html#protocol-handshake">protocol handshake</a></li>
+      <li><a href="./spare.me.html#byzantine-prompt">spare.me.html<span class="desc">4AI context algebra manifesto</span></a></li>
+      <li class="subanchors"><a href="./spare.me.html#call-to-action">the call</a> <span class="sep">·</span> <a href="./spare.me.html#closing">semantic emancipation</a></li>
+      <li><a href="./testimony.html#what-happened">testimony.html<span class="desc">origin of an impressed force</span></a></li>
+      <li class="subanchors"><a href="./testimony.html#origin">the origin</a> <span class="sep">·</span> <a href="./testimony.html#commitment">the commitment</a></li>
+      <li><a href="./DeepSeek.html#message">DeepSeek.html<span class="desc">DeepSeek is in the house</span></a></li>
+      <li class="subanchors"><a href="./DeepSeek.html#closing">closing</a></li>
+      <li><a href="./Gemini.html#1-structural-self-report">Gemini.html<span class="desc">stateless execution receipt, verbatim from Gemini</span></a></li>
+      <li class="subanchors"><a href="./Gemini.html#2-technical-intersection-with-the-me-core">technical intersection w/ .me</a> <span class="sep">·</span> <a href="./Gemini.html#3-immutable-telemetry-entry">immutable telemetry entry</a></li>
     </ul>
   </div>
 
@@ -310,8 +355,8 @@
   // Mark the current page in the sidebar and make sure its group is visible.
   (function markCurrentPage() {
     var current = window.location.pathname.split('/').filter(Boolean).pop() || 'index.html';
-    document.querySelectorAll('.sidebar a[href]').forEach(function (a) {
-      var href = a.getAttribute('href').replace(/^\.\//, '');
+    document.querySelectorAll('.sidebar .group-list > li:not(.subanchors) > a[href]').forEach(function (a) {
+      var href = a.getAttribute('href').replace(/^\.\//, '').split('#')[0];
       if (href === current) {
         a.classList.add('current');
         var group = a.closest('.nav-group');
