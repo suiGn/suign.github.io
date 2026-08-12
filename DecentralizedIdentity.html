@@ -181,7 +181,7 @@
 </section>
 
 <section id="problem">
-  <h2>The Actual Problem</h2>
+  <h2 id="the-actual-problem">The Actual Problem</h2>
   <p>
     When the party holding your identity data is also the party that
     controls readability, that party can revoke, alter, or quietly change
@@ -200,7 +200,7 @@
 </section>
 
 <section id="landscape">
-  <h2>The Common Approaches, Honestly</h2>
+  <h2 id="the-common-approaches-honestly">The Common Approaches, Honestly</h2>
   <p>
     Most decentralized identity work — W3C Decentralized Identifiers (DIDs),
     Verifiable Credentials, blockchain-anchored public keys, self-sovereign
@@ -221,7 +221,7 @@
 </section>
 
 <section id="me-model">
-  <h2>Where <code>.me</code> Adds to This</h2>
+  <h2 id="where-me-adds-to-this">Where <code>.me</code> Adds to This</h2>
   <p>
     <code>.me</code> treats readability itself as the thing to decentralize,
     not just issuance. Audience membership is declared as a structural,
@@ -256,7 +256,7 @@ me("identity.claim")  // readable only with the effective key</code></pre>
 </section>
 
 <section id="compare">
-  <h2>Two Different Questions</h2>
+  <h2 id="two-different-questions">Two Different Questions</h2>
   <table class="compare">
     <tr><th></th><th>"Who issued this?"</th><th>"Who can read this?"</th></tr>
     <tr><td>Typical DID / VC tooling</td><td>Solved — signature verification</td><td>Usually a separate access-control layer</td></tr>
@@ -272,7 +272,7 @@ me("identity.claim")  // readable only with the effective key</code></pre>
 </section>
 
 <section id="user-centric">
-  <h2>The User-Centric System</h2>
+  <h2 id="the-user-centric-system">The User-Centric System</h2>
   <p>
     Decentralized identity, taken to its actual conclusion, isn't only
     "the user owns their data." It's an inversion of which thing is the
@@ -357,12 +357,24 @@ me("identity.claim")  // readable only with the effective key</code></pre>
 </section>
 
 <section id="further">
-  <h2>Go Deeper</h2>
+  <h2 id="go-deeper">Go Deeper</h2>
   <ul class="plain">
     <li><a href="./manifesto.html">manifesto.html</a> — the argued case for separating topology from audience.</li>
     <li><a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a> — the <code>_</code>/<code>~</code> mechanism, source-verified.</li>
     <li><a href="./EncryptedIsland.html">Encrypted Semantic Island</a> — composable audience across multiple identities.</li>
     <li><a href="./DigitalSpaceAlgebra.html">Digital Space Algebra</a> — the full formal index.</li>
+  </ul>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Understanding .me</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./manifesto.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">manifesto.html</a> <span style="color:#8a8a92;">— the argued case for .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./Explain.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.explain()</a> <span style="color:#8a8a92;">— why an AI's self-report isn't evidence</span></li>
+    <li style="margin-bottom:6px;"><a href="./me-Explain-Minimal-Landing.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.explain() — minimal</a> <span style="color:#8a8a92;">— visual landing for explain()/prove()</span></li>
+    <li style="margin-bottom:6px;"><a href="./UserCentricSystem.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">UserCentricSystem.html</a> <span style="color:#8a8a92;">— resolution begins at identity, not a platform</span></li>
+    <li style="margin-bottom:6px;"><a href="./CentralizeTheSelf.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">CentralizeTheSelf.html</a> <span style="color:#8a8a92;">— one root for identity, free topology for data</span></li>
+    <li style="margin-bottom:6px;"><a href="./MeWhateverWhat.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.whatever(what)</a> <span style="color:#8a8a92;">— the syntax — SVO, operators, selectors</span></li>
   </ul>
 </section>
 

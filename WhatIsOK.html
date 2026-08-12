@@ -180,7 +180,7 @@ cost(mutation) = O(k)</code></pre>
 </section>
 
 <section id="fanout">
-  <h2>Benchmark: Root_Fanout_100k</h2>
+  <h2 id="benchmark-root-fanout-100k">Benchmark: Root_Fanout_100k</h2>
   <p class="dim"><code>n</code> = 100,000 dependents, all subscribed to one root.</p>
   <table class="bench">
     <tr><th>phase</th><th>measured</th></tr>
@@ -197,7 +197,7 @@ cost(mutation) = O(k)</code></pre>
 </section>
 
 <section id="hemisphere">
-  <h2>Benchmark: Hemisphere_1M</h2>
+  <h2 id="benchmark-hemisphere-1m">Benchmark: Hemisphere_1M</h2>
   <p class="dim"><code>n</code> = 1,000,000 nodes.</p>
   <table class="bench">
     <tr><th>phase</th><th>measured</th></tr>
@@ -214,8 +214,8 @@ cost(mutation) = O(k)</code></pre>
 </section>
 
 <section id="explain-overhead">
-  <h2>Benchmark: explain() Overhead</h2>
-  <p class="dim">3,000 nodes, 300 iterations — whole-loop latency, not per-node.</p>
+  <h2 id="benchmark-explain-overhead">Benchmark: explain() Overhead</h2>
+  <p class="dim">3,000 nodes, 300 iterations — whole-loop latency, not per-node. What <code>explain()</code> actually returns: <a href="./Explain.html#what-explain-actually-returns">me.explain()</a>.</p>
   <table class="bench">
     <tr><th>mode</th><th>p95</th></tr>
     <tr><td>baseline</td><td class="num">0.0154 ms</td></tr>
@@ -231,7 +231,7 @@ cost(mutation) = O(k)</code></pre>
 </section>
 
 <section id="refactor">
-  <h2>Historical: Array → Set</h2>
+  <h2 id="historical-array-set">Historical: Array → Set</h2>
   <p>
     Subscriber tracking and recompute-wave tracking were both refactored from
     linear-scan array patterns to <code>Set</code>-backed structures —
@@ -250,6 +250,21 @@ set.add(value);</code></pre>
     <code>O(k)</code> traversal — removing a second, avoidable cost layered on
     the first.
   </p>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Digital Space Algebra</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./DigitalSpaceAlgebra.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DigitalSpaceAlgebra.html</a> <span style="color:#8a8a92;">— index of the mathematical structure behind .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./SpaceStructure.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SpaceStructure.html</a> <span style="color:#8a8a92;">— the mathematical structure of a space in .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedAudiences.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedAudiences.html</a> <span style="color:#8a8a92;">— replication is topology, readability is cryptography</span></li>
+    <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="./SetChemistry.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SetChemistry.html</a> <span style="color:#8a8a92;">— cryptographic set-chemistry on audiences</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedIsland.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedIsland.html</a> <span style="color:#8a8a92;">— privacy as derivation, not custodian promise</span></li>
+    <li style="margin-bottom:6px;"><a href="./InvertedIndex.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">InvertedIndex.html</a> <span style="color:#8a8a92;">— refSubscribers, eager/lazy recompute, O(k) invalidation</span></li>
+    <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
+    <li style="margin-bottom:6px;"><a href="./Equations.html#ok-reactivity" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">cost(mutation) = O(k)</a> <span style="color:#8a8a92;">— the formula, in the glossary</span></li>
+  </ul>
 </section>
 
 <footer>

@@ -190,7 +190,7 @@ value(p) = v</code></pre>
 </section>
 
 <section id="base-structure">
-  <h2>The Base Structure: Positions and Containment</h2>
+  <h2 id="the-base-structure-positions-and-containment">The Base Structure: Positions and Containment</h2>
   <p>
     <code>docs/me/Algebra-of-Contexts.md</code> states containment directly:
     <code>profile.contact.email ⊆ profile.contact ⊆ profile</code>. Written as an
@@ -241,7 +241,7 @@ Let P = PrefixClosure(P_declared).</code></pre>
 </section>
 
 <section id="resolution-relation">
-  <h2>The Resolution Relation</h2>
+  <h2 id="the-resolution-relation">The Resolution Relation</h2>
   <pre><code>R : P × Γ ⇀ M</code></pre>
   <p>
     where <code>M</code>, the space of manifestations, is a tagged union of
@@ -270,7 +270,7 @@ Let P = PrefixClosure(P_declared).</code></pre>
 </section>
 
 <section id="addressability">
-  <h2>Addressability and Discoverability</h2>
+  <h2 id="addressability-and-discoverability">Addressability and Discoverability</h2>
   <p>Axiom A0 in <code>tests/axioms.test.ts</code> states the behavior directly:</p>
   <pre><code>me.wallet["_"]("secret");
 me.wallet.income(100);
@@ -300,7 +300,7 @@ console.log(me("wallet.income")); // 100</code></pre>
 </section>
 
 <section id="pointers">
-  <h2>Pointers: The Root/Suffix Asymmetry</h2>
+  <h2 id="pointers-the-rootsuffix-asymmetry">Pointers: The Root/Suffix Asymmetry</h2>
   <p>
     A pointer at <code>p</code> targeting <code>q</code> behaves asymmetrically. At
     the empty suffix, resolution stops at the pointer and returns it as data:
@@ -332,7 +332,7 @@ console.log(me("wallet.income")); // 100</code></pre>
 </section>
 
 <section id="multiplicity">
-  <h2>Multiplicity and Locality</h2>
+  <h2 id="multiplicity-and-locality">Multiplicity and Locality</h2>
   <p><code>[·]</code> produces an indexed family, not a bare list — the index survives resolution:</p>
   <pre><code>me("shops[menu.isPremium == true].name")
 // { 2: "Riverside", 3: "Station" }
@@ -356,7 +356,7 @@ where I_φ = { i ∈ children(p) | φ(p.i, o) holds }</code></pre>
 </section>
 
 <section id="two-structures">
-  <h2>Two Structures, Not One</h2>
+  <h2 id="two-structures-not-one">Two Structures, Not One</h2>
   <p>
     What a space <em>is</em> and what the <code>.me</code> kernel <em>adds</em> to
     it are two different structures, kept separate rather than folded into one
@@ -386,7 +386,7 @@ where I_φ = { i ∈ children(p) | φ(p.i, o) holds }</code></pre>
 </section>
 
 <section id="scope">
-  <h2>Scope of This Claim</h2>
+  <h2 id="scope-of-this-claim">Scope of This Claim</h2>
   <p>
     Not a modal semantics — that word carries a specific technical commitment: a
     formula language, modal operators, an accessibility relation between contexts,
@@ -408,6 +408,20 @@ where I_φ = { i ∈ children(p) | φ(p.i, o) holds }</code></pre>
     describes a space. It is the structure in which meaning takes shape at the
     moment it is resolved.
   </p>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Digital Space Algebra</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./DigitalSpaceAlgebra.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DigitalSpaceAlgebra.html</a> <span style="color:#8a8a92;">— index of the mathematical structure behind .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedAudiences.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedAudiences.html</a> <span style="color:#8a8a92;">— replication is topology, readability is cryptography</span></li>
+    <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="./SetChemistry.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SetChemistry.html</a> <span style="color:#8a8a92;">— cryptographic set-chemistry on audiences</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedIsland.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedIsland.html</a> <span style="color:#8a8a92;">— privacy as derivation, not custodian promise</span></li>
+    <li style="margin-bottom:6px;"><a href="./InvertedIndex.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">InvertedIndex.html</a> <span style="color:#8a8a92;">— refSubscribers, eager/lazy recompute, O(k) invalidation</span></li>
+    <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
+    <li style="margin-bottom:6px;"><a href="./WhatIsOK.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">WhatIsOK.html</a> <span style="color:#8a8a92;">— real benchmark numbers</span></li>
+  </ul>
 </section>
 
 <footer>

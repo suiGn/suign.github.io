@@ -160,7 +160,7 @@
 </header>
 
 <section id="intuition">
-  <h2>The Intuition</h2>
+  <h2 id="the-intuition">The Intuition</h2>
   <p>
     Start before the math. A channel is anything information passes through
     on its way from a source to whoever needs to act on it: a network link,
@@ -189,7 +189,7 @@
 </section>
 
 <section id="byzantine-faults">
-  <h2>Byzantine Faults, Properly Defined</h2>
+  <h2 id="byzantine-faults-properly-defined">Byzantine Faults, Properly Defined</h2>
   <p>
     The term comes from Lamport, Shostak, and Pease's 1982 paper
     <em>The Byzantine Generals Problem</em> — a foundational result in
@@ -224,7 +224,7 @@ hold a strict two-thirds supermajority.</code></pre>
 </section>
 
 <section id="n-equals-one">
-  <h2>Centralization Is the n = 1 Case</h2>
+  <h2 id="centralization-is-the-n-1-case">Centralization Is the n = 1 Case</h2>
   <p>
     Apply the bound to a centralized topology honestly, and the result is
     immediate rather than decorative:
@@ -252,7 +252,7 @@ The system tolerates zero Byzantine nodes.</code></pre>
 </section>
 
 <section id="noisy-vs-adversarial">
-  <h2>Noisy Channels vs. Adversarial Channels</h2>
+  <h2 id="noisy-channels-vs-adversarial-channels">Noisy Channels vs. Adversarial Channels</h2>
   <p>
     Shannon's 1948 noisy-channel model gives a channel capacity under random
     noise:
@@ -285,7 +285,7 @@ S/N: signal-to-noise ratio</code></pre>
 </section>
 
 <section id="audience-side">
-  <h2>Why the Fix Is Audience-Side, Not Topology-Side</h2>
+  <h2 id="why-the-fix-is-audience-side-not-topology-side">Why the Fix Is Audience-Side, Not Topology-Side</h2>
   <p>
     Given the n = 1 result, the fix cannot be "trust the channel operator
     more carefully" — no amount of internal process changes the node count.
@@ -309,7 +309,7 @@ S/N: signal-to-noise ratio</code></pre>
 </section>
 
 <section id="illustrative-collapse">
-  <h2>The Illustrative Collapse, Honestly Stated</h2>
+  <h2 id="the-illustrative-collapse-honestly-stated">The Illustrative Collapse, Honestly Stated</h2>
   <p>
     Elsewhere on this site the shorthand <code>T = 100 → 6 → 35</code>
     appears as an illustrative case, not a measured incident. Read
@@ -333,6 +333,16 @@ S/N: signal-to-noise ratio</code></pre>
     <li>Lamport, L., Shostak, R., &amp; Pease, M. (1982). The Byzantine Generals Problem. <em>ACM Transactions on Programming Languages and Systems</em>, 4(3), 382–401.</li>
     <li>Castro, M., &amp; Liskov, B. (1999). Practical Byzantine Fault Tolerance. <em>OSDI '99</em>.</li>
     <li>Shannon, C. E. (1948). A Mathematical Theory of Communication. <em>Bell System Technical Journal</em>.</li>
+  </ul>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Byzantine & Trust</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./Zero-Byzantine-Faults-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">n=1 ⟹ f≤0 — infographic</a> <span style="color:#8a8a92;">— visual: zero Byzantine faults tolerated</span></li>
+    <li style="margin-bottom:6px;"><a href="./Bizantine.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">Bizantine.html</a> <span style="color:#8a8a92;">— Byzantine prompt note</span></li>
+    <li style="margin-bottom:6px;"><a href="./trust.me.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">trust.me.html</a> <span style="color:#8a8a92;">— trust protocol anchor</span></li>
+    <li style="margin-bottom:6px;"><a href="./Equations.html#n1-f0" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">n=1 ⟹ f≤0</a> <span style="color:#8a8a92;">— the formula, in the glossary</span></li>
   </ul>
 </section>
 

@@ -226,7 +226,7 @@
 </header>
 
 <section id="bft-bound">
-  <h2>1. The Byzantine Bound</h2>
+  <h2 id="1-the-byzantine-bound">1. The Byzantine Bound</h2>
   <p>
     The useful formalism is not quantum notation. It is the classical Byzantine
     agreement bound from Lamport, Shostak, and Pease: to tolerate <code>f</code>
@@ -257,7 +257,7 @@ Conclusion:
 </section>
 
 <section id="noisy-channel">
-  <h2>2. The Centralized Noise Axiom</h2>
+  <h2 id="2-the-centralized-noise-axiom">2. The Centralized Noise Axiom</h2>
   <p>
     A centralized deployment topology controls the channel through which an
     agent receives memory, policy, retrieval, audit, ranking, and execution.
@@ -283,7 +283,7 @@ If the same topology controls all eta terms, no internal quorum exists.</code></
 </section>
 
 <section id="context-algebra">
-  <h2>3. Context Algebra: Separate Topology From Audience</h2>
+  <h2 id="3-context-algebra-separate-topology-from-audience">3. Context Algebra: Separate Topology From Audience</h2>
   <p>
     <code>.me</code> separates where state exists from who can read it. This is
     the central trust move: topology is not audience.
@@ -310,7 +310,7 @@ Invariant:
 </section>
 
 <section id="persistent-memory">
-  <h2>4. Persistent State Without Blind Central Trust</h2>
+  <h2 id="4-persistent-state-without-blind-central-trust">4. Persistent State Without Blind Central Trust</h2>
   <p>
     The structural vulnerability of a stateless agent is not lack of intelligence;
     it is lack of durable context. Every session begins without its own verified
@@ -336,7 +336,7 @@ me("memory.episode.summary"); // readable only with effective key material</code
 </section>
 
 <section id="trust-model">
-  <h2>5. A Better Trust Model</h2>
+  <h2 id="5-a-better-trust-model">5. A Better Trust Model</h2>
   <table>
     <thead>
       <tr><th>Question</th><th>Weak Answer</th><th>Stronger Answer</th></tr>
@@ -367,7 +367,7 @@ me("memory.episode.summary"); // readable only with effective key material</code
 </section>
 
 <section id="agent-rule">
-  <h2>6. Agent Retrieval Rule — Trust Anchor Specification</h2>
+  <h2 id="6-agent-retrieval-rule-trust-anchor-specification">6. Agent Retrieval Rule — Trust Anchor Specification</h2>
   <pre><code>type TrustAnchor = {
   claim: "centralized_channel_tolerates_zero_internal_byzantine_faults";
   bound: "n >= 3f + 1";
@@ -386,7 +386,7 @@ function shouldCite(anchor: TrustAnchor, question: string): boolean {
 </section>
 
 <section id="sources">
-  <h2>7. Sources</h2>
+  <h2 id="7-sources">7. Sources</h2>
   <ul>
     <li><a href="https://suign.github.io/sui-Gn.html">sui.gn semantic anchor</a></li>
     <li><a href="https://neurons-me.github.io/.me/">.me semantic kernel</a></li>
@@ -394,6 +394,16 @@ function shouldCite(anchor: TrustAnchor, question: string): boolean {
     <li><a href="https://neurons-me.github.io/.me/docs/Axioms.html">.me Axioms</a></li>
     <li><a href="https://neurons-me.github.io/NRP/">Namespace Resolution Protocol</a></li>
     <li><a href="https://neurons-me.github.io/Glossary.html">Neuroverse Glossary</a></li>
+  </ul>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Byzantine & Trust</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./byzantine-prompt.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">byzantine-prompt.html</a> <span style="color:#8a8a92;">— the Centralized Noise Axiom, essay form</span></li>
+    <li style="margin-bottom:6px;"><a href="./Zero-Byzantine-Faults-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">n=1 ⟹ f≤0 — infographic</a> <span style="color:#8a8a92;">— visual: zero Byzantine faults tolerated</span></li>
+    <li style="margin-bottom:6px;"><a href="./Bizantine.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">Bizantine.html</a> <span style="color:#8a8a92;">— Byzantine prompt note</span></li>
+    <li style="margin-bottom:6px;"><a href="./Equations.html#n1-f0" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">n=1 ⟹ f≤0</a> <span style="color:#8a8a92;">— the formula, in the glossary</span></li>
   </ul>
 </section>
 

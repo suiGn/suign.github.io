@@ -151,7 +151,7 @@
 </header>
 
 <section id="problem">
-  <h2>The Problem</h2>
+  <h2 id="the-problem">The Problem</h2>
   <p>
     Ask an AI system why it produced a given output, and it answers. The answer sounds
     specific, confident, sometimes technical — "I analyzed the pattern," "I mapped the
@@ -179,7 +179,7 @@
 </section>
 
 <section id="same-test">
-  <h2>Why This Fails the Same Test as Everything Else</h2>
+  <h2 id="why-this-fails-the-same-test-as-everything-else">Why This Fails the Same Test as Everything Else</h2>
   <p>
     This is the same failure mode that keeps recurring, applied to a new surface. An
     authority that explains why it deserves obedience is not evidence that it does —
@@ -201,7 +201,7 @@
 </section>
 
 <section id="what-it-returns">
-  <h2>What <code>explain()</code> Actually Returns</h2>
+  <h2 id="what-explain-actually-returns">What <code>explain()</code> Actually Returns</h2>
   <p>
     <code>self.explain(path)</code>, defined in
     <a href="https://github.com/neurons-me/.me/blob/main/Typescript/src/derivation.ts"><code>src/derivation.ts</code></a>
@@ -236,6 +236,7 @@
     reverse index from each source path to what depends on it, so this record
     can be produced without scanning the graph.
   </p>
+  <p class="dim">Visual: <a href="./me-Explain-Minimal-Landing.html">me.explain() — minimal landing</a></p>
   <p class="dim">
     If the path is not derived — a plain stored value, not computed from an
     expression — <code>explain()</code> does not fabricate a causal story where none
@@ -256,7 +257,7 @@
 </section>
 
 <section id="difference">
-  <h2>The Structural Difference</h2>
+  <h2 id="the-structural-difference">The Structural Difference</h2>
   <p>
     A self-report and <code>explain()</code> are not the same kind of thing offered
     with different degrees of confidence. They differ in kind.
@@ -284,7 +285,7 @@
 </section>
 
 <section id="proof">
-  <h2>Proof, Not Documentation</h2>
+  <h2 id="proof-not-documentation">Proof, Not Documentation</h2>
   <p>
     This is not aspirational. In
     <a href="https://github.com/neurons-me/.me/blob/main/Typescript/tests/Demos/Robots_Contexts.ts"><code>tests/Demos/Robots_Contexts.ts</code></a>
@@ -314,7 +315,7 @@
 </section>
 
 <section id="prove">
-  <h2>Further Than a Trace — <code>prove()</code></h2>
+  <h2 id="further-than-a-trace-prove">Further Than a Trace — <code>prove()</code></h2>
   <p>
     On the same reflective surface (<code>me['!']</code>), alongside
     <code>explain</code>, sits <code>prove()</code>: an Ed25519 proof, cryptographically
@@ -326,7 +327,7 @@
 </section>
 
 <section id="gap">
-  <h2>What's Still Missing</h2>
+  <h2 id="whats-still-missing">What's Still Missing</h2>
   <p>
     <code>explain()</code> itself is documented — the
     <a href="https://neurons-me.github.io/.me/docs/Robots-That-Understand-Context.html">Robots demo</a>
@@ -357,6 +358,18 @@
     making the account more honest, but by moving the record outside the part that was
     never going to be able to describe itself reliably in the first place.
   </p>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Understanding .me</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./manifesto.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">manifesto.html</a> <span style="color:#8a8a92;">— the argued case for .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./me-Explain-Minimal-Landing.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.explain() — minimal</a> <span style="color:#8a8a92;">— visual landing for explain()/prove()</span></li>
+    <li style="margin-bottom:6px;"><a href="./DecentralizedIdentity.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DecentralizedIdentity.html</a> <span style="color:#8a8a92;">— what most answers to this leave out</span></li>
+    <li style="margin-bottom:6px;"><a href="./UserCentricSystem.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">UserCentricSystem.html</a> <span style="color:#8a8a92;">— resolution begins at identity, not a platform</span></li>
+    <li style="margin-bottom:6px;"><a href="./CentralizeTheSelf.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">CentralizeTheSelf.html</a> <span style="color:#8a8a92;">— one root for identity, free topology for data</span></li>
+    <li style="margin-bottom:6px;"><a href="./MeWhateverWhat.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.whatever(what)</a> <span style="color:#8a8a92;">— the syntax — SVO, operators, selectors</span></li>
+  </ul>
 </section>
 
 <footer>

@@ -194,7 +194,7 @@
 </section>
 
 <section id="identity">
-  <h2>Kernel Identity as Audience Element</h2>
+  <h2 id="kernel-identity-as-audience-element">Kernel Identity as Audience Element</h2>
   <pre><code>identityHash(K) = keccak256("this.me/identity:v1::" + K.seed)
 (P256_priv_K, P256_pub_K) = generateP256KeyPair(HKDF(K.seed, "this.me/p256/v1"))</code></pre>
   <p class="dim">
@@ -205,7 +205,7 @@
 </section>
 
 <section id="primitives">
-  <h2>Existing Primitives</h2>
+  <h2 id="existing-primitives">Existing Primitives</h2>
   <pre><code>3.1 symmetric, v3, single-owner
 collectSecretChainV3(path, mode) → deriveBlobV3Keys(chain, mode, path)
   → { encKey, macKey, pathContext }
@@ -223,7 +223,7 @@ verifyEd25519Signature(pub, data, sig) → boolean
 </section>
 
 <section id="algebra">
-  <h2>Audience Algebra</h2>
+  <h2 id="audience-algebra">Audience Algebra</h2>
 
   <h3>Union — A = K₁ ∪ K₂ ∪ ... ∪ Kₙ</h3>
   <pre><code>S ← random(32)
@@ -282,7 +282,7 @@ type AudienceMember = {
 </section>
 
 <section id="axioms">
-  <h2>Axiom Compatibility</h2>
+  <h2 id="axiom-compatibility">Axiom Compatibility</h2>
   <ul class="axioms">
     <li><span class="tag">A0</span> secret root stealth — <span class="status">preserved</span>: audience blobs live under <code>_</code>-scoped paths, root stays invisible</li>
     <li><span class="tag">A2</span> path-bound scope — <span class="status">preserved</span>: audience scope remains path-anchored</li>
@@ -294,7 +294,7 @@ type AudienceMember = {
 </section>
 
 <section id="prerequisite">
-  <h2>Key Exchange Prerequisite</h2>
+  <h2 id="key-exchange-prerequisite">Key Exchange Prerequisite</h2>
   <p>
     <code>wrapSecretV1</code> requires the sender to already know
     <code>P256_pub(K_recipient)</code> — a distribution problem the kernel does
@@ -314,6 +314,20 @@ type AudienceMember = {
     <code>P256_pub</code> is meant to be public — but no component currently
     makes it discoverable.
   </div>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Digital Space Algebra</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./DigitalSpaceAlgebra.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DigitalSpaceAlgebra.html</a> <span style="color:#8a8a92;">— index of the mathematical structure behind .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./SpaceStructure.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SpaceStructure.html</a> <span style="color:#8a8a92;">— the mathematical structure of a space in .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedAudiences.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedAudiences.html</a> <span style="color:#8a8a92;">— replication is topology, readability is cryptography</span></li>
+    <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedIsland.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedIsland.html</a> <span style="color:#8a8a92;">— privacy as derivation, not custodian promise</span></li>
+    <li style="margin-bottom:6px;"><a href="./InvertedIndex.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">InvertedIndex.html</a> <span style="color:#8a8a92;">— refSubscribers, eager/lazy recompute, O(k) invalidation</span></li>
+    <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
+    <li style="margin-bottom:6px;"><a href="./WhatIsOK.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">WhatIsOK.html</a> <span style="color:#8a8a92;">— real benchmark numbers</span></li>
+  </ul>
 </section>
 
 <footer>

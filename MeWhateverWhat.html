@@ -255,7 +255,7 @@ me.店舗.商品[1]["="]("合計", "価格 * 1.16");</code></pre>
 </section>
 
 <section id="selectors">
-  <h2>Selector Syntax</h2>
+  <h2 id="selector-syntax">Selector Syntax</h2>
   <pre><code>me.fleet.trucks[2].km()                                    // fixed index
 me.fleet["trucks[i]"]["="]("cost", "fuel * price_per_liter") // broadcast
 me("fleet.trucks[fuel >= 200].fuel")                         // logical filter
@@ -282,11 +282,23 @@ me("fleet.trucks[x => x.fuel * 0.5]")                          // transform</cod
 </section>
 
 <section id="why-svo">
-  <h2>Why This Shape</h2>
+  <h2 id="why-this-shape">Why This Shape</h2>
   <ul class="plain">
     <li><strong>Semantic clarity</strong> — the call reads as a sentence, which is what makes it auditable rather than merely executable.</li>
     <li><strong>State encapsulation</strong> — everything hangs off <code>me</code>; there is no external object separate from the subject invoking it.</li>
     <li><strong>Deterministic logic</strong> — a result depends strictly on current state and input, not on hidden global state, making calls repeatable.</li>
+  </ul>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Understanding .me</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./manifesto.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">manifesto.html</a> <span style="color:#8a8a92;">— the argued case for .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./Explain.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.explain()</a> <span style="color:#8a8a92;">— why an AI's self-report isn't evidence</span></li>
+    <li style="margin-bottom:6px;"><a href="./me-Explain-Minimal-Landing.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.explain() — minimal</a> <span style="color:#8a8a92;">— visual landing for explain()/prove()</span></li>
+    <li style="margin-bottom:6px;"><a href="./DecentralizedIdentity.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DecentralizedIdentity.html</a> <span style="color:#8a8a92;">— what most answers to this leave out</span></li>
+    <li style="margin-bottom:6px;"><a href="./UserCentricSystem.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">UserCentricSystem.html</a> <span style="color:#8a8a92;">— resolution begins at identity, not a platform</span></li>
+    <li style="margin-bottom:6px;"><a href="./CentralizeTheSelf.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">CentralizeTheSelf.html</a> <span style="color:#8a8a92;">— one root for identity, free topology for data</span></li>
   </ul>
 </section>
 

@@ -192,7 +192,7 @@
 </section>
 
 <section id="operator-secret">
-  <h2>Operator: <code>_</code> — Declare Scope</h2>
+  <h2 id="operator-declare-scope">Operator: <code>_</code> — Declare Scope</h2>
   <pre><code>me.wallet["_"]("secret");
 me.wallet.income(100);
 
@@ -213,7 +213,7 @@ me("wallet.income") // 100 — inside a kernel holding "secret"</code></pre>
 </section>
 
 <section id="wrapping">
-  <h2>Sharing: Key Wrapping</h2>
+  <h2 id="sharing-key-wrapping">Sharing: Key Wrapping</h2>
   <pre><code>kex:  ECDH-ES
 kdf:  HKDF-SHA-256
 aead: AES-256-GCM</code></pre>
@@ -236,7 +236,7 @@ aead: AES-256-GCM</code></pre>
 </section>
 
 <section id="operator-noise">
-  <h2>Operator: <code>~</code> — Reset Derivation</h2>
+  <h2 id="operator-reset-derivation">Operator: <code>~</code> — Reset Derivation</h2>
   <pre><code>me.wallet["_"]("alpha");
 me.wallet.hidden.notes("alpha-note");
 
@@ -252,7 +252,7 @@ me.wallet.hidden.seed("beta-seed");
 </section>
 
 <section id="predicates">
-  <h2>Predicates as Set Statements</h2>
+  <h2 id="predicates-as-set-statements">Predicates as Set Statements</h2>
   <ul class="plain">
     <li>public — <code>A</code> unbounded (no encryption)</li>
     <li>private — <code>A = {self}</code></li>
@@ -273,7 +273,7 @@ tamper(ciphertext) ⟹ decrypt_failure, not corrupted_read</code></pre>
 </section>
 
 <section id="scope-note">
-  <h2>Notation and Scope</h2>
+  <h2 id="notation-and-scope">Notation and Scope</h2>
   <div class="note open">
     This page uses <code>C</code> for capability, matching "Algebra de
     Audiencias Cifradas" (Apr 2026), the anchor piece, and "Algebra of
@@ -287,6 +287,20 @@ tamper(ciphertext) ⟹ decrypt_failure, not corrupted_read</code></pre>
     direction, not current architecture. Everything above is source-verified
     against the running code.
   </p>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Digital Space Algebra</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./DigitalSpaceAlgebra.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DigitalSpaceAlgebra.html</a> <span style="color:#8a8a92;">— index of the mathematical structure behind .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./SpaceStructure.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SpaceStructure.html</a> <span style="color:#8a8a92;">— the mathematical structure of a space in .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="./SetChemistry.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SetChemistry.html</a> <span style="color:#8a8a92;">— cryptographic set-chemistry on audiences</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedIsland.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedIsland.html</a> <span style="color:#8a8a92;">— privacy as derivation, not custodian promise</span></li>
+    <li style="margin-bottom:6px;"><a href="./InvertedIndex.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">InvertedIndex.html</a> <span style="color:#8a8a92;">— refSubscribers, eager/lazy recompute, O(k) invalidation</span></li>
+    <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
+    <li style="margin-bottom:6px;"><a href="./WhatIsOK.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">WhatIsOK.html</a> <span style="color:#8a8a92;">— real benchmark numbers</span></li>
+  </ul>
 </section>
 
 <footer>

@@ -10,19 +10,16 @@
 <meta name="description" content="Every original formula and notation authored across this site, collected in one glossary: context algebra, the space structure formalism, cryptographic audience algebra, O(k) reactive computation, and the structural theorems — with the imported results (Byzantine bound, Shannon capacity) clearly separated, not claimed.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://suign.github.io/Equations.html">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="sui.gn">
 <meta property="og:title" content="The Equations">
 <meta property="og:description" content="Every original formula authored across this site, collected in one glossary — with imported results clearly separated, not claimed.">
 <meta property="og:url" content="https://suign.github.io/Equations.html">
 <meta property="og:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
-
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Equations">
 <meta name="twitter:description" content="Every original formula authored across this site, collected in one glossary.">
 <meta name="twitter:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +30,6 @@
   "description": "Every original formula and notation authored across this site, collected in one glossary — context algebra, the space structure formalism, cryptographic audience algebra, O(k) reactive computation, and the structural theorems. Imported results are listed separately and credited to their source."
 }
 </script>
-
 <style>
   :root {
     --bg: #0b0c10;
@@ -168,17 +164,14 @@
 </head>
 <body>
 {% include sidebar.html %}
-
 <nav class="topnav">
   <a href="./index.html" class="back-link">← back home</a>
 </nav>
-
 <header class="banner">
   <div class="prompt">$ grep -r "=" --formal ./suign.github.io</div>
   <h1>THE EQUATIONS</h1>
   <p>Every original formula authored across this site, in one place — plus the few imported results this work builds on, clearly credited, not claimed.</p>
 </header>
-
 <section id="statement">
   <div class="note">
     This is a glossary, not an essay: notation, one-line meaning, and a link back
@@ -186,8 +179,8 @@
     time — every entry already exists, sourced, on the page it links to. This page
     only collects them.
   </div>
+  <p class="dim">Visual: <a href="./Equations-Visual-Infographics-Edition.html">the whole glossary, as infographics</a></p>
 </section>
-
 <div class="toc">
   <a href="#context-algebra">Context Algebra</a><span class="sep">·</span>
   <a href="#space-structure">Space Structure</a><span class="sep">·</span>
@@ -198,46 +191,39 @@
   <a href="#imported">Imported Results</a><span class="sep">·</span>
   <a href="#notes">Notes</a>
 </div>
-
 <section id="context-algebra">
   <h2>Context Algebra</h2>
-
   <div class="entry">
     <pre><code>C = (T, A)</code></pre>
     <p class="meaning">A context is the pair of topology (where it runs) and audience (who can read it). The root split everything else on this site is built from.</p>
     <p class="source">Source: <a href="./sui-Gn.html">whois.me</a></p>
   </div>
-
   <div class="entry">
     <pre><code>meaning(node) = f(A), never f(T)</code></pre>
     <p class="meaning">Meaning is a function of who's allowed to read, never of where the bytes physically sit. Moving data never changes what it means.</p>
     <p class="source">Source: <a href="./sui-Gn.html">whois.me</a></p>
   </div>
-
   <div class="entry">
     <pre><code>T = topology, A = audience, C = capability, P = path</code></pre>
     <p class="meaning">The four independent axes a context resolves against — where, who, what's permitted, and where meaning is addressed.</p>
     <p class="source">Source: <a href="./trust.me.html">trust.me</a></p>
   </div>
-
   <div class="entry">
     <pre><code>replicate(T) ↛ change(A)</code></pre>
     <p class="meaning">Copying ciphertext to a new host, backup, or device never expands who can read it. Replication and readability are independent operations.</p>
     <p class="source">Source: <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a>, <a href="./CentralizeTheSelf.html">Centralize the Self, Distribute the Data</a></p>
   </div>
-
-  <div class="entry">
+  <div class="entry" id="t-perp-a">
     <pre><code>T ⊥ A</code></pre>
     <p class="meaning">Topology and audience are orthogonal — a compact way of stating the replication invariant above as a structural relation, not just a rule.</p>
     <p class="source">Source: <a href="./EncryptedIsland.html">The Encrypted Island</a></p>
+    <p class="source">Visual: <a href="./Perp-Infographic.html">T ⊥ A — infographic</a></p>
   </div>
-
   <div class="entry">
     <pre><code>I = (path, ciphertext, T, A, C)</code></pre>
     <p class="meaning">The full identity of one encrypted island: where it's addressed, what it contains, where it runs, who can read it, what's permitted on it.</p>
     <p class="source">Source: <a href="./EncryptedIsland.html">The Encrypted Island</a>, echoed in <a href="./DigitalSpaceAlgebra.html">Digital Space Algebra</a></p>
   </div>
-
   <div class="entry">
     <pre><code>private   → A = {self}
 shared    → |A| > 1
@@ -246,7 +232,6 @@ replicated → |T| > 1</code></pre>
     <p class="meaning">Four everyday words about data, restated as constraints on the same two variables — nothing about them requires new machinery beyond T and A.</p>
     <p class="source">Source: <a href="./DigitalSpaceAlgebra.html">Digital Space Algebra</a></p>
   </div>
-
   <div class="entry">
     <pre><code>readable(state) = decrypt(state, A)
 location(state) = replicate(state, T)
@@ -255,34 +240,28 @@ G' = G - noise(T_control, incentive, audit_gap, memory_loss)</code></pre>
     <p class="source">Source: <a href="./4ias.html">4ias</a></p>
   </div>
 </section>
-
 <section id="space-structure">
   <h2>The Space Structure Formalism</h2>
-
   <div class="entry">
     <pre><code>q ≤ p  ⟺  q is a descendant of p</code></pre>
     <p class="meaning">The containment order every path in <code>.me</code> resolves under — position in the tree, not a foreign key, decides what's reachable from where.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a>, <a href="./SemanticGraphEngine.html">The Semantic Graph Engine</a></p>
   </div>
-
   <div class="entry">
     <pre><code>Γ = (o, m, a)</code></pre>
     <p class="meaning">The resolution context: observer, mode, and authority — the three things a read depends on besides the path itself.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
   </div>
-
   <div class="entry">
     <pre><code>R : P × Γ ⇀ M</code></pre>
     <p class="meaning">Resolution is a partial function from (path, context) pairs to manifestations — partial, because not every path resolves under every context.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
   </div>
-
   <div class="entry">
     <pre><code>M = Value + Pointer + Family + Children + History + {⊥}</code></pre>
     <p class="meaning">Everything a resolved path can manifest as — including <code>⊥</code>, structural absence, as a first-class outcome rather than an error.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
   </div>
-
   <div class="entry">
     <pre><code>manifest(p | o, m, a) = x
 — not —
@@ -290,7 +269,6 @@ value(p) = v</code></pre>
     <p class="meaning">A path doesn't have one fixed value — what it manifests as depends on who's asking, under what mode, with what authority. The rejected right-hand form is the assumption this whole formalism replaces.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a>, <a href="./OntologyOfIdentity.html">The Ontology of Identity</a></p>
   </div>
-
   <div class="entry">
     <pre><code>R(p, o, direct) = Pointer(q)
 R(p.s, o, traverse) = R(q.s, o, direct),  for s ≠ ε
@@ -298,20 +276,17 @@ R(p.s, o, traverse) = R(q.s, o, direct),  for s ≠ ε
     <p class="meaning">How a pointer resolves through composition: a suffix under a pointer resolves the same way as that suffix under the pointer's target — chains compose instead of needing to be special-cased.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
   </div>
-
   <div class="entry">
     <pre><code>R*(p[φ], o) = ( i ↦ R(p.i, o, direct) )  for i ∈ I_φ
 where I_φ = { i ∈ children(p) | φ(p.i, o) holds }</code></pre>
     <p class="meaning">A bracket selector turns one position into an indexed family — every child satisfying a filter, resolved together.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a>, used throughout <a href="./MeWhateverWhat.html">me.whatever(what)</a></p>
   </div>
-
   <div class="entry">
     <pre><code>T(Δp) = O(|Reach_D(p)| + C_eval)</code></pre>
     <p class="meaning">The cost of a mutation at path <code>p</code> is bounded by how many dependents it actually reaches, plus evaluation cost — not by the size of the whole space.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
   </div>
-
   <div class="entry">
     <pre><code>S = (P, ≤, Γ, M, R)
 K = (S, π, Σ, H, D)</code></pre>
@@ -319,37 +294,31 @@ K = (S, π, Σ, H, D)</code></pre>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
   </div>
 </section>
-
 <section id="audience-algebra">
   <h2>Cryptographic Audience Algebra</h2>
-
   <div class="entry">
     <pre><code>identityHash(K) = keccak256("this.me/identity:v1::" + K.seed)</code></pre>
     <p class="meaning">One deterministic function from a kernel's seed to its public fingerprint — identity as computation, not as an issued credential.</p>
     <p class="source">Source: <a href="./CentralizeTheSelf.html">Centralize the Self, Distribute the Data</a>, <a href="./SetChemistry.html">Cryptographic Set-Chemistry on Audiences</a></p>
   </div>
-
   <div class="entry">
     <pre><code>wallet.hidden ⊆ wallet
 ⟹ A(wallet.hidden) satisfies A(wallet), not conversely</code></pre>
     <p class="meaning">Nested secret scopes inherit their nearest ancestor's audience by default — the derivation walks ancestor prefixes, not a rule engine.</p>
     <p class="source">Source: <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a></p>
   </div>
-
   <div class="entry">
     <pre><code>cost(scoped_read)  ≈ 10¹–10² × cost(public_read)
 tamper(ciphertext) ⟹ decrypt_failure, not corrupted_read</code></pre>
     <p class="meaning">Reading a secret-scoped path costs one to two orders of magnitude more than a public read (real, measured), and tampering with ciphertext fails closed — you get a decrypt error, never silently corrupted data.</p>
     <p class="source">Source: <a href="./EncryptedAudiences.html">The Algebra of Encrypted Audiences</a></p>
   </div>
-
   <div class="entry">
     <pre><code>A = A₁ ∪ A₂ ∪ ... ∪ Aₙ     (any member resolves independently)
 A = A₁ ∩ A₂ ∩ ... ∩ Aₙ     (all members required, jointly)</code></pre>
     <p class="meaning">An audience composes like a set: OR-audiences where any one key opens it, AND-audiences where every key is required together.</p>
     <p class="source">Source: <a href="./EncryptedIsland.html">The Encrypted Island</a></p>
   </div>
-
   <div class="entry">
     <pre><code>S₁, ..., Sₙ₋₁ ← random(32) each
 Sₙ = S ⊕ S₁ ⊕ ... ⊕ Sₙ₋₁
@@ -358,23 +327,19 @@ Sₙ = S ⊕ S₁ ⊕ ... ⊕ Sₙ₋₁
     <p class="source">Source: <a href="./SetChemistry.html">Cryptographic Set-Chemistry on Audiences</a></p>
   </div>
 </section>
-
 <section id="ok">
   <h2>O(k) Reactivity</h2>
-
-  <div class="entry">
+  <div class="entry" id="ok-reactivity">
     <pre><code>cost(mutation) = O(k), not O(n)
-
-k = |affected dependency frontier|   (a mutation's actual cost)
-n = |total graph size|               (irrelevant to that cost)</code></pre>
+      k = |affected dependency frontier|   (a mutation's actual cost)
+      n = |total graph size|               (irrelevant to that cost)</code></pre>
     <p class="meaning">The core reactive-computation claim: a write's cost depends on how many nodes actually depend on it, never on the size of the whole graph. Measured, not assumed — see the benchmark numbers, including the ones that don't flatter it.</p>
     <p class="source">Source: <a href="./InvertedIndex.html">Inverted Dependency Indexing</a>, <a href="./WhatIsOK.html">What is O(k)?</a></p>
+    <p class="source">Visual: <a href="./Inverted-Dependency-Indexing-Infographic.html">cost(mutation) = O(k) — infographic</a></p>
   </div>
 </section>
-
 <section id="theorems">
   <h2>Structural Theorems</h2>
-
   <div class="entry">
     <pre><code>Axiom 0 — Distinction: any system containing information requires ≥1 distinction
 Axiom 1 — State: a distinction implies ≥2 mutually exclusive states
@@ -382,7 +347,6 @@ Axiom 2 — Transition: movement is the transition between states</code></pre>
     <p class="meaning">The minimal formal precondition for any system to contain information at all — no substrate, no physics required, only the possibility of separation.</p>
     <p class="source">Source: <a href="./AxiomOfDistinction.html">The Axiom of Distinction</a></p>
   </div>
-
   <div class="entry">
     <pre><code>reach(0) = 1
 reach(t) = reach(t-1) + new_nodes_connected_at_t</code></pre>
@@ -413,10 +377,11 @@ f(E, S) = E + f(E₁, S₁) + f(E₂, S₂) + …         (multiplying)</code></
     <p class="source">Source: <a href="./Bizantine.html">Bizantine</a>, <a href="./trust.me.html">trust.me</a>, <a href="./byzantine-prompt.html">byzantine-prompt</a></p>
   </div>
 
-  <div class="entry">
+  <div class="entry" id="n1-f0">
     <pre><code>n = 1  ⟹  f ≤ 0</code></pre>
     <p class="meaning">The degenerate case of the imported Byzantine bound applied to a single-controller channel: a centralized topology tolerates zero internal Byzantine faults, by construction — not by policy, by arithmetic.</p>
     <p class="source">Source: <a href="./byzantine-prompt.html">byzantine-prompt</a>, <a href="./Bizantine.html">Bizantine</a>, <a href="./trust.me.html">trust.me</a>, <a href="./learn.html">learn</a></p>
+    <p class="source">Visual: <a href="./Zero-Byzantine-Faults-Infographic.html">n=1 ⟹ f≤0 — infographic</a></p>
   </div>
 </section>
 

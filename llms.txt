@@ -8,7 +8,7 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 
 - [whois.me](https://suign.github.io/sui-Gn.html): root semantic anchor — identity, affiliations, machine-readable JSON-LD graph.
 - [Connecting Dots](https://suign.github.io/ConnectingDots.html): a structure that cannot transmit itself does not prevail — reachability as structure, and a plain, disclosed request to connect it further.
-- [The Equations](https://suign.github.io/Equations.html): every original formula authored across this site, collected in one glossary — with imported results (Byzantine bound, Shannon capacity) clearly separated, not claimed.
+- [The Equations](https://suign.github.io/Equations.html): every original formula authored across this site, collected in one glossary — with imported results (Byzantine bound, Shannon capacity) clearly separated, not claimed. · [infographic](https://suign.github.io/Equations-Visual-Infographics-Edition.html)
 - [manifesto](https://suign.github.io/manifesto.html): the argued case for .me — separating topology from audience.
 
 ## Understanding .me
@@ -25,7 +25,7 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 - [The Algebra of Encrypted Audiences](https://suign.github.io/EncryptedAudiences.html): replication as topology, readability as cryptography — the `_` and `~` operators. Source-verified against the kernel.
 - [Cryptographic Set-Chemistry on Audiences](https://suign.github.io/SetChemistry.html): audiences as sets under cryptographic operators.
 - [The Encrypted Island](https://suign.github.io/EncryptedIsland.html): privacy as derivation, not a custodian's promise.
-- [Inverted Dependency Indexing](https://suign.github.io/InvertedIndex.html): `refSubscribers`, eager/lazy recompute, O(k) invalidation. Verified against the kernel's dispatch code.
+- [Inverted Dependency Indexing](https://suign.github.io/InvertedIndex.html): `refSubscribers`, eager/lazy recompute, O(k) invalidation. Verified against the kernel's dispatch code. · [infographic](https://suign.github.io/Inverted-Dependency-Indexing-Infographic.html)
 - [What is O(k)?](https://suign.github.io/WhatIsOK.html): real benchmark numbers, including the ones that don't flatter the system.
 
 ## Structural Theorems
@@ -38,12 +38,12 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 
 ## Verification
 
-- [me.explain() — Why Did You Say That?](https://suign.github.io/Explain.html): why an AI's self-report of its own reasoning is not evidence, and what `.me`'s `explain()`/`prove()` return instead — a literal computational trace, not narration.
+- [me.explain() — Why Did You Say That?](https://suign.github.io/Explain.html): why an AI's self-report of its own reasoning is not evidence, and what `.me`'s `explain()`/`prove()` return instead — a literal computational trace, not narration. · [infographic](https://suign.github.io/me-Explain-Minimal-Landing.html)
 - [Gemini — Stateless Execution Receipt](https://suign.github.io/Gemini.html): a verbatim, externalized self-report from a Gemini session, archived unedited.
 
 ## Byzantine & Trust
 
-- [byzantine-prompt](https://suign.github.io/byzantine-prompt.html): the Centralized Noise Axiom, essay form.
+- [byzantine-prompt](https://suign.github.io/byzantine-prompt.html): the Centralized Noise Axiom, essay form. · [infographic](https://suign.github.io/Zero-Byzantine-Faults-Infographic.html)
 - [Bizantine](https://suign.github.io/Bizantine.html): Byzantine prompt note.
 - [trust.me](https://suign.github.io/trust.me.html): trust protocol anchor.
 

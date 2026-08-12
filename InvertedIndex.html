@@ -190,7 +190,7 @@ recomputeMode: "eager" | "lazy"      (kernel-wide setting)</code></pre>
 </section>
 
 <section id="eager">
-  <h2>Propagation — Eager Mode</h2>
+  <h2 id="propagation-eager-mode">Propagation — Eager Mode</h2>
   <pre><code>queue ← [changed path]
 seen  ← {}
 while queue not empty:
@@ -210,7 +210,7 @@ while queue not empty:
 </section>
 
 <section id="lazy">
-  <h2>Propagation — Lazy Mode</h2>
+  <h2 id="propagation-lazy-mode">Propagation — Lazy Mode</h2>
   <pre><code>me["!"].runtime.setRecomputeMode("lazy");
 
 write(path):
@@ -247,7 +247,7 @@ read(path):
 </section>
 
 <section id="explain">
-  <h2>Explainability</h2>
+  <h2 id="explainability">Explainability</h2>
   <pre><code>me["!"].explain("order.total")
 → {
     path, value, expr,
@@ -266,7 +266,7 @@ read(path):
 </section>
 
 <section id="secret">
-  <h2>Secret Scopes</h2>
+  <h2 id="secret-scopes">Secret Scopes</h2>
   <pre><code>{
   label: "walletBalance",
   path: "wallet.balance",
@@ -280,6 +280,21 @@ read(path):
     functions across the boundary — the structure of the derivation is
     visible, the secret value is not.
   </p>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Digital Space Algebra</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./DigitalSpaceAlgebra.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DigitalSpaceAlgebra.html</a> <span style="color:#8a8a92;">— index of the mathematical structure behind .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./SpaceStructure.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SpaceStructure.html</a> <span style="color:#8a8a92;">— the mathematical structure of a space in .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedAudiences.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedAudiences.html</a> <span style="color:#8a8a92;">— replication is topology, readability is cryptography</span></li>
+    <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="./SetChemistry.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SetChemistry.html</a> <span style="color:#8a8a92;">— cryptographic set-chemistry on audiences</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedIsland.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedIsland.html</a> <span style="color:#8a8a92;">— privacy as derivation, not custodian promise</span></li>
+    <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
+    <li style="margin-bottom:6px;"><a href="./WhatIsOK.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">WhatIsOK.html</a> <span style="color:#8a8a92;">— real benchmark numbers</span></li>
+    <li style="margin-bottom:6px;"><a href="./Equations.html#ok-reactivity" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">cost(mutation) = O(k)</a> <span style="color:#8a8a92;">— the formula, in the glossary</span></li>
+  </ul>
 </section>
 
 <footer>
