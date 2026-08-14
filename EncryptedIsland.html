@@ -140,6 +140,54 @@
   }
   .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
 
+  .projection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .projection-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    background: rgba(31, 40, 51, 0.34);
+  }
+  .projection-card .label {
+    color: var(--fg-dim);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .projection-card code {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .query-block {
+    margin: 18px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(31, 40, 51, 0.32);
+    overflow: hidden;
+  }
+  .query-prompt {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  .query-body { padding: 14px; }
+  .quote { color: #ffffff; margin: 0 0 8px; }
+  .source {
+    color: var(--fg-dim);
+    font-size: 12px;
+    margin: 0 0 12px;
+  }
+
+  @media (max-width: 700px) {
+    .projection-grid { grid-template-columns: 1fr; }
+  }
+
   footer {
     margin-top: 60px;
     padding-top: 20px;
@@ -210,6 +258,85 @@ A = A₁ ∩ A₂ ∩ ... ∩ Aₙ     (all members required, jointly)</code></p
   </p>
 </section>
 
+<section id="pala-projection">
+  <h2>Pala Projection</h2>
+  <div class="note open">
+    Pala is not the proof of <code>T ⊥ A</code>. It is a cross-domain
+    projection of the same relation: external control may shape topology,
+    but it cannot possess the inner derivation that makes experience resolvable.
+  </div>
+
+  <pre><code>$ .me --mount pala --as projection
+> source: Aldous Huxley / Island / 1962
+> mode: cross-domain derivation
+> formal relation preserved: T ⊥ A</code></pre>
+
+  <div class="projection-grid">
+    <div class="projection-card">
+      <div class="label">Exact relation</div>
+      <code>T ⊥ A</code>
+      <p class="dim">Topology does not determine audience.</p>
+    </div>
+    <div class="projection-card">
+      <div class="label">Semantic projection</div>
+      <code>[ External Authority ] ⊥ [ Inner Experience ]</code>
+      <p class="dim">The location of power does not determine the interior state.</p>
+    </div>
+    <div class="projection-card">
+      <div class="label">Interpretation</div>
+      <code>control(T) ≠ derive(A)</code>
+      <p class="dim">A system may arrange the environment without resolving the subject.</p>
+    </div>
+  </div>
+
+  <div class="query-block">
+    <div class="query-prompt">$ .pala --query quote --tag attention</div>
+    <div class="query-body">
+      <p class="quote">"Attention. Here and now, boys. Here and now."</p>
+      <p class="source">— Aldous Huxley, <em>Island</em> (1962)</p>
+      <pre><code>description(x) ≠ resolution(x)
+
+attention = local_derivation(
+  present_moment,
+  sensory_input,
+  awareness
+)</code></pre>
+      <p class="dim">
+        In this projection, attention cannot be delegated to a platform,
+        custodian, or state. It is resolved locally, through direct derivation.
+      </p>
+    </div>
+  </div>
+
+  <div class="query-block">
+    <div class="query-prompt">$ .pala --query sovereignty --mode derived</div>
+    <div class="query-body">
+      <p>
+        Pala's political claim is not that environment is irrelevant. It is that
+        external arrangement cannot substitute for inner derivation.
+      </p>
+      <pre><code>centralized_control: environment -> behavior
+pala_projection:    practice + attention -> resolved_experience
+.me analogue:       topology ⊥ audience</code></pre>
+      <p class="dim">
+        This keeps the literary layer subordinate to the formal one: Pala helps
+        name the human intuition, while Digital Space Algebra keeps the proof
+        boundary intact.
+      </p>
+    </div>
+  </div>
+
+  <pre><code>========================================================================
+[ CROSS-DOMAIN DERIVATION ]
+literary kernel:
+  Aldous Huxley — Island (1962)
+semantic projection:
+  Pala -> sovereign contextual island
+formal language:
+  Digital Space Algebra / .me
+========================================================================</code></pre>
+</section>
+
 <section id="contrast">
   <h2 id="contrast-policy-custody-vs-derivation">Contrast: Policy Custody vs. Derivation</h2>
   <table class="compare">
@@ -248,6 +375,7 @@ A = A₁ ∩ A₂ ∩ ... ∩ Aₙ     (all members required, jointly)</code></p
     <li style="margin-bottom:6px;"><a href="./SpaceStructure.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SpaceStructure.html</a> <span style="color:#8a8a92;">— the mathematical structure of a space in .me</span></li>
     <li style="margin-bottom:6px;"><a href="./EncryptedAudiences.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedAudiences.html</a> <span style="color:#8a8a92;">— replication is topology, readability is cryptography</span></li>
     <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="#pala-projection" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">Pala Projection</a> <span style="color:#8a8a92;">— Huxley's Island as a cross-domain semantic projection</span></li>
     <li style="margin-bottom:6px;"><a href="./SetChemistry.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SetChemistry.html</a> <span style="color:#8a8a92;">— cryptographic set-chemistry on audiences</span></li>
     <li style="margin-bottom:6px;"><a href="./InvertedIndex.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">InvertedIndex.html</a> <span style="color:#8a8a92;">— refSubscribers, eager/lazy recompute, O(k) invalidation</span></li>
     <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
