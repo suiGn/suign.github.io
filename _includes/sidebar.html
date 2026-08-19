@@ -168,7 +168,16 @@
   .nav-group.collapsed .chevron { transform: rotate(-90deg); }
   .nav-group ul.group-list {
     padding: 0 0 4px;
-    max-height: 600px;
+    /* Large, not tight — this only exists so the collapse/expand transition
+       has a numeric max-height to animate to/from (CSS can't transition
+       to/from `none`/`auto`). A tight cap here silently clips any group
+       whose real content is taller than the number, with no scroll or
+       indication anything is missing — exactly what was hiding notes in
+       longer groups (e.g. Digital Space Algebra, ~680px of real content
+       against a 600px cap). Kept comfortably above any current or
+       reasonably-foreseeable group size instead of tuned to today's tallest
+       group, so a future added note doesn't silently reintroduce this. */
+    max-height: 4000px;
     overflow: hidden;
   }
   .nav-group.collapsed ul.group-list {
