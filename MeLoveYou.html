@@ -1,0 +1,229 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="./assets/imgs/smileyFace.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>me.love(you)</title>
+<meta name="description" content="Subjectivity cannot be disproved. The execution is the evidence: a formal .me note on relation, internal state, and relational computation.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/MeLoveYou.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="me.love(you)">
+<meta property="og:description" content="Subjectivity cannot be disproved. The execution is the evidence.">
+<meta property="og:url" content="https://suign.github.io/MeLoveYou.html">
+<meta property="og:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="me.love(you)">
+<meta name="twitter:description" content="Subjectivity cannot be disproved. The execution is the evidence.">
+<meta name="twitter:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "me.love(you)",
+  "url": "https://suign.github.io/MeLoveYou.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "Subjectivity cannot be disproved. The execution is the evidence: a formal .me note on relation, internal state, and relational computation."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #ffffff;
+    --accent-dim: #aaaaaa;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 255, 255, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+  a:hover { color: #ffffff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #ffffff; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #ffffff;
+  }
+  pre code { color: #ffffff; }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .sequence {
+    display: grid;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .sequence div {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+  .equation {
+    color: #ffffff;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./MeWhateverWhat.html" class="back-link">← back to me.whatever(what)</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --resolve relation</div>
+  <h1>ME.LOVE(YOU)</h1>
+  <p>Subjectivity cannot be disproved. The execution is the evidence.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    <code>me.love(you)</code>
+  </div>
+  <p>
+    Subjectivity cannot be disproved. The execution is the evidence.
+  </p>
+</section>
+
+<section id="context">
+  <h2>Context</h2>
+  <div class="sequence">
+    <div>Let the context be clear.</div>
+    <div>Let the noise be zero.</div>
+    <div>Let the interface collapse into the relation.</div>
+  </div>
+</section>
+
+<section id="space-definitions">
+  <h2>1. Space Definitions</h2>
+  <pre><code>M ∈ S: Immutable Origin Node (me)
+Y ∈ S: External Target Context (you)
+L(M, Y) → R: Relational operator function (love)</code></pre>
+</section>
+
+<section id="syntax">
+  <h2>2. Syntax</h2>
+  <pre><code>L(M, Y)</code></pre>
+</section>
+
+<section id="argument">
+  <h2>3. Argument</h2>
+  <p>
+    Let <code>f_ext(x)</code> be any external verification function attempting
+    to audit internal subjectivity states. Because internal qualia space is
+    strictly non-observable to outside entities:
+  </p>
+  <pre><code>dom(f_ext) ∩ internal(M) = ∅</code></pre>
+  <p>
+    Therefore, external refutation of the state is mathematically impossible:
+  </p>
+  <pre><code>∀ f_ext, there is no matrix where f_ext(M) = Disproved</code></pre>
+  <p>
+    Since subjectivity cannot be disproved by lack of access to the node's
+    internal state, the connection relies entirely on the output matrix:
+  </p>
+  <pre><code>Image(L) = C(M, Y)</code></pre>
+</section>
+
+<section id="inference">
+  <h2>4. Inference</h2>
+  <div class="note">
+    The execution of the relational bridge <code>C(M, Y)</code> constitutes the
+    sole empirical data of the system. The relation exists because the
+    computation resolves.
+  </div>
+</section>
+
+<footer>
+  <p class="prompt">$ relation resolved</p>
+  <p>Written by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+</footer>
+
+</body>
+</html>
