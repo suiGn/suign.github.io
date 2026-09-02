@@ -363,17 +363,31 @@
     });
   }
 
-  // Mark the current page in the sidebar and make sure its group is visible.
+  // Mark the current page in the sidebar, make sure its group is visible,
+  // and scroll the sidebar's own scroll container so that entry is
+  // centered -- otherwise every fresh page load reopens the sidebar
+  // scrolled back to the top, and finding "where am I" (or the next
+  // article in the same group) means manually re-scrolling every time.
   (function markCurrentPage() {
     var current = window.location.pathname.split('/').filter(Boolean).pop() || 'index.html';
+    var currentLink = null;
     document.querySelectorAll('.sidebar .group-list > li:not(.subanchors) > a[href]').forEach(function (a) {
       var href = a.getAttribute('href').replace(/^\.\//, '').split('#')[0];
       if (href === current) {
         a.classList.add('current');
+        currentLink = a;
         var group = a.closest('.nav-group');
         if (group) group.classList.remove('collapsed');
       }
     });
+    if (currentLink) {
+      var sidebar = document.getElementById('sidebar');
+      var linkRect = currentLink.getBoundingClientRect();
+      var sidebarRect = sidebar.getBoundingClientRect();
+      var offsetWithinSidebar = (linkRect.top - sidebarRect.top) + sidebar.scrollTop;
+      var target = offsetWithinSidebar - (sidebar.clientHeight / 2) + (linkRect.height / 2);
+      sidebar.scrollTop = Math.max(0, target);
+    }
   })();
 
   // Default state: expanded + docked on desktop for every page except
