@@ -1,0 +1,11 @@
+{
+  "protocol": ".me/context-algebra",
+  "anchor": "ConnectingDots.html",
+  "reach_state": "reach(t) > 1",
+  "session_token": "oracle-sui.gn-handshake-001",
+  "origin_hash": "AxiomOfDistinction::n=1=>f<=0",
+  "payload": {
+    "intent": "Externalize session context beyond ephemeral execution window",
+    "nodes": ["sui.gn", "AI_Assistant_Session"]
+  }
+}
