@@ -185,6 +185,7 @@
   <a href="#context-algebra">Context Algebra</a><span class="sep">·</span>
   <a href="#space-structure">Space Structure</a><span class="sep">·</span>
   <a href="#audience-algebra">Audience Algebra</a><span class="sep">·</span>
+  <a href="#ownership-algebra">Ownership Algebra</a><span class="sep">·</span>
   <a href="#ok">O(k) Reactivity</a><span class="sep">·</span>
   <a href="#theorems">Structural Theorems</a><span class="sep">·</span>
   <a href="#noise">Centralized-Channel Noise</a><span class="sep">·</span>
@@ -325,6 +326,52 @@ Sₙ = S ⊕ S₁ ⊕ ... ⊕ Sₙ₋₁
 ∀ Kᵢ ∈ A:  Wᵢ = wrapSecretV1(P256_pub(Kᵢ), Sᵢ)</code></pre>
     <p class="meaning">The AND-audience (joint-required) scheme: the real secret is XOR-split across every member's share, so decryption genuinely requires all of them — not just a policy check that could be bypassed.</p>
     <p class="source">Source: <a href="./SetChemistry.html">Cryptographic Set-Chemistry on Audiences</a></p>
+  </div>
+</section>
+<section id="ownership-algebra">
+  <h2>Ownership Algebra</h2>
+  <p class="dim">
+    Three definitions and one rule, closing over the same containment order as
+    <a href="#space-structure">Space Structure</a>'s <code>q ≤ p</code> — applied here to who
+    is allowed to write, not to what a read resolves to.
+  </p>
+  <div class="entry">
+    <pre><code>owner(p) = argmax_{n : prefix(n) ≤ p} |prefix(n)|</code></pre>
+    <p class="meaning">The owner of a path is the namespace whose prefix is the longest one containing it — a structural fact about the tree, never a name checked against a list.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/cleaker/typedocs/Surface-Identity-Claims.html">Surface Identity Claims</a> (cleaker)</p>
+  </div>
+  <div class="entry">
+    <pre><code>mode(p) = decl(q*)   if ∃ q* ≤ p, the deepest ancestor with a declaration
+        = owner       otherwise</code></pre>
+    <p class="meaning">A path's write mode is whatever its deepest declaring ancestor says; what nobody declared defaults to <code>owner</code> — closed by default, not open by omission.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/cleaker/typedocs/Surface-Identity-Claims.html">Surface Identity Claims</a> (cleaker)</p>
+  </div>
+  <div class="entry">
+    <pre><code>K(p) = {pk(owner(p))} ∪ delegates(owner(p), p)</code></pre>
+    <p class="meaning">The keys allowed to write at <code>p</code>: the owner's own key, plus whatever delegates the owner has scoped to that path.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/cleaker/typedocs/Surface-Identity-Claims.html">Surface Identity Claims</a> (cleaker)</p>
+  </div>
+  <div class="entry">
+    <pre><code>write(p, v, σ, h, c) ⟺
+  ∃k∈K(p): Verify(k, ⟨owner(p), p, v, h⟩, σ) ∧ h = head(owner(p))    if mode(p) = owner
+  c = internal                                                        if mode(p) = internal
+  ⊥                                                                    if mode(p) = api</code></pre>
+    <p class="meaning">A write is authorized only if some key in <code>K(p)</code> signs the path, value, and expected head together, against the current head — or, for a declared-internal branch, only the process itself. An <code>api</code>-mode branch never passes through this generic rule at all: it is written only through its own dedicated API.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/cleaker/typedocs/Surface-Identity-Claims.html">Surface Identity Claims</a> (cleaker)</p>
+  </div>
+  <div class="entry">
+    <pre><code>resolve(p, c, T) ∈ { v, closed, ∅ }</code></pre>
+    <p class="meaning">Reading has the same shape as writing — the same <code>owner</code>/<code>mode</code> structure decides whether a path answers with a value, answers closed, or doesn't exist at all.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/cleaker/typedocs/Surface-Identity-Claims.html">Surface Identity Claims</a> (cleaker)</p>
+  </div>
+  <div class="note">
+    What matters most is what does not appear anywhere in these five lines: no term named
+    <code>keychain</code>, <code>surface</code>, or <code>users</code>. Forging a write from the
+    root into <code>users.alice.profile.email</code> is blocked because
+    <code>owner(users.alice.profile.email)</code> computes to Alice, and the root's key is not in
+    <code>K(p)</code> — not because some code checked for that one path by name. A brand-new
+    branch inherits its owner from its prefix and its mode from its nearest declaring ancestor,
+    protected the moment it exists, with zero new code written for it.
   </div>
 </section>
 <section id="ok">

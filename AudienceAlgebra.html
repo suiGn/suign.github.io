@@ -1,0 +1,394 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="./assets/imgs/smileyFace.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audience Algebra</title>
+<meta name="description" content="The formal algebra of the audience A in .me: monotone Boolean formulas over kernel identities, compiled to a tree of key envelopes. Canonical form, laws, construction, groups, and exact implementation status.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/AudienceAlgebra.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="Audience Algebra">
+<meta property="og:description" content="Who can open a value, as a closed algebra: monotone formulas over kernel identities, compiled to a tree of key envelopes.">
+<meta property="og:url" content="https://suign.github.io/AudienceAlgebra.html">
+<meta property="og:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Audience Algebra">
+<meta name="twitter:description" content="Who can open a value, as a closed algebra.">
+<meta name="twitter:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Audience Algebra",
+  "url": "https://suign.github.io/AudienceAlgebra.html",
+  "author": { "@type": "Person", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "description": "The formal algebra of the audience A in .me: monotone Boolean formulas over kernel identities, compiled to a tree of key envelopes. Canonical form, laws, construction, groups, and exact implementation status."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #ffffff;
+    --accent-dim: #aaaaaa;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 255, 255, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+  a:hover { color: #ffffff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+  h3 {
+    color: #ffffff;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 20px 0 8px;
+  }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #ffffff; }
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13.5px;
+    color: #ffffff;
+  }
+  pre code { color: #ffffff; }
+
+  ul.plain { padding-left: 22px; }
+  ul.plain li { margin-bottom: 10px; }
+
+  dl.spec { margin: 0; }
+  dl.spec dt { color: #ffffff; font-weight: normal; margin-top: 10px; }
+  dl.spec dd { margin: 2px 0 0; color: var(--fg-dim); }
+
+  ul.axioms { padding-left: 0; list-style: none; }
+  ul.axioms li { margin-bottom: 8px; }
+  ul.axioms .tag { color: var(--accent-dim); }
+  ul.axioms .status { color: var(--fg-dim); }
+
+  .note {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .note.open { border-left-color: #a3a3ad; background: rgba(255, 255, 255, 0.03); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./DigitalSpaceAlgebra.html" class="back-link">← back to Digital Space Algebra</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ .me --spec audience-algebra</div>
+  <h1>AUDIENCE ALGEBRA</h1>
+  <p>Who can open a value, as a closed algebra.</p>
+</header>
+
+<section id="statement">
+  <h2>Statement</h2>
+  <div class="note">
+    An audience is a monotone Boolean formula over identities. It compiles to a
+    tree of key envelopes. Encryption can only grant; it can never take away.
+  </div>
+  <p class="dim">
+    The Island in <a href="./DigitalSpaceAlgebra.html">Digital Space Algebra</a>
+    is <code>I = (path, ciphertext, T, A, C)</code>.
+    <a href="./SpaceStructure.html">SpaceStructure</a> defines <code>path</code>.
+    This page defines <code>A</code>.
+  </p>
+</section>
+
+<section id="definitions">
+  <h2>Definitions</h2>
+  <dl class="spec">
+    <dt>universe</dt>
+    <dd><code>U</code> — finite set of kernel identities <code>k = (identityHash, P256_pub)</code>, as in <a href="./SetChemistry.html#identity">SetChemistry</a></dd>
+    <dt>audience</dt>
+    <dd><code>A ::= k | OR(A₁, …, Aₙ) | AND(A₁, …, Aₙ)</code>, with <code>k ∈ U</code></dd>
+    <dt>coalition</dt>
+    <dd><code>S ⊆ U</code> — the identities whose private keys are present</dd>
+    <dt>opens</dt>
+    <dd><code>opens(S, A)</code> — the formula <code>A</code> is true when exactly the members of <code>S</code> are set true</dd>
+  </dl>
+  <p class="dim">
+    Below, <code>∨</code> is <code>OR</code> and <code>∧</code> is
+    <code>AND</code>. SetChemistry's union audience
+    <code>K₁ ∪ … ∪ Kₙ</code> is <code>OR</code> over leaves; its intersection
+    audience <code>K₁ ∩ … ∩ Kₙ</code> is <code>AND</code> over leaves. There is
+    no <code>NOT</code>: that is what makes it monotone.
+  </p>
+</section>
+
+<section id="canonical-form">
+  <h2>Canonical Form</h2>
+  <p>
+    Every <code>A</code> reduces to <code>min(A)</code>, its set of minimal
+    coalitions. It is an antichain: no coalition in it contains another.
+  </p>
+  <pre><code>(alice AND bob) OR carol   =   { {alice, bob}, {carol} }</code></pre>
+  <p>Operations on canonical form, where <code>⌊·⌋</code> drops every coalition that is a superset of another:</p>
+  <pre><code>min(k)       = { {k} }
+min(A ∨ B)   = ⌊ min(A) ∪ min(B) ⌋
+min(A ∧ B)   = ⌊ { X ∪ Y | X ∈ min(A), Y ∈ min(B) } ⌋
+
+id(A)        = hash(sorted min(A))</code></pre>
+  <p>
+    The id of an audience is the hash of its canonical form, so how it was
+    written doesn't matter. <code>carol OR (bob AND alice)</code> and
+    <code>(alice AND bob) OR carol OR (carol AND bob)</code> have the same id.
+  </p>
+  <p class="dim">
+    Monotone formulas over a finite <code>U</code>, up to equivalence, form a
+    finite distributive lattice: <code>∨</code> and <code>∧</code> always give
+    back an audience, and every audience has exactly one canonical form.
+    Closed and well defined.
+  </p>
+</section>
+
+<section id="laws">
+  <h2>Laws</h2>
+  <p class="dim">These are the test contract.</p>
+  <ul class="axioms">
+    <li><span class="tag">L1</span> <code>opens(S, A)</code> iff <code>S</code> contains some coalition in <code>min(A)</code>.</li>
+    <li><span class="tag">L2</span> monotonicity — <code>opens(S, A) ∧ S ⊆ S′ ⟹ opens(S′, A)</code>.</li>
+    <li><span class="tag">L3</span> a set containing no coalition of <code>min(A)</code> opens nothing and derives nothing.</li>
+    <li><span class="tag">L4</span> commutativity, associativity, idempotence, absorption, distributivity — equal canonical form, equal id.</li>
+    <li><span class="tag">L5</span> every seal is a version with a fresh key.</li>
+    <li><span class="tag">L6</span> difference — <code>A \ x</code> drops every coalition containing <code>x</code>. Resolved at seal time only. <code>x</code> cannot open that version.</li>
+    <li><span class="tag">L7</span> revocation — seal a new version. Earlier versions are unchanged; what was opened stays opened.</li>
+    <li><span class="tag">L8</span> changing any byte of an envelope, share, or ciphertext fails closed — decrypt failure, never a corrupted read.</li>
+    <li><span class="tag">L9</span> publishing a derivation of a sealed value requires a coalition that opens it. Under <code>OR</code> any member may publish; under <code>AND</code> only the full coalition. Declaring a public formula is the owner's standing disclosure.</li>
+  </ul>
+  <pre><code>L4, written out:
+A ∨ B = B ∨ A                A ∧ B = B ∧ A
+(A ∨ B) ∨ C = A ∨ (B ∨ C)    (A ∧ B) ∧ C = A ∧ (B ∧ C)
+A ∨ A = A                    A ∧ A = A
+A ∨ (A ∧ B) = A              A ∧ (A ∨ B) = A
+A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C)
+A ∨ (B ∧ C) = (A ∨ B) ∧ (A ∨ C)</code></pre>
+  <p class="dim">
+    <code>A \ x</code> can come out empty — <code>alice AND x</code> minus
+    <code>x</code> leaves no coalition. An empty audience opens for no one, so
+    seal refuses it.
+  </p>
+</section>
+
+<section id="construction">
+  <h2>Construction</h2>
+  <p>
+    Seal walks the formula tree. Each node carries a key. An <code>OR</code>
+    node hands the same key to every child. An <code>AND</code> node splits its
+    key into XOR shares, <code>K = s₁ ⊕ … ⊕ sₙ</code>, one per child. A leaf
+    wraps whatever key it receives to that identity with
+    <code>wrapSecretV1</code>; the identity opens it with its P256 private key.
+  </p>
+  <pre><code>seal(V, A):
+  K ← random(32)
+  ciphertext = encryptSymmetric(K, V)
+  publish { ciphertext, tree: wrap(A, K) }
+
+wrap(k, K):
+  leaf(identityHash(k), wrapSecretV1(P256_pub(k), K))
+wrap(OR(A₁…Aₙ), K):
+  or [ wrap(Aᵢ, K) ]ᵢ
+wrap(AND(A₁…Aₙ), K):
+  s₁, ..., sₙ₋₁ ← random(32) each
+  sₙ = K ⊕ s₁ ⊕ ... ⊕ sₙ₋₁
+  and [ wrap(Aᵢ, sᵢ) ]ᵢ
+
+open(node, keys):
+  leaf(h, W) → k ∈ keys with identityHash(k) = h ?
+               unwrapSecretV1(P256_priv(k), W) : ⊥
+  or  [...]  → the first child that opens, else ⊥
+  and [...]  → every child opens → s₁ ⊕ ... ⊕ sₙ, else ⊥
+
+V = decryptSymmetric(open(tree, keys), ciphertext)</code></pre>
+  <p class="dim">
+    Open walks the tree with whatever keys it holds. It is recursive, so nesting
+    costs nothing extra. SetChemistry's Union and Intersection blocks are this
+    tree at depth one. The ciphertext is authenticated, so shares that combine
+    to a wrong <code>K</code> end in a decrypt failure (L8), not garbage.
+  </p>
+</section>
+
+<section id="excluded">
+  <h2 id="excluded-and-why">Excluded, and Why</h2>
+  <ul class="plain">
+    <li><code>NOT</code> — "everyone except <code>x</code>" as a standing rule. Not monotone: adding people can never remove someone's ability to open. Exclusion exists only as <code>A \ x</code>, applied once, at seal time (L6).</li>
+    <li><code>XOR</code> — "<code>a</code> or <code>b</code> but not both." Not monotone either. <code>⊕</code> appears only inside, as the share split that implements <code>AND</code>.</li>
+    <li>exclusivity — "only one may claim it." That is an ordering rule for <code>monad</code>, not an audience.</li>
+    <li>threshold <code>k</code>-of-<code>n</code> — expressible today as <code>OR</code> of <code>AND</code>s. A native operator (Shamir) may come later without breaking any law above.</li>
+  </ul>
+</section>
+
+<section id="groups">
+  <h2>Groups</h2>
+  <p>
+    A group is an immutable value identified by its set: <code>id(G)</code> is
+    the hash of its canonical form. Same members in any order, same group —
+    the same property as the README's <code>audienceSeed</code>, where
+    <code>frank + ana = ana + frank</code>.
+  </p>
+  <pre><code>G₁ = { alice, bob }
+G₂ = G₁ ∪ { carol }    // new id, new key
+
+team → G₁              // "to team" at t₀ = G₁
+team → G₂              // "to team" at t₁ = G₂
+
+history(team) = [ G₁, G₂ ]</code></pre>
+  <p>
+    Adding a member creates a new group with a new id and a new key. What was
+    sealed to <code>G₁</code> remains exactly for <code>G₁</code>. What changes
+    is a name in the tree: <code>team</code> points to <code>G₁</code>, then to
+    <code>G₂</code>. Sealing "to team" uses the group it points to at that
+    moment, and the name's history is the sequence of groups. Join and leave
+    move the pointer, so revocation needs no extra mechanism (L7).
+  </p>
+  <p>A member may itself be a group. That is just nesting.</p>
+  <ul class="plain">
+    <li>a plain set <code>{a, b, c}</code> means <code>OR</code></li>
+    <li><code>AND</code> is declared explicitly</li>
+    <li>a new member does not see earlier seals unless someone who can open them re-seals them — an explicit act</li>
+  </ul>
+</section>
+
+<section id="limits">
+  <h2 id="limits-of-the-model">Limits of the Model</h2>
+  <ul class="plain">
+    <li>members of an <code>AND</code> can always combine their shares. That is what <code>AND</code> is.</li>
+    <li>envelope size grows with formula size: one wrap per leaf occurrence.</li>
+    <li>whoever opens can copy. The algebra controls who can open, not what they do after.</li>
+    <li>key distribution — knowing <code>P256_pub</code> of each recipient — is not solved by the kernel. See SetChemistry's <a href="./SetChemistry.html#prerequisite">Key Exchange Prerequisite</a>.</li>
+  </ul>
+</section>
+
+<section id="status">
+  <h2 id="implementation-status">Implementation Status</h2>
+  <p>Checked against <code>neurons-me/.me</code> source, <code>Typescript/src</code>.</p>
+  <ul class="axioms">
+    <li><span class="tag">wrap</span> — <span class="status">exists</span>: <code>wrapSecretV1</code> / <code>unwrapSecretV1</code> in <code>src/crypto.ts</code>, exposed as statics on <code>ME</code>. One recipient per envelope — ECDH-ES P-256 / HKDF-SHA-256 / AES-256-GCM. Wrong key, tampered ciphertext and tampered tag are rejected in <code>tests/contracts/wrapped-secret-negative.contract.test.mjs</code>.</li>
+    <li><span class="tag">OR</span> — <span class="status">by composition only</span>: several wraps of the same key. Not a declared audience.</li>
+    <li><span class="tag">AND · nesting · id(A) · groups · named group pointers</span> — <span class="status">specified here, not in the kernel</span>. <code>grep -i audience src/</code> finds nothing.</li>
+  </ul>
+  <p class="dim">
+    <code>AudienceBlobV1</code> in <a href="./SetChemistry.html#blob-format">SetChemistry</a>
+    is a spec, not kernel code, and it is flat: a list of members. It will need
+    to grow into a tree. The README's <code>audienceSeed</code> is an example
+    in the README, not a kernel export. The real <code>wrapSecretV1</code>
+    takes <code>{ secret, recipientPublicKey, kid, class }</code>; the
+    pseudo-code above uses SetChemistry's short form.
+  </p>
+  <div class="note open">
+    The laws above become the test contract
+    <code>tests/Security/audience-algebra.test.ts</code> in
+    <code>neurons-me/.me</code>. Planned, not written. <code>OR</code> cases can
+    run today by composition; <code>AND</code> cases are marked todo.
+  </div>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Digital Space Algebra</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./DigitalSpaceAlgebra.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">DigitalSpaceAlgebra.html</a> <span style="color:#8a8a92;">— index of the mathematical structure behind .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./SpaceStructure.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SpaceStructure.html</a> <span style="color:#8a8a92;">— the mathematical structure of a space in .me</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedAudiences.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedAudiences.html</a> <span style="color:#8a8a92;">— replication is topology, readability is cryptography</span></li>
+    <li style="margin-bottom:6px;"><a href="./Perp-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">T ⊥ A — infographic</a> <span style="color:#8a8a92;">— visual: topology/audience orthogonality</span></li>
+    <li style="margin-bottom:6px;"><a href="./SetChemistry.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">SetChemistry.html</a> <span style="color:#8a8a92;">— cryptographic set-chemistry on audiences</span></li>
+    <li style="margin-bottom:6px;"><a href="./EncryptedIsland.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">EncryptedIsland.html</a> <span style="color:#8a8a92;">— privacy as derivation, not custodian promise</span></li>
+    <li style="margin-bottom:6px;"><a href="./InvertedIndex.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">InvertedIndex.html</a> <span style="color:#8a8a92;">— refSubscribers, eager/lazy recompute, O(k) invalidation</span></li>
+    <li style="margin-bottom:6px;"><a href="./Inverted-Dependency-Indexing-Infographic.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">O(k) reactivity — infographic</a> <span style="color:#8a8a92;">— visual: cost(mutation) = O(k)</span></li>
+    <li style="margin-bottom:6px;"><a href="./WhatIsOK.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">WhatIsOK.html</a> <span style="color:#8a8a92;">— real benchmark numbers</span></li>
+  </ul>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>
+    Written by sui.gn · <a href="./sui-Gn.html">whois.me</a><br>
+    Source: <a href="https://github.com/neurons-me/.me">github.com/neurons-me/.me</a>
+  </p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
