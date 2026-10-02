@@ -24,6 +24,7 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 - [The Mathematical Structure of a Space in .me](https://suign.github.io/SpaceStructure.html): formal definition of positions, containment order, and observer/mode/authority-indexed resolution. Source-verified against the kernel.
 - [The Algebra of Encrypted Audiences](https://suign.github.io/EncryptedAudiences.html): replication as topology, readability as cryptography — the `_` and `~` operators. Source-verified against the kernel.
 - [Cryptographic Set-Chemistry on Audiences](https://suign.github.io/SetChemistry.html): audiences as sets under cryptographic operators.
+- [Audience Algebra](https://suign.github.io/AudienceAlgebra.html): who can open a value, as a closed algebra — monotone OR/AND formulas over identities, canonical form, laws, immutable groups. Specified; mostly not yet in the kernel.
 - [The Encrypted Island](https://suign.github.io/EncryptedIsland.html): privacy as derivation, not a custodian's promise.
 - [Inverted Dependency Indexing](https://suign.github.io/InvertedIndex.html): `refSubscribers`, eager/lazy recompute, O(k) invalidation. Verified against the kernel's dispatch code. · [infographic](https://suign.github.io/Inverted-Dependency-Indexing-Infographic.html)
 - [What is O(k)?](https://suign.github.io/WhatIsOK.html): real benchmark numbers, including the ones that don't flatter the system.
