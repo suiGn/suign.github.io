@@ -261,10 +261,9 @@ A = A₁ ∩ A₂ ∩ ... ∩ Aₙ     (all members required, jointly)</code></p
   <h2>Status in this.me 4.2.1</h2>
   <div class="note">
     Kernel: this.me 4.2.1<br>
-    <strong>Sealed subtree</strong> — implemented: <code>_(secret)</code> paths are stored as v3 blobs
-    (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L489-L506">deriveBlobV3Keys L489–506</a>, <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L945-L957">encryptBlobV3 L945–957</a>), tested by <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/tests/secret-blob-v3.read.test.ts">secret-blob-v3.read.test.ts</a>.<br>
-    <strong>Epoch</strong> — implemented: <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/secret-context.ts#L159-L179">secret-context.ts bumpSecretEpoch L159–179</a> advances the secret epoch and zeroes every cached derived key, so keys are derived again.<br>
-    <strong>Sharing</strong> — single recipient via <code>wrapSecretV1</code> (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L1422-L1429">crypto.ts L1422–1429</a>), available from npm as <code>ME.wrapSecretV1</code>.<br>
+    <strong>Sealed subtree</strong> — implemented and tested: <code>_(secret)</code> paths are stored as encrypted blobs; a copy is no more readable than the original (<a href="https://neurons-me.github.io/.me/docs/Axioms.html">Axioms</a>, <a href="https://neurons-me.github.io/.me/docs/Algebra-of-Contexts.html">Algebra of Contexts</a>).<br>
+    <strong>Epoch</strong> — implemented: bumping the secret epoch zeroes every cached derived key, so keys are derived again.<br>
+    <strong>Sharing</strong> — one recipient at a time by wrapping, available from npm (<a href="https://neurons-me.github.io/.me/docs/Audiences.html">Audiences</a>).<br>
     <strong>Group / surface addressing</strong> — not implemented.
   </div>
 </section>
