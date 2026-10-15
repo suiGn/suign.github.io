@@ -257,6 +257,18 @@ A = A₁ ∩ A₂ ∩ ... ∩ Aₙ     (all members required, jointly)</code></p
   </p>
 </section>
 
+<section id="status">
+  <h2>Status in this.me 4.2.1</h2>
+  <div class="note">
+    Kernel: this.me 4.2.1<br>
+    <strong>Sealed subtree</strong> — implemented: <code>_(secret)</code> paths are stored as v3 blobs
+    (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L489-L506">deriveBlobV3Keys L489–506</a>, <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L945-L957">encryptBlobV3 L945–957</a>), tested by <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/tests/secret-blob-v3.read.test.ts">secret-blob-v3.read.test.ts</a>.<br>
+    <strong>Epoch</strong> — implemented: <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/secret-context.ts#L159-L179">secret-context.ts bumpSecretEpoch L159–179</a> advances the secret epoch and zeroes every cached derived key, so keys are derived again.<br>
+    <strong>Sharing</strong> — single recipient via <code>wrapSecretV1</code> (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L1422-L1429">crypto.ts L1422–1429</a>), available from npm as <code>ME.wrapSecretV1</code>.<br>
+    <strong>Group / surface addressing</strong> — not implemented.
+  </div>
+</section>
+
 <section id="core-relation">
   <h2>Core Relation</h2>
   <pre><code>T ⊥ A</code></pre>

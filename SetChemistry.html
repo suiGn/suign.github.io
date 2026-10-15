@@ -195,8 +195,20 @@
 
 <section id="identity">
   <h2 id="kernel-identity-as-audience-element">Kernel Identity as Audience Element</h2>
-  <pre><code>identityHash(K) = keccak256("this.me/identity:v1::" + K.seed)
-(P256_priv_K, P256_pub_K) = generateP256KeyPair(HKDF(K.seed, "this.me/p256/v1"))</code></pre>
+  <pre><code>seed(who, secret) = keccak256("me.seed/compound:v1::" + who + "::" + secret)
+identityHash(K)   = keccak256("this.me/identity:v1::" + K.seed)
+(P256_priv_K, P256_pub_K) = generateP256KeyPair()   // random, not derived from seed
+W = wrapSecretV1(P256_pub_K, secret)                // secrets are wrapped to it</code></pre>
+  <div class="note">
+    <strong>Status in this.me 4.2.1</strong> · Kernel: this.me 4.2.1<br>
+    Seed and identity formulas: <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/me.ts#L123-L157">me.ts L123–157</a>, tested in
+    <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/tests/Security/seed-persistence.test.ts#L1">seed-persistence.test.ts</a>.
+    <code>identityHash</code> is exposed through <code>me.prove(&#123; expression, rootNamespace &#125;)</code>
+    (returned as <code>identityHash</code>), not as a <code>me.identityHash()</code> method.<br>
+    The P-256 key pair is generated randomly with WebCrypto
+    (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L1372-L1385">crypto.ts generateP256KeyPair L1372–1385</a>); there is no
+    seed-to-P-256 derivation. Secrets reach it by wrapping (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/crypto.ts#L1422-L1429">wrapSecretV1 L1422–1429</a>).
+  </div>
   <p class="dim">
     <code>P256_pub_K</code> — encryption target, shareable.
     <code>identityHash(K)</code> — membership identifier.
@@ -224,6 +236,14 @@ verifyEd25519Signature(pub, data, sig) → boolean
 
 <section id="algebra">
   <h2 id="audience-algebra">Audience Algebra</h2>
+
+  <div class="note">
+    <strong>Status in this.me 4.2.1</strong> · Kernel: this.me 4.2.1<br>
+    Union (OR), intersection (AND, XOR shares) and difference (<code>minus</code>, resolved at seal time)
+    are implemented in <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L1">audience.ts</a> (<code>sealAudience</code> <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L207-L226">L207–226</a>, <code>openAudience</code> <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L229-L247">L229–247</a>,
+    <code>minus</code> <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L101-L107">L101–107</a>), tested by <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/tests/Security/audience-algebra.test.ts#L1">audience-algebra.test.ts</a> (16/16),
+    and not exported by the npm 4.2.1 package. Threshold-k (Shamir) is not implemented.
+  </div>
 
   <h3>Union — A = K₁ ∪ K₂ ∪ ... ∪ Kₙ</h3>
   <pre><code>S ← random(32)
@@ -256,29 +276,42 @@ decrypt: requires all Kᵢ
 
   <h3>Set Difference — A = K₁ \ K₂</h3>
   <p class="dim">
-    Not directly constructible via wrapping alone. Requires revocation:
-    re-encrypt <code>S</code> for <code>A \ {K₂}</code> and rotate. Old
-    ciphertext and <code>W₂</code> invalidated only if <code>S</code> rotates.
+    <code>minus(A, K₂)</code> drops every coalition containing <code>K₂</code>
+    (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L101-L107">audience.ts L101–107</a>). It is applied at seal time;
+    revoking from existing data means resealing with a fresh <code>S</code>. Tested in
+    <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/tests/Security/audience-algebra.test.ts">audience-algebra.test.ts</a>; not exported by npm 4.2.1.
   </p>
 </section>
 
 <section id="blob-format">
   <h2>Blob Format</h2>
-  <pre><code>type AudienceBlobV1 = {
-  version: "audience/v1";
-  ciphertext: Uint8Array;        // encryptSymmetric(S, value)
-  audience: AudienceMember[];
-};
+  <pre><code>interface AudienceEnvelopeV1 {
+  version: 1;
+  audience: string;              // audienceId of the sealed audience
+  epoch: number;                 // revocation = new seal, higher epoch
+  ciphertext: EncryptedBlob;     // value under a fresh content key
+  tree: AudienceNodeV1;
+}
 
-type AudienceMember = {
-  identityHash: string;          // hex — audience kernel fingerprint
-  wrapped: WrappedSecret;        // wrapSecretV1(P256_pub_K, S)
-};</code></pre>
+type AudienceNodeV1 =
+  | { leaf: string; wrapped: WrappedSecretV1 }   // leaf = identityHash
+  | { or: AudienceNodeV1[] }
+  | { and: AudienceNodeV1[] };                   // XOR shares</code></pre>
+  <p class="dim">Kernel: this.me 4.2.1 · <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L70-L77">audience.ts AudienceEnvelopeV1 L70–77</a>. The envelope is a tree, not a flat member list.</p>
   <p class="dim">
     Stored at the target path in the kernel's encrypted branch, alongside or
     replacing the v3 blob, depending on whether the path is self-owned or
     audience-scoped.
   </p>
+</section>
+
+<section id="kdf-domains">
+  <h2>KDF Domains</h2>
+  <pre><code>"me.seed/compound:v1::"   compound seed        me.ts L124
+"this.me/identity:v1::"   identityHash         me.ts L123
+"this.me/audience:v1::"   audienceId           audience.ts L35
+"this.me/audience/v1"     AUDIENCE_KDF_SALT    audience.ts L36</code></pre>
+  <p class="dim">Status in this.me 4.2.1: these are the domain strings that exist (<a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/me.ts#L123-L124">me.ts L123–124</a>, <a href="https://github.com/neurons-me/.me/blob/v4.2.1/Typescript/src/audience.ts#L35-L36">audience.ts L35–36</a>). No other per-purpose domains are defined.</p>
 </section>
 
 <section id="axioms">
