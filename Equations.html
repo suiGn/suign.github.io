@@ -180,10 +180,12 @@
     only collects them.
   </div>
   <p class="dim">Visual: <a href="./Equations-Visual-Infographics-Edition.html">the whole glossary, as infographics</a></p>
+  <p class="dim">On the .me docs: <a href="https://neurons-me.github.io/.me/docs/Space-Structure.html">What Is the Mathematical Structure of a Space in .me?</a> · <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html">Is .me a Category?</a></p>
 </section>
 <div class="toc">
   <a href="#context-algebra">Context Algebra</a><span class="sep">·</span>
   <a href="#space-structure">Space Structure</a><span class="sep">·</span>
+  <a href="#category">Is .me a Category?</a><span class="sep">·</span>
   <a href="#audience-algebra">Audience Algebra</a><span class="sep">·</span>
   <a href="#ownership-algebra">Ownership Algebra</a><span class="sep">·</span>
   <a href="#ok">O(k) Reactivity</a><span class="sep">·</span>
@@ -248,6 +250,12 @@ G' = G - noise(T_control, incentive, audit_gap, memory_loss)</code></pre>
     <p class="meaning">The containment order every path in <code>.me</code> resolves under — position in the tree, not a foreign key, decides what's reachable from where.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a>, <a href="./SemanticGraphEngine.html">The Semantic Graph Engine</a></p>
   </div>
+  <div class="entry" id="prefix-closure">
+    <pre><code>Let P_declared be the set of paths that were actually written.
+Let P = PrefixClosure(P_declared).</code></pre>
+    <p class="meaning">The positions of a space are every written path plus every prefix of one — <code>profile</code> is a position even if only <code>profile.contact.email</code> was ever written. Under <code>≤</code>, <code>P</code> is a rooted, tree-shaped poset.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Space-Structure.html">What Is the Mathematical Structure of a Space in .me?</a> (<a href="https://medium.suign.com/what-is-the-mathematical-structure-of-a-space-in-me-6fc61a2b89d2">Medium</a>)</p>
+  </div>
   <div class="entry">
     <pre><code>Γ = (o, m, a)</code></pre>
     <p class="meaning">The resolution context: observer, mode, and authority — the three things a read depends on besides the path itself.</p>
@@ -262,6 +270,11 @@ G' = G - noise(T_control, incentive, audit_gap, memory_loss)</code></pre>
     <pre><code>M = Value + Pointer + Family + Children + History + {⊥}</code></pre>
     <p class="meaning">Everything a resolved path can manifest as — including <code>⊥</code>, structural absence, as a first-class outcome rather than an error.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
+  </div>
+  <div class="entry" id="addressability">
+    <pre><code>E_o(wallet) = ∅,   while   R_o(wallet.income, direct) = 100</code></pre>
+    <p class="meaning">Addressable but not discoverable: a secret-scoped root is absent from enumeration, yet its exact leaf still resolves. You can resolve what you cannot discover by browsing from its root.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Space-Structure.html">What Is the Mathematical Structure of a Space in .me?</a> (<a href="https://medium.suign.com/what-is-the-mathematical-structure-of-a-space-in-me-6fc61a2b89d2">Medium</a>)</p>
   </div>
   <div class="entry">
     <pre><code>manifest(p | o, m, a) = x
@@ -293,6 +306,70 @@ where I_φ = { i ∈ children(p) | φ(p.i, o) holds }</code></pre>
 K = (S, π, Σ, H, D)</code></pre>
     <p class="meaning">The full definitions: a space is its paths, containment order, contexts, manifestation domain, and resolution relation; a kernel adds pointers, a secret-scope algebra, a hash chain, and deterministic conflict resolution on top of a space.</p>
     <p class="source">Source: <a href="./SpaceStructure.html">SpaceStructure</a></p>
+  </div>
+</section>
+<section id="category">
+  <h2>Is .me a Category?</h2>
+  <p class="dim">From pointer semantics to categorical structure: history, an active graph, a free category of routes, one typed trace per read, a canonical relocation, and a contextual manifestation. Full text: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html">Is .me a Category?</a> on the .me docs, building on <a href="https://neurons-me.github.io/.me/docs/Space-Structure.html">What Is the Mathematical Structure of a Space in .me?</a></p>
+  <div class="note">Notation: <code>R_{t,γ}</code> is the resolution relation <code>R</code> above, fixed at time <code>t</code> with context <code>γ</code>.</div>
+  <div class="entry" id="cat-pipeline">
+    <pre><code>H_t  ──fold_LWW──▶  G_t  ──FreeCat──▶  C_t</code></pre>
+    <p class="meaning">The event history <code>H_t</code> folds (last write wins) into the active pointer graph <code>G_t</code>, which generates the free category of routes <code>C_t</code>.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#the-fully-typed-pipeline">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-freecat">
+    <pre><code>C_t = FreeCat(G_t)</code></pre>
+    <p class="meaning">Objects are positions, morphisms are formal paths of active pointer edges: every route the active graph permits, unconcerned with any particular execution.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#verdict">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-trace-type">
+    <pre><code>Trace^{(n)}_t : P̂ ⇀ Mor(C_t)
+Mor(C_t) = ∐_{p, q ∈ P̂} Hom_{C_t}(p, q)</code></pre>
+    <p class="meaning">A fuel-bounded trace returns a morphism of <code>C_t</code> typed by source and target, not the category itself.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#trace-must-return-a-morphism-not-a-category">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-trace">
+    <pre><code>Trace^{(n)}_t(x) = c : p → q,   c ∈ Hom_{C_t}(p, q),   x ∈ ↓p
+Trace^{(n)}_t(x) = id_x : x → x        (no pointer involved)</code></pre>
+    <p class="meaning">The input lives in the source's cone (<code>x = p.s</code>), not necessarily at the source; with no pointer, the trace is the identity anchored at <code>x</code> itself.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#the-pointer-free-case-needs-its-own-object-not-a-bare-identity">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-functor">
+    <pre><code>F_t(c) : ↓p → ↓q,   F_t(c)(x) ∈ ↓q
+F_t(id_x) = id_{↓x}</code></pre>
+    <p class="meaning">The structural functor sends a route to its net relocation between principal cones; an identity route relocates nothing.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#the-fully-typed-pipeline">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-exec">
+    <pre><code>Exec_{t,γ}(id_x, x) = R_{t,γ}(x)</code></pre>
+    <p class="meaning">Pointer-free resolution is the special case where the structural layer contributes nothing and contextual resolution acts directly on the input.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#the-pointer-free-case-needs-its-own-object-not-a-bare-identity">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-runtime-eval">
+    <pre><code>RuntimeEval^{(n)}_{t,γ}(x) = R_{t,γ}( F_t(Trace^{(n)}_t(x))(x) ),   when the trace is defined</code></pre>
+    <p class="meaning">One read: trace the route, relocate the input along it, then resolve the relocated path under context. A4: <code>profile.cards.primary.income</code> ↦ <code>wallet.income</code> ↦ <code>1000</code>.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#the-fully-typed-pipeline">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-conesubst">
+    <pre><code>ConeSubst(P̂):   π_{p,q}(p.s) = q.s,   one morphism per ordered pair (p, q)</code></pre>
+    <p class="meaning">A deliberately restricted category: only the canonical prefix-replacement map between each pair of principal cones, so every hom-set is a singleton and every morphism invertible (chaotic).</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#conesubstp-is-a-deliberately-restricted-category-not-the-category-of-all-cone-maps">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-partiality">
+    <pre><code>R_{t,γ} : P̂ ⇀ M      — semantic partiality
+Trace^{(n)}_t           — operational partiality</code></pre>
+    <p class="meaning">Two partialities at two layers: a valid position may manifest nothing (<code>⊥</code>), and a fuel-bounded evaluation may not complete a finite trace.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#two-different-partialities-not-one">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-faithful">
+    <pre><code>F_t injective on Hom_{C_t}(p, q)  ⟺  |Hom_{C_t}(p, q)| ≤ 1</code></pre>
+    <p class="meaning">Faithfulness is per hom-set: route information survives exactly for source–target pairs with at most one formal chain, and is lost wherever there are more.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#faithfulness-is-a-per-hom-set-property-not-a-property-of-one-walked-route">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
+  </div>
+  <div class="entry" id="cat-stages">
+    <pre><code>history → active graph → available routes → traversed route → canonical relocation → contextual manifestation</code></pre>
+    <p class="meaning">The six typed stages, <code>H_t</code>, <code>G_t</code>, <code>C_t</code>, <code>Trace</code>, <code>F_t</code>, <code>R_{t,γ}</code>: each carries exactly what the next one needs.</p>
+    <p class="source">Source: <a href="https://neurons-me.github.io/.me/docs/Is-Me-A-Category.html#verdict">Is .me a Category?</a> (<a href="https://medium.com/codex/is-me-a-category-807a8f5fc881">Medium</a>)</p>
   </div>
 </section>
 <section id="audience-algebra">
