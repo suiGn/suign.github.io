@@ -260,29 +260,6 @@ architecture  → patches accumulate, core function still fails</code></pre>
   </ul>
 </section>
 
-<section id="instantiation">
-  <h2>Where <code>.me</code> Fits, Verified</h2>
-  <p>Verified today (<code>this.me</code> 4.2.1):</p>
-  <pre><code>change(x)       → recompute only dependents of x       O(k)
-explain(v)      → where v came from
-me.wallet["_"]  → secret branch: a guest cannot read it
-                  or confirm it exists</code></pre>
-  <p class="dim">
-    Structure is kept separate from who can see it. Numbers:
-    <a href="./WhatIsOK.html">WhatIsOK.html</a>. The distinction behind
-    secret scopes: <a href="./AxiomOfDistinction.html">AxiomOfDistinction.html</a>.
-    Algebra of the space: <a href="./DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html</a>.
-    Demos: <a href="https://neurons-me.github.io/.me/Demos/">neurons-me.github.io/.me/Demos</a>.
-  </p>
-  <div class="note open">
-    <strong>Direction, not implemented.</strong> Coordination between
-    organizations is not something <code>.me</code> does today. Two carriers
-    would each keep their own data; the shared question — "spare capacity on
-    this route this week?" — could be answered without either seeing the
-    other's clients, prices or routes.
-  </div>
-</section>
-
 <section id="references">
   <h2>References</h2>
   <ul class="plain">
