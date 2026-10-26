@@ -194,7 +194,7 @@ M \ V    = feasible but invisible connections  → where Π_gap lives</code></pr
 S2   price(x) → 0   ⇏   utility(x) → 0
 S3   expansion  ≠  coordination</code></pre>
   <ul class="plain">
-    <li><strong>S1.</strong> Profit can reward efficiency, or it can be a rent on a difference: knowing first, being the only one with access, sitting between two sides that cannot see each other, or moving risk onto someone else. The number alone does not say which. The hypothesis is that a significant share of profit today is <code>Π_gap</code>. Not yet estimated; the diesel case below is the proposed first measurement.</li>
+    <li><strong>S1.</strong> Profit can reward efficiency, or it can be a rent on a difference: knowing first, being the only one with access, sitting between two sides that cannot see each other, or moving risk onto someone else. The number alone does not say which. The hypothesis is that a significant share of profit today is <code>Π_gap</code>. Not yet estimated; the instrument below is how to measure it.</li>
     <li><strong>S2.</strong> An unsold apple has price 0 and the same nutrients.</li>
     <li><strong>S3.</strong> The first infrastructure (roads, grids, factories, networks, the Internet) is good at producing and connecting. That is not the same capability as matching what exists to what is needed.</li>
   </ul>
@@ -247,24 +247,31 @@ wealth       top 10%    ~76% of global wealth
 weakens if:
   most waste is explained by safety, legal, or physical limits
   (i.e. M is already small and mostly exhausted)</code></pre>
-  <p>Example under test: diesel in Mexico.</p>
-  <ul class="plain">
-    <li><strong>Access gap.</strong> A truck brings diesel from Brownsville to San Luis Potosí because that seller closed the sale, while diesel at the same or lower price may be available in Lagos de Moreno that the buyer did not reach. Test: had the buyer seen it, on terms they could use (quantity, timing, spec, contract), would the Brownsville run still happen? If not, the margin was <code>Π_gap</code>.</li>
-    <li><strong>Counter-flow.</strong> A buyer in Monterrey gets diesel from the Bajío while another truck carries the same product the other way on the same corridor. Unless grade, contract or timing explains it, this is a coordination failure. If shared visibility does not collapse the flow, the hypothesis fails for this case.</li>
-    <li><strong>Policy gap.</strong> Part of a regional price difference can come from pricing rules or subsidies, not coordination. Closing that one is a governance question, not a matching one.</li>
-  </ul>
-  <p>Instrument: decompose the spread on one corridor.</p>
-  <pre><code>Δp       = p_delivered − p_alt        p_alt = best reachable alternative
-Δp       = c_freight + c_policy + Π_gap
+  <p>Test case, stated generally: one good <code>g</code> moving between nodes.</p>
+  <pre><code>p_i        = price of g at node i
+c(i,j)     = cost to move g from i to j
+τ_i        = policy term at i (taxes, subsidies, regulated price)
+f(i→j)     = flow of g from i to j in a time window
 
-c_freight  = published freight rate per km × distance
-c_policy   = difference from taxes, regulated or regional pricing
-Π_gap      ≈ Δp − c_freight − c_policy     (residual, upper bound)</code></pre>
+access gap   buyer at j is served from i, while some k ∈ M exists with
+             p_k + c(k,j) + τ_k  <  p_i + c(i,j) + τ_i
+             and k ∉ V for the buyer
+
+counter-flow f(i→j) > 0  and  f(j→i) > 0   same g, same window
+
+policy gap   part of p_i − p_k comes from τ_i − τ_k, not from c or M \ V</code></pre>
+  <p>Instrument: decompose the spread on one route.</p>
+  <pre><code>Δp       = p_delivered − p_alt        p_alt = best alternative in M
+Δp       = c_freight + c_policy + Π_gap
+Π_gap    ≈ Δp − c_freight − c_policy     (residual, upper bound)</code></pre>
   <p class="dim">
-    Every term except the residual comes from public prices and rules.
-    <code>c_policy</code> is subtracted first, so the policy gap is not
-    counted as a coordination failure. If the residual is near zero across
-    many trips, the Brownsville run was logistics, not capture.
+    The hypothesis predicts that access gaps and counter-flows shrink when
+    <code>V</code> grows toward <code>M</code>, without new production. If
+    they persist once alternatives are visible, the claim fails for that
+    good. <code>c_policy</code> is subtracted first, so a policy gap is not
+    counted as coordination failure. Where prices are administered, the
+    residual is not interpretable; the test needs a period or market where
+    they are not.
   </p>
   <p class="dim">
     Feasibility is local; the resource is global. Coordination is making
