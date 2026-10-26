@@ -168,6 +168,11 @@ M ⊆ S×D  = feasible connections (s, d):
 Π_i      = private profit of actor i
 W        = collective welfare
 
+Π_i      = Π_eff + Π_gap
+Π_eff    = return on value created (less input per output, better matching)
+Π_gap    = return on a difference held: information, access, bargaining
+           power, jurisdiction, or risk moved onto others
+
 R(N)     = N(N−1)/2     possible pairwise relations among N participants
 R(100)   = 4,950
 R(1,000) = 499,500      10× participants → ~100× relations</code></pre>
@@ -179,11 +184,11 @@ R(1,000) = 499,500      10× participants → ~100× relations</code></pre>
 
 <section id="statements">
   <h2>Statements</h2>
-  <pre><code>S1   max Π_i  ⇏  max W
+  <pre><code>S1   max Π_i  ⇏  max W      Π_gap can grow while W does not
 S2   price(x) → 0   ⇏   utility(x) → 0
 S3   expansion  ≠  coordination</code></pre>
   <ul class="plain">
-    <li><strong>S1.</strong> Profit and welfare can align, but one does not imply the other. Higher profit can come from better logistics or from shifting risk onto others; the number alone does not say which.</li>
+    <li><strong>S1.</strong> Profit can reward efficiency, or it can be a rent on a difference: knowing first, being the only one with access, sitting between two sides that cannot see each other, or moving risk onto someone else. The number alone does not say which. The claim is that a significant share of profit today is <code>Π_gap</code>.</li>
     <li><strong>S2.</strong> An unsold apple has price 0 and the same nutrients.</li>
     <li><strong>S3.</strong> The first infrastructure (roads, grids, factories, networks, the Internet) is good at producing and connecting. That is not the same capability as matching what exists to what is needed.</li>
   </ul>
@@ -221,6 +226,10 @@ wealth       top 10%    ~76% of global wealth
     limits — those are exactly what <code>M</code> encodes. It asks that
     finding the paths in <code>M</code> be a basic capability, not charity.
   </p>
+  <div class="note">
+    Profit should track net value created. Capturing a difference counts
+    only when closing it created value.
+  </div>
 </section>
 
 <section id="predictions">
@@ -232,10 +241,16 @@ wealth       top 10%    ~76% of global wealth
 weakens if:
   most waste is explained by safety, legal, or physical limits
   (i.e. M is already small and mostly exhausted)</code></pre>
+  <p>Example under test: diesel in Mexico.</p>
+  <ul class="plain">
+    <li><strong>Access gap.</strong> A truck brings diesel from Brownsville to San Luis Potosí because that seller closed the sale, while diesel at the same or lower price may be available in Lagos de Moreno that the buyer did not reach. Test: had the buyer seen it, on terms they could use (quantity, timing, spec, contract), would the Brownsville run still happen? If not, the margin was <code>Π_gap</code>.</li>
+    <li><strong>Counter-flow.</strong> A buyer in Monterrey gets diesel from the Bajío while another truck carries the same product the other way on the same corridor. Unless grade, contract or timing explains it, this is a coordination failure. If shared visibility does not collapse the flow, the hypothesis fails for this case.</li>
+    <li><strong>Policy gap.</strong> Part of a regional price difference can come from pricing rules or subsidies, not coordination. Closing that one is a governance question, not a matching one.</li>
+  </ul>
   <p class="dim">
-    Example under test: two carriers running half-empty trucks on the same
-    route. If shared knowledge of spare capacity does not reduce empty
-    kilometers, the coordination claim fails for that case.
+    Feasibility is local; the resource is global. Coordination is making
+    <code>M</code> visible across the boundary where it is invisible today,
+    without centralizing ownership.
   </p>
 </section>
 
@@ -256,6 +271,7 @@ architecture  → patches accumulate, core function still fails</code></pre>
   <ul class="plain">
     <li>Not a claim that markets create no value. Intermediaries consolidate, refrigerate, check quality and finance.</li>
     <li>Not a claim that one technology solves coordination.</li>
+    <li>Not a claim that every captured difference is bad. Finding a gap is information, and closing one can create value. Separating <code>Π_eff</code> from <code>Π_gap</code> is hard and has to be measured per domain: logistics, finance, platforms.</li>
     <li>Not a claim that coordination needs a central owner. Putting everyone's data in one system recreates the problem with a new owner; participation should not require surrendering ownership or privacy.</li>
   </ul>
 </section>
