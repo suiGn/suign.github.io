@@ -174,11 +174,17 @@ W        = collective welfare
            power, jurisdiction, or risk moved onto others
 
 R(N)     = N(N−1)/2     possible pairwise relations among N participants
-R(100)   = 4,950
-R(1,000) = 499,500      10× participants → ~100× relations</code></pre>
+V ⊆ M    = connections some participant can actually see
+
+|R(N)|   grows ~ N²     (10× participants → ~100× relations)
+|V|      grows ~ N·c    each actor sees only its own c contacts
+
+M \ V    = feasible but invisible connections  → where Π_gap lives</code></pre>
   <p class="dim">
-    Real societies are not fully connected. <code>R(N)</code> is an upper
-    bound, used only to show that relations grow faster than participants.
+    <code>R(N)</code> is an upper bound, not a model of a real society. The
+    point is the ratio: as participants grow, the share of feasible
+    connections anyone can see shrinks. Whoever sees across that gap can
+    charge for it.
   </p>
 </section>
 
@@ -188,7 +194,7 @@ R(1,000) = 499,500      10× participants → ~100× relations</code></pre>
 S2   price(x) → 0   ⇏   utility(x) → 0
 S3   expansion  ≠  coordination</code></pre>
   <ul class="plain">
-    <li><strong>S1.</strong> Profit can reward efficiency, or it can be a rent on a difference: knowing first, being the only one with access, sitting between two sides that cannot see each other, or moving risk onto someone else. The number alone does not say which. The claim is that a significant share of profit today is <code>Π_gap</code>.</li>
+    <li><strong>S1.</strong> Profit can reward efficiency, or it can be a rent on a difference: knowing first, being the only one with access, sitting between two sides that cannot see each other, or moving risk onto someone else. The number alone does not say which. The hypothesis is that a significant share of profit today is <code>Π_gap</code>. Not yet estimated; the diesel case below is the proposed first measurement.</li>
     <li><strong>S2.</strong> An unsold apple has price 0 and the same nutrients.</li>
     <li><strong>S3.</strong> The first infrastructure (roads, grids, factories, networks, the Internet) is good at producing and connecting. That is not the same capability as matching what exists to what is needed.</li>
   </ul>
@@ -247,6 +253,19 @@ weakens if:
     <li><strong>Counter-flow.</strong> A buyer in Monterrey gets diesel from the Bajío while another truck carries the same product the other way on the same corridor. Unless grade, contract or timing explains it, this is a coordination failure. If shared visibility does not collapse the flow, the hypothesis fails for this case.</li>
     <li><strong>Policy gap.</strong> Part of a regional price difference can come from pricing rules or subsidies, not coordination. Closing that one is a governance question, not a matching one.</li>
   </ul>
+  <p>Instrument: decompose the spread on one corridor.</p>
+  <pre><code>Δp       = p_delivered − p_alt        p_alt = best reachable alternative
+Δp       = c_freight + c_policy + Π_gap
+
+c_freight  = published freight rate per km × distance
+c_policy   = difference from taxes, regulated or regional pricing
+Π_gap      ≈ Δp − c_freight − c_policy     (residual, upper bound)</code></pre>
+  <p class="dim">
+    Every term except the residual comes from public prices and rules.
+    <code>c_policy</code> is subtracted first, so the policy gap is not
+    counted as a coordination failure. If the residual is near zero across
+    many trips, the Brownsville run was logistics, not capture.
+  </p>
   <p class="dim">
     Feasibility is local; the resource is global. Coordination is making
     <code>M</code> visible across the boundary where it is invisible today,
