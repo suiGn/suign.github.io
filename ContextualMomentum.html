@@ -114,6 +114,19 @@
     border-radius: 0 8px 8px 0;
   }
 
+  .pullquote {
+    border-left: 3px solid #ffffff;
+    padding: 18px 22px;
+    margin: 22px 0 6px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 0 8px 8px 0;
+  }
+  .pullquote cite { display: block; margin-top: 10px; font-style: normal; font-size: 13px; color: var(--fg-dim); }
+  .pullquote-note { font-size: 13px; margin: 0 0 15px; }
+
   pre {
     background: rgba(31, 40, 51, 0.6);
     border: 1px solid var(--border);
@@ -158,6 +171,14 @@
     Contextual Momentum: the tendency of a generated representation to preserve its own
     continuity and coherence while its correspondence with the described state decays.
   </div>
+  <blockquote class="pullquote">
+    “Coherence is a relationship between statements. Correctness is a relationship between a statement and the state it describes.”
+    <cite>— suiGn</cite>
+  </blockquote>
+  <p class="dim pullquote-note">
+    A distinction as old as the <a href="https://plato.stanford.edu/entries/truth-coherence/">coherence</a>
+    and <a href="https://plato.stanford.edu/entries/truth-correspondence/">correspondence</a> theories of truth.
+  </p>
   <p>
     This is a descriptive term, not a discovery of a new property of transformers. It
     names a pattern that is already visible: once a context has committed to a picture
@@ -190,8 +211,7 @@
 <section id="coherence">
   <h2 id="coherence-is-not-correctness">Coherence Is Not Correctness</h2>
   <p>
-    Coherence is a relation between statements. Correctness is a relation between a
-    statement and a state. A representation can maximize the first while the second
+    A representation can maximize coherence while correctness
     quietly falls away, and from inside the representation the two are
     indistinguishable.
   </p>
