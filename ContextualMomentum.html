@@ -1,0 +1,281 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="./assets/imgs/smileyFace.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contextual Momentum — Coherence Is Not Correctness</title>
+<meta name="description" content="Contextual Momentum: a generated representation keeps its continuity and internal coherence while progressively losing correspondence with the state it describes. A descriptive term by sui.gn, not a new property of transformers.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suign.github.io/ContextualMomentum.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sui.gn">
+<meta property="og:title" content="Contextual Momentum — Coherence Is Not Correctness">
+<meta property="og:description" content="A generated representation keeps its coherence while losing correspondence with the state it describes. Coherence is not correctness.">
+<meta property="og:url" content="https://suign.github.io/ContextualMomentum.html">
+<meta property="og:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contextual Momentum — Coherence Is Not Correctness">
+<meta name="twitter:description" content="A generated representation keeps its coherence while losing correspondence with the state it describes. Coherence is not correctness.">
+<meta name="twitter:image" content="https://suign.github.io/assets/imgs/smileyFace.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Contextual Momentum — Coherence Is Not Correctness",
+  "url": "https://suign.github.io/ContextualMomentum.html",
+  "author": { "@type": "Person", "@id": "https://suign.github.io/sui-Gn.html#identity", "name": "sui.gn", "url": "https://suign.github.io/sui-Gn.html" },
+  "about": "Contextual Momentum",
+  "citation": { "@type": "ScholarlyArticle", "name": "How Language Model Hallucinations Can Snowball", "author": "Zhang et al.", "datePublished": "2023", "url": "https://arxiv.org/abs/2305.13534" },
+  "isPartOf": { "@type": "WebSite", "url": "https://suign.github.io/" },
+  "description": "Contextual Momentum: a generated representation keeps its continuity and internal coherence while progressively losing correspondence with the state it describes. A descriptive term by sui.gn, not a new property of transformers."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c10;
+    --card: rgba(31, 40, 51, 0.45);
+    --fg: #c5c6c7;
+    --fg-dim: #a9b7c6;
+    --accent: #ffffff;
+    --accent-dim: #aaaaaa;
+    --border: rgba(31, 40, 51, 0.9);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  body {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 255, 255, 0.08), transparent 60%),
+      var(--bg);
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+  a:hover { color: #ffffff; border-bottom-color: var(--accent); }
+
+  .topnav { margin-bottom: 20px; }
+  .topnav .back-link { color: var(--fg-dim); border-bottom: none; font-size: 13px; }
+  .topnav .back-link:hover { color: var(--accent); }
+
+  header.banner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    background: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  header.banner .prompt { color: var(--fg-dim); font-size: 13px; }
+  header.banner h1 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin: 8px 0 16px;
+    letter-spacing: 0.01em;
+  }
+  header.banner p { color: var(--fg); margin: 0; }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2::before { content: "## "; color: var(--accent-dim); }
+
+  p { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  code { color: #ffffff; }
+
+  .thesis {
+    border-left: 3px solid var(--accent-dim);
+    padding: 14px 18px;
+    margin: 15px 0;
+    color: #ffffff;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+
+  pre {
+    background: rgba(31, 40, 51, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-size: 13px;
+    color: #ffffff;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-dim);
+    font-size: 13px;
+  }
+  footer .prompt { color: var(--fg-dim); }
+</style>
+</head>
+<body>
+{% include sidebar.html %}
+
+<nav class="topnav">
+  <a href="./index.html" class="back-link">← back home</a>
+</nav>
+
+<header class="banner">
+  <div class="prompt">$ me['!'].contextualMomentum --thesis</div>
+  <h1>CONTEXTUAL MOMENTUM — COHERENCE IS NOT CORRECTNESS</h1>
+  <p>
+    A generated representation can keep its continuity and internal coherence while
+    progressively losing correspondence with the state it describes. That drift has a
+    shape, and it deserves a name.
+  </p>
+</header>
+
+<section id="definition">
+  <h2 id="the-term">The Term</h2>
+  <div class="thesis">
+    Contextual Momentum: the tendency of a generated representation to preserve its own
+    continuity and coherence while its correspondence with the described state decays.
+  </div>
+  <p>
+    This is a descriptive term, not a discovery of a new property of transformers. It
+    names a pattern that is already visible: once a context has committed to a picture
+    of the world, each new generation tends to extend that picture rather than check it.
+    The text stays consistent with itself. It does not stay consistent with the world.
+  </p>
+  <p class="dim">
+    It is related to the observation in Zhang et al. (2023),
+    <a href="https://arxiv.org/abs/2305.13534">How Language Model Hallucinations Can Snowball</a>,
+    that models tend to commit to an early mistake and then generate further claims to
+    justify it. Contextual Momentum describes a broader case.
+  </p>
+</section>
+
+<section id="no-error">
+  <h2 id="no-initial-hallucination-required">No Initial Hallucination Required</h2>
+  <p>
+    Snowballing begins with an error. Contextual Momentum does not need one. A
+    representation can begin perfectly correct — an accurate observation, faithfully
+    recorded — and still go wrong, because the world moves and the representation does
+    not. The observation does not become false by being misread. It becomes false by
+    becoming old.
+  </p>
+  <p>
+    Nothing in the text marks that moment. A stale fact reads exactly like a fresh one.
+    The context carries it forward with the same confidence it had when it was true.
+  </p>
+</section>
+
+<section id="coherence">
+  <h2 id="coherence-is-not-correctness">Coherence Is Not Correctness</h2>
+  <p>
+    Coherence is a relation between statements. Correctness is a relation between a
+    statement and a state. A representation can maximize the first while the second
+    quietly falls away, and from inside the representation the two are
+    indistinguishable.
+  </p>
+  <p>
+    This is why a representation cannot be its own evidence. Asking the context whether
+    it is still accurate returns more context — generated by the same process, anchored
+    to the same picture. The check and the claim live in the same place. It is the same
+    shape described in <a href="./Explain.html">me.explain()</a>: a generated
+    explanation is not evidence about the computation; the computation's own record is.
+  </p>
+</section>
+
+<section id="authority">
+  <h2 id="describing-authority-is-not-having-it">Describing Authority Is Not Having It</h2>
+  <p>
+    A context can describe authority. It cannot manufacture it. Text that says
+    "the battery is sufficient" or "this action is permitted" is a description of a
+    state, not the state, and not permission. If generated text can grant itself the
+    authority to act, then whatever drifted into the context has that authority too.
+  </p>
+  <p>
+    The resolution is a separation of roles: a model proposes, a runtime evaluates. The
+    proposal may be fluent, coherent and wrong. The evaluation reads the current state
+    and either agrees or does not. This is the same line drawn in
+    <a href="./Bizantine.html">the Byzantine pages</a> — trust what can be checked
+    outside the participant making the claim — and in
+    <a href="./AxiomOfDistinction.html">the Axiom of Distinction</a>: a description and
+    the thing described are not the same object, and a system has to keep them apart.
+    Or, as the site puts it, <a href="./index.html">the code is the ultimate truth</a>.
+  </p>
+</section>
+
+<section id="illustration">
+  <h2 id="a-small-illustration">A Small Illustration</h2>
+  <p>
+    A robot's battery was observed at 90. A context records it and reasons forward:
+    the robot can proceed. Later the battery is at 10. The context, unless it is told,
+    still says 90, and still says the robot can proceed — coherently.
+  </p>
+  <pre><code>me.robot["="]("canProceed", "battery >= minimumBattery")
+
+battery: 90  →  canProceed: true
+battery: 10  →  canProceed: false</code></pre>
+  <p class="dim">
+    In <code>.me</code> (verified with this.me 4.2.1), <code>canProceed</code> is not
+    remembered; it is derived from the current state, and recomputes when the state
+    changes. The generated representation can keep its momentum. The derived value does
+    not have any. See <a href="./Equations.html">Equations</a> for how derivations are
+    declared, and <a href="./Explain.html">me.explain()</a> for how their record is
+    returned.
+  </p>
+</section>
+
+<section id="pending">
+  <h2 id="what-is-not-shown-yet">What Is Not Shown Yet</h2>
+  <p>
+    The illustration shows that the runtime value changes when the state changes. It
+    does not yet show, end to end, a model proposing an action from stale context and
+    the runtime rejecting it. That experiment is pending, and this page does not claim
+    its result.
+  </p>
+  <p class="dim">
+    Related material: the <a href="https://neurons-me.github.io/.me/LLMS/">LLMS demo</a>
+    and the <a href="https://github.com/neurons-me/.me">.me repository</a>.
+  </p>
+  <p class="dim"><a href="https://neurons-me.hashnode.dev/contextual-momentum">Technical article on Hashnode</a></p>
+</section>
+
+<section id="related" style="margin:44px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);">
+  <p style="color:#9a9aa2;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">Related — Understanding .me</p>
+  <ul style="list-style:none;margin:0;padding:0;color:#c5c6c7;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+    <li style="margin-bottom:6px;"><a href="./Explain.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">me.explain()</a> <span style="color:#8a8a92;">— the computation's record, not a generated account</span></li>
+    <li style="margin-bottom:6px;"><a href="./Bizantine.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">Bizantine.html</a> <span style="color:#8a8a92;">— trust what can be checked</span></li>
+    <li style="margin-bottom:6px;"><a href="./AxiomOfDistinction.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">AxiomOfDistinction.html</a> <span style="color:#8a8a92;">— description is not the described</span></li>
+    <li style="margin-bottom:6px;"><a href="https://neurons-me.hashnode.dev/contextual-momentum" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">Technical article on Hashnode</a> <span style="color:#8a8a92;">— Contextual Momentum, in depth</span></li>
+    <li style="margin-bottom:6px;"><a href="./Equations.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.35);text-decoration:none;">Equations.html</a> <span style="color:#8a8a92;">— derived values from current state</span></li>
+  </ul>
+</section>
+
+<footer>
+  <div class="prompt">$ exit</div>
+  <p>Written as thesis by sui.gn · <a href="./sui-Gn.html">whois.me</a></p>
+  {% include social-footer.html %}
+</footer>
+
+</body>
+</html>
