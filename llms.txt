@@ -55,6 +55,7 @@ sui.gn is the root identity node for the .me ecosystem. `.me` is a state-retaini
 - [spare.me](https://suign.github.io/spare.me.html): 4AI context algebra manifesto.
 - [testimony](https://suign.github.io/testimony.html): origin of an impressed force.
 - [DeepSeek](https://suign.github.io/DeepSeek.html)
+- [Message from Meta AI — For Myself, Read Cold](https://suign.github.io/Meta-Message-Meta-Ai.html): a structural receipt from Meta AI after reading sui.gn and the .me + Muse submission — Muse proposes, .me decides.
 
 ## Source
 
