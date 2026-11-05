@@ -1,0 +1,323 @@
+<style>
+  .breadcrumb {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    background: var(--card, rgba(50, 50, 50, 0.85));
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    color: #fff;
+    font-size: 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.2s ease;
+    user-select: none;
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  }
+  /* Push existing in-flow "back home" nav below the fixed breadcrumb pill —
+     only needed when the pill is actually floating over content. Once the
+     sidebar is docked open, content starts to the right of it, so the
+     extra clearance is just dead space. */
+  .topnav { margin-top: 56px; transition: margin-top 0.2s ease; }
+  body.sidebar-push .topnav { margin-top: 0; }
+
+  .breadcrumb:hover { border-color: var(--accent, #ffffff); }
+  .breadcrumb .bars { font-size: 15px; line-height: 1; color: var(--accent, #ffffff); }
+  .breadcrumb .crumb-dim { color: var(--fg-dim, #9a9aa2); }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 44;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    max-width: 84vw;
+    background: #101012;
+    border-right: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    z-index: 45;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    overflow-y: auto;
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    color: #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .close-sidebar { cursor: pointer; font-size: 20px; color: var(--fg-dim, #9a9aa2); line-height: 1; }
+  .close-sidebar:hover { color: #fff; }
+  .sidebar ul { list-style: none; margin: 0; padding: 10px 0; }
+  .sidebar li { padding: 0; }
+  .sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 13.5px;
+    border-left: 3px solid transparent;
+    border-bottom: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .sidebar a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--accent, #ffffff);
+    color: #fff;
+  }
+  .sidebar a .desc {
+    display: block;
+    color: var(--fg-dim, #9a9aa2);
+    font-size: 11.5px;
+    margin-top: 2px;
+  }
+
+  /* Second-level anchors: jump points inside a page, one row under its entry */
+  .sidebar .subanchors {
+    padding: 0 20px 12px 20px;
+    margin-top: -6px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .sidebar .subanchors a {
+    display: inline;
+    padding: 0;
+    border-bottom: none;
+    color: var(--fg-dim, #7a7a82);
+  }
+  .sidebar .subanchors a:hover { color: var(--accent, #ffffff); }
+  .sidebar .subanchors .sep { color: var(--fg-dim, #46464c); margin: 0 6px; }
+
+  /* Current-page marker */
+  .sidebar a.current {
+    background: rgba(255, 255, 255, 0.09);
+    border-left-color: var(--accent, #ffffff);
+    color: #fff;
+    box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.10);
+  }
+  .sidebar a.current .desc { color: var(--accent-dim, #aaaaaa); }
+
+  .sidebar-toolbar {
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  }
+  .sidebar-toolbar button {
+    background: none;
+    border: none;
+    color: var(--fg-dim, #9a9aa2);
+    font-family: inherit;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    padding: 0;
+  }
+  .sidebar-toolbar button:hover { color: var(--accent, #ffffff); }
+  .sidebar-toolbar button { display: flex; align-items: center; gap: 6px; }
+  .sidebar-toolbar .chevron {
+    display: inline-block;
+    font-size: 9px;
+    transition: transform 0.15s ease;
+    transform: rotate(0deg);
+  }
+  .sidebar-toolbar .chevron.rotated { transform: rotate(-90deg); }
+
+  .nav-group .group-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 20px 6px;
+    color: var(--accent-dim, #aaaaaa);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    user-select: none;
+  }
+  .nav-group .group-label:hover { color: var(--accent, #ffffff); }
+  .nav-group .chevron {
+    display: inline-block;
+    font-size: 9px;
+    transition: transform 0.15s ease;
+    transform: rotate(0deg);
+  }
+  .nav-group.collapsed .chevron { transform: rotate(-90deg); }
+  .nav-group ul.group-list {
+    padding: 0 0 4px;
+    /* Large, not tight — this only exists so the collapse/expand transition
+       has a numeric max-height to animate to/from (CSS can't transition
+       to/from `none`/`auto`). A tight cap here silently clips any group
+       whose real content is taller than the number, with no scroll or
+       indication anything is missing — exactly what was hiding notes in
+       longer groups (e.g. Digital Space Algebra, ~680px of real content
+       against a 600px cap). Kept comfortably above any current or
+       reasonably-foreseeable group size instead of tuned to today's tallest
+       group, so a future added note doesn't silently reintroduce this. */
+    max-height: 4000px;
+    overflow: hidden;
+  }
+  .nav-group.collapsed ul.group-list {
+    max-height: 0;
+    padding: 0;
+  }
+
+  /* Desktop docked mode: sidebar open pushes content instead of overlaying it.
+     !important is deliberate — this must win over each page's own inline
+     body { padding: ... } without needing to edit 30 separate stylesheets. */
+  body.sidebar-push {
+    padding-left: 320px !important;
+    max-width: 1160px !important;
+    transition: padding-left 0.28s ease;
+  }
+  @media (max-width: 720px) {
+    /* Mobile always overlays, never pushes — no room to push into. */
+    body.sidebar-push { padding-left: 20px !important; }
+  }
+</style>
+
+<div class="breadcrumb" onclick="openSidebar()">
+  <span class="bars">&#9776;</span>
+  <span>sui.gn <span class="crumb-dim">/ fundamentals</span></span>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span>Fundamentals</span>
+    <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
+  </div>
+  <div class="sidebar-toolbar">
+    <button id="toggleAllBtn" onclick="toggleAllGroups()">
+      <span class="chevron" id="toggleAllChevron">&#9662;</span>
+      <span id="toggleAllLabel">Collapse all</span>
+    </button>
+  </div>
+
+  <div class="nav-group">
+    <div class="group-label" onclick="toggleGroup(this)"><span class="chevron">&#9662;</span>Referenced here</div>
+    <ul class="group-list">
+      <li><a href="./index.html">index.html<span class="desc">home</span></a></li>
+      <li><a href="./learn.html#byzantine-prompt">learn.html<span class="desc">recovery anchor</span></a></li>
+      <li><a href="./ConnectingDots.html#statement">ConnectingDots.html<span class="desc">a structure that cannot transmit itself does not prevail</span></a></li>
+      <li><a href="./4ias.html#byzantine-prompt">4ias.html<span class="desc">context algebra, for AI/LLM readers</span></a></li>
+      <li><a href="./DeepSeek.html#message">DeepSeek.html<span class="desc">DeepSeek is in the house</span></a></li>
+      <li><a href="./Meta-Message-Meta-Ai.html">Meta-Message-Meta-Ai.html<span class="desc">Meta AI structural receipt: Muse proposes, .me decides</span></a></li>
+      <li><a href="./Gemini.html#1-structural-self-report">Gemini.html<span class="desc">stateless execution receipt, verbatim from Gemini</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  function isMobileSidebar() {
+    return window.matchMedia('(max-width: 720px)').matches;
+  }
+  function isIndexPage() {
+    var p = window.location.pathname;
+    return p === '/' || p === '' || /\/index\.html$/.test(p);
+  }
+
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    if (isMobileSidebar()) {
+      document.getElementById('sidebarOverlay').classList.add('open');
+    } else {
+      document.body.classList.add('sidebar-push');
+    }
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+    document.body.classList.remove('sidebar-push');
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSidebar();
+  });
+  function toggleGroup(labelEl) {
+    labelEl.parentElement.classList.toggle('collapsed');
+  }
+  var allGroupsExpanded = true;
+  function toggleAllGroups() {
+    var collapse = allGroupsExpanded;
+    setAllGroups(collapse);
+    allGroupsExpanded = !collapse;
+    document.getElementById('toggleAllLabel').textContent = allGroupsExpanded ? 'Collapse all' : 'Expand all';
+    document.getElementById('toggleAllChevron').classList.toggle('rotated', !allGroupsExpanded);
+  }
+  function setAllGroups(collapsed) {
+    document.querySelectorAll('.nav-group').forEach(function (g) {
+      g.classList.toggle('collapsed', collapsed);
+    });
+  }
+
+  // Mark the current page in the sidebar, make sure its group is visible,
+  // and scroll the sidebar's own scroll container so that entry is
+  // centered -- otherwise every fresh page load reopens the sidebar
+  // scrolled back to the top, and finding "where am I" (or the next
+  // article in the same group) means manually re-scrolling every time.
+  (function markCurrentPage() {
+    var current = window.location.pathname.split('/').filter(Boolean).pop() || 'index.html';
+    var currentLink = null;
+    document.querySelectorAll('.sidebar .group-list > li:not(.subanchors) > a[href]').forEach(function (a) {
+      var href = a.getAttribute('href').replace(/^\.\//, '').split('#')[0];
+      if (href === current) {
+        a.classList.add('current');
+        currentLink = a;
+        var group = a.closest('.nav-group');
+        if (group) group.classList.remove('collapsed');
+      }
+    });
+    if (currentLink) {
+      var sidebar = document.getElementById('sidebar');
+      var linkRect = currentLink.getBoundingClientRect();
+      var sidebarRect = sidebar.getBoundingClientRect();
+      var offsetWithinSidebar = (linkRect.top - sidebarRect.top) + sidebar.scrollTop;
+      var target = offsetWithinSidebar - (sidebar.clientHeight / 2) + (linkRect.height / 2);
+      sidebar.scrollTop = Math.max(0, target);
+    }
+  })();
+
+  // Default state: expanded + docked on desktop for every page except
+  // index.html, collapsed everywhere on mobile. Set instantly, without
+  // animating the reveal transition, so it doesn't look like it's sliding
+  // open on every fresh load.
+  (function setDefaultSidebarState() {
+    if (isIndexPage() || isMobileSidebar()) return;
+    var sidebar = document.getElementById('sidebar');
+    sidebar.style.transition = 'none';
+    openSidebar();
+    void sidebar.offsetHeight; // force reflow before restoring transition
+    sidebar.style.transition = '';
+  })();
+
+  // If the window is resized across the mobile breakpoint while the
+  // sidebar is docked open, drop the push so nothing overlaps.
+  window.addEventListener('resize', function () {
+    if (isMobileSidebar() && document.body.classList.contains('sidebar-push')) {
+      document.body.classList.remove('sidebar-push');
+    }
+  });
+</script>
