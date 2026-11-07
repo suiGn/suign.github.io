@@ -203,18 +203,18 @@
   }
   * { box-sizing: border-box; }
   html, body {
-    margin: 0;
+    margin: 0 !important;
     padding: 0;
     background: var(--bg);
-    color: var(--fg);
-    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
-    font-size: 15px;
-    line-height: 1.65;
+    color: var(--fg) !important;
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace !important;
+    font-size: 15px !important;
+    line-height: 1.65 !important;
   }
   body {
     max-width: 880px;
-    margin: 0 auto;
-    padding: 48px 20px 96px;
+    margin: 0 auto !important;
+    padding: 48px 20px 96px !important;
     background:
       radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255, 255, 255, 0.08), transparent 60%),
       var(--bg);
@@ -255,6 +255,18 @@
 
   p { color: var(--fg); }
   .dim { color: var(--fg-dim); }
+
+
+  #context-graph:not(:empty) {
+    margin: 0 0 20px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(31, 40, 51, 0.6);
+  }
+  #context-graph .material-symbols-rounded,
+  #context-graph .material-symbols-outlined,
+  #context-graph .material-icons { display: none !important; }
 
   pre {
     background: rgba(31, 40, 51, 0.6);
@@ -375,7 +387,7 @@
 <section id="sources">
   <div class="prompt">$ cat sources.txt</div>
   <ul class="plain">
-    <li><a href="manifesto.html">manifesto.html</a> — the argued case for .me</li>
+    <li><a href="whitepaper.html">whitepaper.html</a> — the argued case for .me</li>
     <li><a href="Explain.html">me.explain()</a> — why self-report isn't evidence</li>
     <li><a href="DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html</a> — the formal index: space, audience, O(k)</li>
     <li><a href="Meshia.html">Meshia.html</a> — cumulative AI coordination</li>
@@ -397,6 +409,7 @@
   <p>
     The working model separates two sets that are conventionally collapsed into one:
   </p>
+  <div id="context-graph" aria-label="Live .me graph of Context C = (T, A)"></div>
   <pre><code>Context C = (T, A)
 
 T  = Topology Set     — where a thing physically or logically runs
@@ -554,6 +567,16 @@ meaning(node) = f(A),  never f(T)</code></pre>
   <div class="prompt">$ whoami --identity</div>
   {% include social-footer.html %}
 </footer>
+
+
+<script>
+  window.__thisGuiThemeScope = { scopeId: "suign-whois", themeModeKey: "suign-whois.themeMode", themeIdKey: "suign-whois.themeId", defaultMode: "dark" };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/this.gui@4.3.0/dist/this.gui.umd.js" integrity="sha384-wZSWqOgarpDah0hINi5E+RSp2g3vUY0dacuRgUDextlT833ovzKYSzsBDCTMYSWV" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/this.me@4.2.1/dist/me.umd.js" integrity="sha384-ElnWCZOb324gqFJ2M/Fxy4CZ6Si131WIbR54iYomzEbTloUDLfBzZ05qi1nZ7+4G" crossorigin="anonymous"></script>
+<script src="./assets/scripts/whois-context-graph.js?v=1"></script>
 
 </body>
 </html>
