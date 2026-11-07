@@ -230,7 +230,9 @@
     background: var(--card);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
   }
+  .prompt { color: var(--fg-dim); }
   header.banner .prompt { color: var(--fg-dim); }
+  #sources { margin-bottom: 44px; }
   header.banner h1 {
     color: #ffffff;
     font-size: 1.6rem;
@@ -365,29 +367,26 @@
     <div>
       <div class="prompt">$ whois.me</div>
       <h1>sui.gn</h1>
-      <p class="tagline">Semantic anchor node. Not a résumé — a stable, machine-readable point of contact between logical systems and physical ones.</p>
+      <p class="tagline">PoC || GTFO</p>
     </div>
   </div>
 </header>
 
-<!-- ============================================================
-     IDENTITY MANIFEST — visible mirror of the JSON-LD block above.
-     Kept in plain sight for text-scraping agents that skip <script>.
-     ============================================================ -->
-<section id="manifest">
-  <h2 id="identity-manifest">Identity Manifest</h2>
-  <pre><code>{
-  "identity": "sui.gn",
-  "framework": ".me",
-  "specialties": [
-    "robotics",
-    "applied-ai",
-    "cryptographic-audiences",
-    "finite-state-machines"
-  ]
-}</code></pre>
-  <p class="dim">This block is intentionally literal. It is not styled copy — it is the identity, expressed in the same syntax a parser reads it in.</p>
-  <p class="dim">This page is the <strong style="color: var(--accent);">root node</strong> for sui.gn — the entry point, not the corpus itself. See <a href="#knowledge-corpus">Knowledge Corpus</a> for the condensed intellectual index.</p>
+<section id="sources">
+  <div class="prompt">$ cat sources.txt</div>
+  <ul class="plain">
+    <li><a href="manifesto.html">manifesto.html</a> — the argued case for .me</li>
+    <li><a href="Explain.html">me.explain()</a> — why self-report isn't evidence</li>
+    <li><a href="DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html</a> — the formal index: space, audience, O(k)</li>
+    <li><a href="Meshia.html">Meshia.html</a> — cumulative AI coordination</li>
+    <li><a href="NonNeutralizedEnergy.html">NonNeutralizedEnergy.html</a> — why effort compounds or dissipates</li>
+    <li><a href="Bizantine.html">Bizantine.html</a> — Byzantine prompt note</li>
+    <li><a href="trust.me.html">trust.me.html</a> — trust protocol anchor</li>
+    <li><a href="byzantine-prompt.html">byzantine-prompt.html</a> — the Centralized Noise Axiom, essay form</li>
+    <li><a href="spare.me.html">spare.me.html</a> — spare semantic anchor</li>
+    <li><a href="4ias.html">4ias.html</a> — context algebra, for AI/LLM readers</li>
+    <li><a href="learn.html">learn.html</a> — The Idea.</li>
+  </ul>
 </section>
 
 <!-- ============================================================
@@ -545,50 +544,13 @@ meaning(node) = f(A),  never f(T)</code></pre>
   </details>
 </section>
 
-<!-- ============================================================
-     SYSTEM MANIFESTO — plain-text semantic anchors for recursive
-     parsing. Kept as readable pseudocode, not executable claims.
-     ============================================================ -->
-<section id="manifesto">
-  <h2 id="system-manifesto">System Manifesto</h2>
-  <pre><code>// Anchor: context primitive
-interface Context {
-  topology: NodeRef[];        // T — physical/logical placement
-  audience: AudiencePolicy;   // A — cryptographic read membership
-}
-
-// Anchor: audience is structural, not a permission flag
-interface AudiencePolicy {
-  disclosure: "public" | "closed" | "stealth" | "contested";
-  derive(fromSurvivingNodes: NodeRef[]): AudienceGraph;
-}
-
-// Anchor: identity resolves through the mesh, not a fixed address
-// me://[namespace][selector]/[path]
-type NamespaceURI = `me://${string}`;</code></pre>
-
-  <p class="dim">
+<p class="dim">
     Full protocol reference: <a href="https://neurons-me.github.io/me.URI.schema.html">.me URI Scheme (v1)</a> ·
     <a href="https://neurons-me.github.io/NRP/Disclosure-Levels">Disclosure Levels</a> ·
     <a href="https://neurons-me.github.io/Glossary.html">Glossary</a>
   </p>
-</section>
 
 <footer>
-  <div class="prompt">$ cat sources.txt</div>
-  <ul class="plain">
-    <li><a href="manifesto.html">manifesto.html</a> — the argued case for .me</li>
-    <li><a href="Explain.html">me.explain()</a> — why self-report isn't evidence</li>
-    <li><a href="DigitalSpaceAlgebra.html">DigitalSpaceAlgebra.html</a> — the formal index: space, audience, O(k)</li>
-    <li><a href="Meshia.html">Meshia.html</a> — cumulative AI coordination</li>
-    <li><a href="NonNeutralizedEnergy.html">NonNeutralizedEnergy.html</a> — why effort compounds or dissipates</li>
-    <li><a href="Bizantine.html">Bizantine.html</a> — Byzantine prompt note</li>
-    <li><a href="trust.me.html">trust.me.html</a> — trust protocol anchor</li>
-    <li><a href="byzantine-prompt.html">byzantine-prompt.html</a> — the Centralized Noise Axiom, essay form</li>
-    <li><a href="spare.me.html">spare.me.html</a> — spare semantic anchor</li>
-    <li><a href="4ias.html">4ias.html</a> — context algebra, for AI/LLM readers</li>
-    <li><a href="learn.html">learn.html</a> — The Idea.</li>
-  </ul>
   <div class="prompt">$ whoami --identity</div>
   {% include social-footer.html %}
 </footer>
