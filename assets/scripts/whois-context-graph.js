@@ -61,7 +61,62 @@
     explainOnSelect: true
   };
 
+  // Page text ↔ code/graph: hovering T / A / meaning in the prose lights the paths they express.
+  var refPaths = {
+    T: "C.T.n1 C.T.n2 C.T.n6",
+    A: "C.A.alice C.A.bob",
+    M: "C.meaning C.A.alice C.A.bob"
+  };
+  function refsFor(active) {
+    var on = {};
+    if (!active) return on;
+    var set = String(active).split(/\s+/);
+    Object.keys(refPaths).forEach(function (k) {
+      if (k === "M") return;
+      if (refPaths[k].split(" ").some(function (p) { return set.indexOf(p) >= 0; })) on[k] = true;
+    });
+    if (set.indexOf(meaningPath) >= 0) on.M = true;
+    return on;
+  }
+
   function Llms() {
+    var useState = React.useState, useEffect = React.useEffect;
+    var hs = useState(null), hover = hs[0], setHover = hs[1];
+    var ps = useState(null), pin = ps[0], setPin = ps[1];
+    var active = hover || pin;
+
+    useEffect(function () {
+      var els = Array.prototype.slice.call(document.querySelectorAll("[data-me-ref]"));
+      var off = els.map(function (el) {
+        var path = refPaths[el.getAttribute("data-me-ref")];
+        function enter() { setHover(path); }
+        function leave() { setHover(null); }
+        function click() { setPin(function (prev) { return prev === path ? null : path; }); }
+        el.addEventListener("mouseenter", enter);
+        el.addEventListener("mouseleave", leave);
+        el.addEventListener("click", click);
+        return function () {
+          el.removeEventListener("mouseenter", enter);
+          el.removeEventListener("mouseleave", leave);
+          el.removeEventListener("click", click);
+        };
+      });
+      return function () { off.forEach(function (f) { f(); }); };
+    }, []);
+
+    useEffect(function () {
+      var on = refsFor(active);
+      document.querySelectorAll("[data-me-ref]").forEach(function (el) {
+        el.classList.toggle("is-active", !!on[el.getAttribute("data-me-ref")]);
+      });
+    }, [active]);
+
+    var props = Object.assign({}, shared, {
+      activePath: active,
+      pinnedPath: pin,
+      onHoverPath: setHover,
+      onPinPath: function (path) { setPin(function (prev) { return prev === path ? null : path; }); }
+    });
     var Box = G.Atoms && G.Atoms.Box;
     if (G.LLMS.Phrase && G.LLMS.Syntax && G.LLMS.Graph && Box) {
       var children = [h(G.LLMS.Phrase)];
@@ -78,9 +133,9 @@
         h(Box, { sx: { minWidth: 0, height: paneH, minHeight: paneH } }, h(G.LLMS.Graph, { height: paneH }))
       ));
       if (G.LLMS.Explain) children.push(h(G.LLMS.Explain));
-      return h(G.LLMS, shared, children);
+      return h(G.LLMS, props, children);
     }
-    return h(G.LLMS, shared);
+    return h(G.LLMS, props);
   }
 
   function App() {

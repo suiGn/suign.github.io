@@ -364,6 +364,8 @@
   @media (max-width: 480px) {
     .banner-inner { flex-direction: column; align-items: flex-start; }
   }
+  .me-ref { cursor: pointer; border-bottom: 1px dotted currentColor; border-radius: 2px; transition: background .15s, color .15s; }
+  .me-ref.is-active { color: #ffffff; background: color-mix(in srgb, var(--accent) 35%, transparent); border-bottom-color: var(--accent); }
 </style>
 </head>
 <body>
@@ -410,19 +412,19 @@
     The working model separates two sets that are conventionally collapsed into one:
   </p>
   <div id="context-graph" aria-label="Live .me graph of Context C = (T, A)"></div>
-  <pre><code>Context C = (T, A)
+  <pre><code>Context C = (<span class="me-ref" data-me-ref="T">T</span>, <span class="me-ref" data-me-ref="A">A</span>)
 
-T  = Topology Set     — where a thing physically or logically runs
+<span class="me-ref" data-me-ref="T">T  = Topology Set</span>     — where a thing physically or logically runs
                          (host, process, monad, transport)
-A  = Audience Set     — who can cryptographically read or derive
+<span class="me-ref" data-me-ref="A">A  = Audience Set</span>     — who can cryptographically read or derive
                          meaning from it (membership, not location)
 
-meaning(node) = f(A),  never f(T)</code></pre>
+<span class="me-ref" data-me-ref="M">meaning(node)</span> = <span class="me-ref" data-me-ref="A">f(A)</span>,  never <span class="me-ref" data-me-ref="T">f(T)</span></code></pre>
   <p>
-    T and A are independent axes. A node's physical placement can change completely —
+    <span class="me-ref" data-me-ref="T">T</span> and <span class="me-ref" data-me-ref="A">A</span> are independent axes. A node's <span class="me-ref" data-me-ref="T">physical placement</span> can change completely —
     migrate hosts, lose replicas, reroute through a different gateway — without altering
-    who is entitled to read it. Conversely, two nodes can share the exact same host
-    (same T) and remain mutually illegible to each other (disjoint A).
+    <span class="me-ref" data-me-ref="A">who is entitled to read it</span>. Conversely, two nodes can share the exact same host
+    (<span class="me-ref" data-me-ref="T">same T</span>) and remain mutually illegible to each other (<span class="me-ref" data-me-ref="A">disjoint A</span>).
   </p>
   <p class="dim">
     This is the same separation formalized in
@@ -576,7 +578,7 @@ meaning(node) = f(A),  never f(T)</code></pre>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/this.gui@4.3.0/dist/this.gui.umd.js" integrity="sha384-wZSWqOgarpDah0hINi5E+RSp2g3vUY0dacuRgUDextlT833ovzKYSzsBDCTMYSWV" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/this.me@4.2.1/dist/me.umd.js" integrity="sha384-ElnWCZOb324gqFJ2M/Fxy4CZ6Si131WIbR54iYomzEbTloUDLfBzZ05qi1nZ7+4G" crossorigin="anonymous"></script>
-<script src="./assets/scripts/whois-context-graph.js?v=1"></script>
+<script src="./assets/scripts/whois-context-graph.js?v=2"></script>
 
 </body>
 </html>
